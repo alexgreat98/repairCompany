@@ -12,5 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('pageIndex');
+});
+Route::get('/about-us', function () {
+    return view('pageAbout');
+});
+Route::get('/services', function () {
+    return view('services');
 });
