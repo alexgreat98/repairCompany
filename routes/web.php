@@ -20,3 +20,6 @@ Route::get('/about-us', function () {
 Route::get('/services', function () {
     return view('services');
 });
+Route::get('/services/electro', function () {
+    return view('service');
+});

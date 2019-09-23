@@ -15,7 +15,7 @@
 
     <style>
         html, body {
-            background-color: #fff;
+            background-color: whitesmoke;
             color: #636b6f;
             font-family: 'Nunito', sans-serif;
             font-weight: 200;
@@ -86,11 +86,6 @@
     <div class="main__app">
 
         <div class="main__app-wrap">
-            <ul class="breadcrumbs">
-                <li class="B_firstCrumb" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb"><a class="B_homeCrumb" itemprop="url" rel="Home" href="https://dev-stroy.ru/"><span itemprop="title">Главная</span></a></li>
-                <li itemscope="itemscope" class="B_crumb" itemtype="http://data-vocabulary.org/Breadcrumb"><a class="B_crumb" itemprop="url" href="uslugi"><span itemprop="title">Услуги</span></a></li>
-                <li>Электромонтажные работы</li>
-            </ul>
             <div class="main__wrap">
                 {{--<div class="main__wrap-sidebar">
                     <aside class="nav__bar">
