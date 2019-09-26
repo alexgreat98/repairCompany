@@ -20,6 +20,12 @@ Route::get('/about-us', function () {
 Route::get('/services', function () {
     return view('services');
 });
+Route::get('/portfolio', function () {
+    return view('portfolio');
+});
+Route::get('/portfolio/item', function () {
+    return view('portfolioItem');
+});
 Route::get('/services/electro', function () {
     return view('service');
 });

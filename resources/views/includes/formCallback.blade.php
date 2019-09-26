@@ -1,6 +1,6 @@
 <div class="main-callback-form-center">
     <div class="main-callback-form">
-        <div class="main-callback-form-img" style="background-image: url('{{Storage::url('/site/mainForm.jpg')}}');">
+        <div class="main-callback-form-img" style="background-image: url('{{Storage::url('site/mainForm.jpg')}}');">
             {{--<img class="img-fluid" style="background-image: {{Storage::url('/site/mainForm.jpg')}};" alt="Оставьте заявку">--}}
         </div>
         <div class="main-callback-form-wrap">

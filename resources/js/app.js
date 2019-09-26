@@ -7,6 +7,8 @@
 
 window.Vue = require('vue');
 import Swiper from 'swiper';
+
+
 // import Vuetify from 'vuetify/lib'
 
 /**
@@ -65,6 +67,14 @@ new Swiper('.services-portfolio-slider', {
         }
     }
 });
+new Swiper('.index_banner', {
+    pagination: {
+        clickable: true,
+        el: '.swiper-pagination',
+    },
+});
+
+
 
 document.querySelectorAll('img[data-src]')
     .forEach(e => {

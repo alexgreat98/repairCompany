@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>Строй компания</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -12,6 +12,7 @@
 
 <!-- Styles -->
     <link href="{{asset('css/app.css')}}" rel="stylesheet">
+    <link href="{{Storage::url('css/fslightbox.min.css')}}" rel="stylesheet">
 
     <style>
         html, body {
@@ -67,16 +68,16 @@
                 <div class="collapse navbar-collapse top__navigation order-1" id="navbarSupportedContent">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a href="/" class="nav-link" title="LOGO">О компании</a>
+                            <a href="#" class="nav-link" title="LOGO">О компании</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/radios" class="nav-link" title="Список радиостанций">Услуги</a>
+                            <a href="/services" class="nav-link" title="Услуги">Услуги</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/top" class="nav-link" title="Топ радиостанций">портфолио</a>
+                            <a href="/portfolio" class="nav-link" title="портфолио">портфолио</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/category" class="nav-link" title="Жанры музыки">контакты</a>
+                            <a href="#" class="nav-link" title="контакты">контакты</a>
                         </li>
                     </ul>
                 </div>
@@ -194,4 +195,5 @@
 </div>
 </body>
 <script src="{{asset('js/app.js')}}" async></script>
+<script src="{{Storage::url('js/fslightbox.min.js')}}"></script>
 </html>
