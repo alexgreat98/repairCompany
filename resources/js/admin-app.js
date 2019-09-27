@@ -1,24 +1,22 @@
+window.Vue = require('vue');
+import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loader
+import 'material-design-icons-iconfont'
+window.Vuetify = require('vuetify');
+import 'vuetify/dist/vuetify.min.css'
+import App from './components/AppAdmin';
 
-import Vue from 'vue';
-import Vuetify from 'vuetify';
 
-import "vuetify/dist/vuetify.min.css";
-import 'material-design-icons-iconfont/dist/material-design-icons.css'
-//console.log(Vuetify);
+Vue.use(Vuetify);
 
-import App from './App-admin';
-Vue.use(Vuetify, {
-    iconfont: 'mdi'
-});
+const opts = {
+    icons: {
+        iconfont: 'mdi',
+
+    },
+};
+
 
 new Vue({
-    el: '#app',
-    vuetify: new Vuetify(),
-    components:{
-        App
-    },
-    template: '<App/>',
-    data: () => ({
-        drawer: null
-    })
-});
+    vuetify: new Vuetify(opts),
+    render: h => h(App),
+}).$mount('#app');

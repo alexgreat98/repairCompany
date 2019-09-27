@@ -12,7 +12,7 @@
 {{--<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">--}}
 
 <!-- Styles -->
-    <link href="{{asset('css/app.css')}}" rel="stylesheet">
+    <link href="{{asset('css/admin-app.css')}}" rel="stylesheet">
 
     <style>
         html, body {
