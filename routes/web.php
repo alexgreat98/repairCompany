@@ -26,6 +26,9 @@ Route::get('/portfolio', function () {
 Route::get('/portfolio/item', function () {
     return view('portfolioItem');
 });
+Route ::get('/admin', function(){
+    return view('admin/index');
+});
 Route::get('/services/electro', function () {
     return view('service');
 });
