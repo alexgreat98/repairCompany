@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Admin;
 
 use App\Param;
 use Illuminate\Http\Request;
@@ -37,7 +37,17 @@ class ParamsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'key' => 'required|unique:posts|max:255',
+            'value' => 'required',
+            'description'=>''
+        ]);
+        $param = new Param;
+        $param->fill($request->all());
+        $param->save();
+
+        return response()->json($param);
     }
 
     /**
@@ -71,7 +81,14 @@ class ParamsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $param = Param::findOrFail($id);
+        $request->validate([
+            'value' => 'required',
+            'description'=>''
+        ]);
+        $param->fill($request->except(['key']));
+        $param->save();
+        return response()->json($param);
     }
 
     /**
@@ -82,6 +99,8 @@ class ParamsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $param = Param::find($id);
+        $param->delete();
+        return response()->json('ok');
     }
 }
