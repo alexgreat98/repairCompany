@@ -17,5 +17,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::resource('prices', 'Admin\PriceController');
 Route::resource('params', 'Admin\ParamsController');
 Route::resource('users', 'Admin\UserController');

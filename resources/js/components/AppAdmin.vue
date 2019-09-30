@@ -123,7 +123,7 @@
         </v-app-bar>
         <v-content>
             <v-container
-                    class="fill-height"
+                    class="fill-height d-flex justify-center align-start"
                     fluid
             >
                     <transition name="fade">
