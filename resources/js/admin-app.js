@@ -14,6 +14,7 @@ import PricesAdmin from './components/PricesAdmin';
 import ServicesAdmin from './components/ServicesAdmin';
 import ServiceAdmin from './components/ServiceAdmin';
 import ParametersAdmin from './components/ParametersAdmin';
+import UsersAdmin from './components/UsersAdmin';
 import axios from 'axios';
 import Vuex from 'vuex'
 //store
@@ -46,6 +47,7 @@ const routes = [
     {path: '/services', component: ServicesAdmin},
     {path: '/prices/', component: PricesAdmin},
     {path: '/parameters', component: ParametersAdmin},
+    {path: '/users', component: UsersAdmin},
 ];
 const router = new VueRouter({
     routes // сокращённая запись для `routes: routes`

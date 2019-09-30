@@ -251,7 +251,7 @@
                     ],
                 },
                 { icon: 'settings', text: 'Параметры', link: 'parameters' },
-                 // { icon: 'chat_bubble', text: 'Send feedback' },
+                { icon: 'chat_bubble', text: 'Пользователи', link: 'users'  },
                  // { icon: 'help', text: 'Help' },
                  // { icon: 'phonelink', text: 'App downloads' },
                  // { icon: 'keyboard', text: 'Go to the old version' },
