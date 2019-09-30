@@ -8,5 +8,5 @@ class Param extends Model
 {
     //
     protected $table = 'params';
-    protected $fillable = ['key', 'value', 'description'];
+    protected $fillable = ['key', 'value'];
 }

@@ -39,7 +39,7 @@ class ParamsController extends Controller
     {
 
         $request->validate([
-            'key' => 'required|unique:posts|max:255',
+            'key' => 'required|unique:params|max:255',
             'value' => 'required',
             'description'=>''
         ]);

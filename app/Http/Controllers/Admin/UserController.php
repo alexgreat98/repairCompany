@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -37,7 +38,18 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:users|max:255',
+            'password'=> 'required',
+        ]);
+        $param = new User;
+        $data = $request->except(['created_at', 'updated_at']);
+        $data['password'] = Hash::make($data['password']);
+        $param->fill($data);
+        $param->save();
+
+        return response()->json($param);
     }
 
     /**
@@ -71,7 +83,20 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|max:255',
+            'password'=> '',
+        ]);
+        $data = $request->except(['created_at', 'updated_at']);
+        if(!isset($data['password'])){
+            $data['password'] = '';
+        }
+        $data['password'] = $data['password'] ? Hash::make($data['password']) : $user->password;
+        $user->fill($data);
+        $user->save();
+        return response()->json($user);
     }
 
     /**
@@ -82,6 +107,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user ->delete();
+        return response()->json('ok');
     }
 }

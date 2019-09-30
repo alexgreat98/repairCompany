@@ -11,6 +11,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        /**
+         * composer dump-autoload
+         * php artisan db:seed
+         */
+        $this->call([
+            ParamsTableSeeder::class,
+            UsersTableSeeder::class,
+            //CommentsTableSeeder::class,
+        ]);
     }
 }

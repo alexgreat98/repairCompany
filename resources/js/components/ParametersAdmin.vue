@@ -14,7 +14,7 @@
                         :return-value.sync="props.item.value"
                         large
                         persistent
-                        @save="save"
+                        @save="save(props.item)"
                         @cancel="cancel"
                         @open="open"
                         @close="close"
@@ -44,7 +44,6 @@
 </template>
 
 <script>
-    import axios from 'axios';
     export default {
         name: "ParametersAdmin",
         data(){
@@ -60,23 +59,30 @@
                         value: 'key',
                         width : '150px'
                     },
+                    {   text: 'Описание',
+                        value: 'description',
+                        align: 'left'
+                    },
                     {   text: 'Значение',
                         value: 'value',
                         align: 'left'
                     },
+
                 ],
                 params: []
             }
         },
         mounted() {
-            axios.get('api/params')
+            this.axios.get('api/params')
                 .then(data=>{
                     console.log(data);
                     this.params = data.data;
                 })
         },
         methods: {
-            save () {
+            save (item) {
+                this.axios.put('api/params/' + item.id, item);
+                console.log(item)
                 this.snack = true
                 this.snackColor = 'success'
                 this.snackText = 'Данные сохранены'

@@ -76,7 +76,6 @@
 </template>
 
 <script>
-    import axios from 'axios';
     export default {
         data: () => ({
             dialog: false,
@@ -87,10 +86,10 @@
                     sortable: false,
                     value: 'name',
                 },
-                { text: 'Email', value: 'email' },
-                { text: 'Создан', value: 'created_at' },
-                { text: 'Обновлён', value: 'updated_at' },
-                { text: 'Actions', value: 'action', sortable: false },
+                {text: 'Email', value: 'email'},
+                // { text: 'Создан', value: 'created_at' },
+                // { text: 'Обновлён', value: 'updated_at' },
+                {text: 'Actions', value: 'action', sortable: false},
             ],
             users: [],
             editedIndex: -1,
@@ -123,10 +122,18 @@
         },
 
         methods: {
+            data(s){
+                return s.slice(0, length - 9).split('-').reverse().join('.')
+            },
             initialize () {
-                axios.get('api/users')
+                this.axios.get('api/users')
                     .then(data=>{
-                        this.users = data.data;
+                        this.users = data.data
+ /*                           .map(u=>{
+                            u.created_at = this.data(u.created_at)
+                            u.updated_at = this.data(u.updated_at)
+                            return u;
+                        });*/
                     });
             },
             editItem (item) {
@@ -138,6 +145,7 @@
             deleteItem (item) {
                 const index = this.users.indexOf(item)
                 confirm('Вы уверены что хотите удалить пользователя?') && this.users.splice(index, 1)
+                this.axios.delete('api/users/' + item.id)
             },
 
             close () {
@@ -149,6 +157,17 @@
             },
 
             save () {
+                console.log(this.editedItem, this.editedIndex);
+                if(this.editedIndex === -1){
+                    //new item
+                    this.axios.post('api/users', this.editedItem);
+                }else{
+                    //edit item
+                    let user = this.users[this.editedIndex]
+                    this.axios.put('api/users/' + user.id, user);
+                    console.log(user)
+                }
+
                 if (this.editedIndex > -1) {
                     Object.assign(this.users[this.editedIndex], this.editedItem)
                 } else {
