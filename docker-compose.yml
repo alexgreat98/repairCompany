@@ -44,9 +44,9 @@ services:
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     networks:
-      - app-network
+      - laravel
 
 #Docker Networks
 networks:
-  app-network:
+  laravel:
     driver: bridge

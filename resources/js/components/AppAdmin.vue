@@ -6,7 +6,7 @@
                 app
         >
             <v-list dense>
-                <template v-for="item in items">
+                <template v-for="item in navItems">
                     <v-row
                             v-if="item.heading"
                             :key="item.heading"
@@ -28,6 +28,7 @@
                         </v-col>
                     </v-row>
                     <v-list-group
+                            :to="item.link"
                             v-else-if="item.children"
                             :key="item.text"
                             v-model="item.model"
@@ -60,6 +61,7 @@
                     </v-list-group>
                     <v-list-item
                             v-else
+                            :to="item.link"
                             :key="item.text"
                             @click=""
                     >
@@ -124,39 +126,9 @@
                     class="fill-height"
                     fluid
             >
-                <v-row
-                        align="center"
-                        justify="center"
-                >
-                    <v-tooltip right>
-                        <template v-slot:activator="{ on }">
-                            <v-btn
-                                    :href="source"
-                                    icon
-                                    large
-                                    target="_blank"
-                                    v-on="on"
-                            >
-                                <v-icon large>mdi-code-tags</v-icon>
-                            </v-btn>
-                        </template>
-                        <span>Source</span>
-                    </v-tooltip>
-                    <v-tooltip right>
-                        <template v-slot:activator="{ on }">
-                            <v-btn
-                                    icon
-                                    large
-                                    href="https://codepen.io/johnjleider/pen/MNYLdL"
-                                    target="_blank"
-                                    v-on="on"
-                            >
-                                <v-icon large>mdi-codepen</v-icon>
-                            </v-btn>
-                        </template>
-                        <span>Codepen</span>
-                    </v-tooltip>
-                </v-row>
+                    <transition name="fade">
+                        <router-view></router-view>
+                    </transition>
             </v-container>
         </v-content>
         <v-btn
@@ -260,19 +232,11 @@
         data: () => ({
             dialog: false,
             drawer: null,
-            items: [
-                { icon: 'contacts', text: 'Пользователи' },
-                { icon: 'history', text: 'Frequently contacted' },
-                { icon: 'content_copy', text: 'Галерея' },
-                 // {
-                 //     icon: 'keyboard_arrow_up',
-                 //     'icon-alt': 'keyboard_arrow_down',
-                 //     text: 'Labels',
-                 //     model: true,
-                 //     children: [
-                 //         { icon: 'add', text: 'Create label' },
-                 //     ],
-                 // },
+            navItems: [
+                { icon: 'contacts', text: 'Услуги', link: 'services' },
+                { icon: 'contacts', text: 'Прайсы', link: 'prices' },
+                { icon: 'contacts', text: 'Портфолио', link: 'portfolios' },
+                { icon: 'content_copy', text: 'Галерея', link: '/' },
                 {
                     icon: 'keyboard_arrow_up',
                     'icon-alt': 'keyboard_arrow_down',
@@ -286,7 +250,7 @@
                         { text: 'Other contacts' },
                     ],
                 },
-                { icon: 'settings', text: 'Параметры' },
+                { icon: 'settings', text: 'Параметры', link: 'parameters' },
                  // { icon: 'chat_bubble', text: 'Send feedback' },
                  // { icon: 'help', text: 'Help' },
                  // { icon: 'phonelink', text: 'App downloads' },

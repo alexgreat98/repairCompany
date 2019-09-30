@@ -20,9 +20,7 @@ Route::get('/about-us', function () {
 Route::get('/services', function () {
     return view('services');
 });
-Route::get('/portfolio', function () {
-    return view('portfolio');
-});
+Route::get('/portfolio', 'Client\PageController@GetPortfolio');
 Route::get('/portfolio/item', function () {
     return view('portfolioItem');
 });
