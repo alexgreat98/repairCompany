@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Service;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,7 +15,8 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        //
+        $items = Service::all();
+        return response()->json(compact('items'));
     }
 
     /**
@@ -55,9 +57,11 @@ class ServiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Service $service)
     {
-        //
+        return response()->json([
+            'item'=> $service
+        ]);
     }
 
     /**

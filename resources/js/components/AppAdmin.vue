@@ -89,7 +89,7 @@
                     class="ml-0 pl-4"
             >
                 <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-                <span class="hidden-sm-and-down">Google Contacts</span>
+                <span class="hidden-sm-and-down">Администрирование</span>
             </v-toolbar-title>
             <v-text-field
                     flat

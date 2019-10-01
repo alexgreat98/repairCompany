@@ -19,6 +19,7 @@ import axios from 'axios';
 import Vuex from 'vuex'
 //store
 import pricesStore from './components/store/pricesStore'
+import servicesStore from './components/store/servicesStore'
 
 /*axios.defaults.headers.common = {
     'X-CSRF-TOKEN': myToken.csrfToken,
@@ -56,6 +57,7 @@ const store =
     {
         modules: {
             pricesStore,
+            servicesStore,
         },
     };
 

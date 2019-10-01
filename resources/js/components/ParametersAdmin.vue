@@ -1,7 +1,6 @@
 <template>
-    <v-row
-            align="center"
-            justify="center"
+    <v-container
+            fluid
     >
         <v-data-table dense
                 :headers="headers"
@@ -39,7 +38,7 @@
             {{ snackText }}
             <v-btn text @click="snack = false">Close</v-btn>
         </v-snackbar>
-    </v-row>
+    </v-container>
 
 </template>
 
