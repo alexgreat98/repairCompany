@@ -126,9 +126,8 @@
                     class="fill-height d-flex justify-center align-start"
                     fluid
             >
-                    <transition name="fade">
+
                         <router-view></router-view>
-                    </transition>
             </v-container>
         </v-content>
 <!--        <v-btn

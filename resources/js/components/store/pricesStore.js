@@ -6,7 +6,7 @@ const state = {
     editedPrice: {
         id: '',
         name: '',
-        value: '',
+        price: '',
         type: '',
     },
 };
@@ -31,7 +31,8 @@ const actions = {
         commit('clearEditedPrice');
         await axios.get('/api/prices/create')
             .then(({data}) => {
-                commit('clearEditedPrice', {items: data.supPrices});
+                commit('clearEditedPrice');
+                commit('setTypes', {items: data.type});
             })
             .catch(({error}) => {
                 console.log(error);
@@ -84,7 +85,7 @@ const mutations = {
         state.editedPrice = {
             id: null,
             name: '',
-            value: '',
+            price: '',
             type: '',
         }
     },

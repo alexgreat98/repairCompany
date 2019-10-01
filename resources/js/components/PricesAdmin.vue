@@ -43,7 +43,7 @@
                                 <v-text-field v-model="editedPrice.name" label="Название" required></v-text-field>
                             </v-flex>
                             <v-flex xs12 sm8>
-                                <v-text-field v-model="editedPrice.value" label="Цена" required></v-text-field>
+                                <v-text-field v-model="editedPrice.price" label="Цена" required></v-text-field>
                             </v-flex>
                             <v-flex xs12 sm4>
                                 <v-select
@@ -60,28 +60,27 @@
                     <div class="flex-grow-1"></div>
                     <v-btn  small color="red darken-1" text @click="dialogEdit = false">Отмена</v-btn>
                     <v-btn  small color="green darken-1" text v-if="userCreatedBtn===true" outlined
-                           @click="createUser()">
+                           @click="createItem()">
                         Создать
                     </v-btn>
-                    <v-btn  small color="green darken-1"  v-else outlined  @click="updatePrice()">
+                    <v-btn  small color="green darken-1"  v-else outlined  @click="updatePriceAction()">
                         Сохранить
                     </v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
         <v-btn
-                bottom
-                color="pink"
-                dark
-                fab
-                fixed
-                right
-                @click="dialog = !dialog"
+            bottom
+            color="pink"
+            dark
+            fab
+            fixed
+            right
+            @click="createItemInfo"
         >
             <v-icon>mdi-plus</v-icon>
         </v-btn>
     </v-card>
-
 </template>
 
 <script>
@@ -95,6 +94,13 @@
                 prices: state => state.prices,
                 editedPrice: state => state.editedPrice,
             }),
+        },
+        watch: {
+            dialogEdit(val) {
+                if(!val){
+                    this.userCreatedBtn = false;
+                }
+            }
         },
         data() {
             return {
@@ -110,7 +116,7 @@
                         value: 'id',
                     },
                     {text: 'Название', value: 'name'},
-                    {text: 'Цена', value: 'value'},
+                    {text: 'Цена', value: 'price'},
                     {text: 'Ед.Изм.', value: 'type'},
                     {text: 'Создание', value: 'created_at'},
                     {text: 'Измение', value: 'updated_at'},
@@ -122,24 +128,38 @@
             ...mapActions('pricesStore', [
                 'getAllPrices',
                 'getPriceInfo',
-                'updatePrice'
+                'createPriceInfo',
+                'createPrice',
+                'updatePrice',
+                'deletePrice'
             ]),
             async getPrices() {
                 this.progresses = true;
                 await this.getAllPrices({});
                 this.progresses = false;
             },
+            async createItemInfo() {
+                this.userCreatedBtn = true;
+                await this.createPriceInfo({});
+                this.dialogEdit = true
+            },
+            async createItem(){
+                await this.createPrice({});
+                this.dialogEdit = false;
+            },
             async editPrice(item) {
                 await this.getPriceInfo(item.id);
                 this.dialogEdit = true
             },
-            async updatePrice() {
-                await this.updatePrice();
+            async updatePriceAction() {
+                await this.updatePrice({});
                 this.dialogEdit = false
             },
-            async createUser(){
+            async deleteItem(item){
+                await this.deletePrice(item.id);
+            },
 
-            }
+
         },
         created() {
             this.getPrices()

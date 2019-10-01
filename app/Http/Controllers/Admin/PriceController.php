@@ -30,7 +30,9 @@ class PriceController extends Controller
      */
     public function create()
     {
-        return response()->json(compact('type'));
+        return response()->json([
+            'type' => $this->type
+        ]);
 
     }
 
@@ -42,7 +44,7 @@ class PriceController extends Controller
     {
         Price::create($request->all());
         $prices = Price::all();
-        return response()->json(compact($prices));
+        return response()->json(compact('prices'));
     }
 
     /**
@@ -73,20 +75,26 @@ class PriceController extends Controller
     /**
      * @param Request $request
      * @param Price $price
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, Price $price)
     {
-        //
+        $price->update($request->all());
+        return response()->json([
+           'prices' => Price::all()
+        ]);
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Price $price
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(Price $price)
     {
-        //
+        $price->delete();
+        return response()->json([
+            'prices' => Price::all()
+        ]);
     }
 }
