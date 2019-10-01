@@ -1,78 +1,86 @@
 <template>
-    <v-row
-            align="center"
-            justify="center"
-    >
-        <v-data-table
-                :headers="headers"
-                :items="users"
-                sort-by="name"
-                class="elevation-1"
-                width="100%"
-        >
-            <template v-slot:top>
-                <v-toolbar flat color="white">
-                    <v-toolbar-title>Пользователи</v-toolbar-title>
-                    <v-divider
-                            class="mx-4"
-                            inset
-                            vertical
-                    ></v-divider>
-                    <div class="flex-grow-1"></div>
-                    <v-dialog v-model="dialog" max-width="500px">
-                        <template v-slot:activator="{ on }">
-                            <v-btn color="primary" dark class="mb-2" v-on="on">Новый</v-btn>
-                        </template>
-                        <v-card>
-                            <v-card-title>
-                                <span class="headline">{{ formTitle }}</span>
-                            </v-card-title>
+        <v-container fluid>
+            <v-data-table
+                    :headers="headers"
+                    :items="users"
+                    sort-by="name"
+                    class="elevation-1"
+                    width="100%"
+            >
+                <template v-slot:top>
+                    <v-toolbar flat color="white">
+                        <v-toolbar-title>Пользователи</v-toolbar-title>
+                        <v-divider
+                                class="mx-4"
+                                inset
+                                vertical
+                        ></v-divider>
+                        <div class="flex-grow-1"></div>
+                        <v-dialog v-model="dialog" max-width="500px">
+                            <!--                        <template v-slot:activator="{ on }">
+                                                        <v-btn color="primary" dark class="mb-2" v-on="on">Новый</v-btn>
+                                                    </template>-->
+                            <v-card>
+                                <v-card-title class="grey darken-2">
+                                    <span class="headline">{{ formTitle }}</span>
+                                </v-card-title>
 
-                            <v-card-text>
-                                <v-container>
-                                    <v-row>
-                                        <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="editedItem.name" label="Имя"></v-text-field>
-                                        </v-col>
-                                        <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="editedItem.email" label="E-mail"></v-text-field>
-                                        </v-col>
-                                        <v-col cols="12" sm="6" md="4">
-                                            <v-text-field v-model="editedItem.password" label="Пароль"></v-text-field>
-                                        </v-col>
-                                    </v-row>
-                                </v-container>
-                            </v-card-text>
+                                <v-card-text>
+                                    <v-container>
+                                        <v-row>
+                                            <v-col cols="12" sm="6" md="4">
+                                                <v-text-field v-model="editedItem.name" label="Имя"></v-text-field>
+                                            </v-col>
+                                            <v-col cols="12" sm="6" md="4">
+                                                <v-text-field v-model="editedItem.email" label="E-mail"></v-text-field>
+                                            </v-col>
+                                            <v-col cols="12" sm="6" md="4">
+                                                <v-text-field v-model="editedItem.password" label="Пароль"></v-text-field>
+                                            </v-col>
+                                        </v-row>
+                                    </v-container>
+                                </v-card-text>
 
-                            <v-card-actions>
-                                <div class="flex-grow-1"></div>
-                                <v-btn color="blue darken-1" text @click="close">Отмена</v-btn>
-                                <v-btn color="blue darken-1" text @click="save">Сохранить</v-btn>
-                            </v-card-actions>
-                        </v-card>
-                    </v-dialog>
-                </v-toolbar>
-            </template>
-            <template v-slot:item.action="{ item }">
-                <v-icon
-                        small
-                        class="mr-2"
-                        @click="editItem(item)"
-                >
-                    edit
-                </v-icon>
-                <v-icon
-                        small
-                        @click="deleteItem(item)"
-                >
-                    delete
-                </v-icon>
-            </template>
-            <template v-slot:no-data>
-                <v-btn color="primary" @click="initialize">Reset</v-btn>
-            </template>
-        </v-data-table>
-    </v-row>
+                                <v-card-actions>
+                                    <div class="flex-grow-1"></div>
+                                    <v-btn color="red darken-1" text @click="close">Отмена</v-btn>
+                                    <v-btn color="green darken-1" text @click="save">Сохранить</v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-dialog>
+                    </v-toolbar>
+                </template>
+                <template v-slot:item.action="{ item }">
+                    <v-icon
+                            small
+                            class="mr-2"
+                            @click="editItem(item)"
+                    >
+                        edit
+                    </v-icon>
+                    <v-icon
+                            small
+                            @click="deleteItem(item)"
+                    >
+                        delete
+                    </v-icon>
+                </template>
+                <template v-slot:no-data>
+                    <v-btn color="primary" @click="initialize">Reset</v-btn>
+                </template>
+            </v-data-table>
+            <v-btn
+                    bottom
+                    color="pink"
+                    dark
+                    fab
+                    fixed
+                    right
+                    @click="dialog = !dialog"
+            >
+                <v-icon>mdi-plus</v-icon>
+            </v-btn>
+        </v-container>
 </template>
 
 <script>

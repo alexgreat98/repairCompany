@@ -100,7 +100,7 @@
                     class="hidden-sm-and-down"
             ></v-text-field>
             <div class="flex-grow-1"></div>
-            <v-btn icon>
+<!--            <v-btn icon>
                 <v-icon>mdi-apps</v-icon>
             </v-btn>
             <v-btn icon>
@@ -119,7 +119,7 @@
                             alt="Vuetify"
                     >
                     </v-img></v-avatar>
-            </v-btn>
+            </v-btn>-->
         </v-app-bar>
         <v-content>
             <v-container
@@ -131,7 +131,7 @@
                     </transition>
             </v-container>
         </v-content>
-        <v-btn
+<!--        <v-btn
                 bottom
                 color="pink"
                 dark
@@ -141,8 +141,8 @@
                 @click="dialog = !dialog"
         >
             <v-icon>mdi-plus</v-icon>
-        </v-btn>
-        <v-dialog
+        </v-btn>-->
+<!--        <v-dialog
                 v-model="dialog"
                 width="800px"
         >
@@ -220,7 +220,7 @@
                     >Save</v-btn>
                 </v-card-actions>
             </v-card>
-        </v-dialog>
+        </v-dialog>-->
     </v-app>
 </template>
 

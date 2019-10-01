@@ -1,7 +1,6 @@
 <template>
     <v-container fluid>
         <div class="text-center">
-            <v-btn>Создать альбом</v-btn>
         </div>
         <v-data-iterator
                 :items="items"
@@ -62,8 +61,9 @@
             </template>
             <v-card>
                 <v-card-title><div>Упраление показом </div><v-icon
-                        small
-                        @click="deleteItem(n)"
+                        medium
+                        color="red"
+                        @click="deleteItem()"
                 >
                     delete
                 </v-icon></v-card-title>
@@ -75,6 +75,7 @@
                             <tr>
                                 <th class="text-left" width="100px"></th>
                                 <th class="text-left">Категория</th>
+                                <th class="text-center" width="40px"></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -99,7 +100,7 @@
                                 </td>
                                 <td>
                                     <v-icon
-                                            small
+                                            medium
                                             @click="deleteItem(n)"
                                     >
                                         delete
@@ -118,6 +119,47 @@
                 </v-card-actions>
             </v-card>
         </v-dialog>
+                <v-btn
+                bottom
+                color="pink"
+                dark
+                fab
+                fixed
+                right
+                @click="dialogNew = !dialogNew"
+        >
+            <v-icon>mdi-plus</v-icon>
+        </v-btn>
+        <v-row justify="center">
+            <v-dialog v-model="dialogNew" persistent max-width="600px">
+                <template v-slot:activator="{ on }">
+                    <v-btn color="primary" dark v-on="on">Open Dialog</v-btn>
+                </template>
+                <v-card>
+                    <v-card-title>
+                        <span class="headline">Новый Альбом</span>
+                    </v-card-title>
+                    <v-card-text>
+                        <v-container>
+                            <v-row>
+                                <v-col cols="12" sm="6" md="4">
+                                    <v-text-field label="Название*" required></v-text-field>
+                                </v-col>
+<!--                                <v-col cols="12" sm="6" md="4">
+                                    <v-text-field label="Название" hint="example of helper text only on focus"></v-text-field>
+                                </v-col>-->
+                            </v-row>
+                        </v-container>
+                        <small>*обязательно к заполнению</small>
+                    </v-card-text>
+                    <v-card-actions>
+                        <div class="flex-grow-1"></div>
+                        <v-btn color="red darken-1" text @click="dialogNew = false">Отмена</v-btn>
+                        <v-btn color="green darken-1" text @click="dialogNew = false">Сохранить</v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
+        </v-row>
     </v-container>
 </template>
 
@@ -192,7 +234,8 @@
                         iron: '0%',
                     },
                 ],
-                dialog : false
+                dialog : false,
+                dialogNew : false
             }
         },
         methods : {
