@@ -1,5 +1,8 @@
 <template>
     <v-container fluid>
+        <div class="text-center">
+            <v-btn>Создать альбом</v-btn>
+        </div>
         <v-data-iterator
                 :items="items"
                 :items-per-page.sync="itemsPerPage"
@@ -58,14 +61,19 @@
                 <v-btn color="primary" dark v-on="on">Open Dialog</v-btn>
             </template>
             <v-card>
-                <v-card-title>К какой категории относится это фото</v-card-title>
+                <v-card-title><div>Упраление показом </div><v-icon
+                        small
+                        @click="deleteItem(n)"
+                >
+                    delete
+                </v-icon></v-card-title>
                 <v-divider></v-divider>
                 <v-card-text style="height: 500px;">
                     <v-simple-table>
                         <template v-slot:default>
                             <thead>
                             <tr>
-                                <th class="text-left">Фото</th>
+                                <th class="text-left" width="100px"></th>
                                 <th class="text-left">Категория</th>
                             </tr>
                             </thead>
@@ -78,7 +86,25 @@
                                         aspect-ratio="1"
                                         class="grey lighten-2"
                                 ></v-img></td>
-                                <td>Селектор выбора категории</td>
+                                <td>
+                                    <v-select
+                                            max-width="300px"
+                                            ref="country"
+                                            v-model="country"
+                                            :items="countries"
+                                            label="Категория"
+                                            placeholder="Выберите..."
+                                            required
+                                    ></v-select>
+                                </td>
+                                <td>
+                                    <v-icon
+                                            small
+                                            @click="deleteItem(n)"
+                                    >
+                                        delete
+                                    </v-icon>
+                                </td>
                             </tr>
                             </tbody>
                         </template>
@@ -86,8 +112,9 @@
                 </v-card-text>
                 <v-divider></v-divider>
                 <v-card-actions>
-                    <v-btn color="blue darken-1" text @click="dialog = false">Отмена</v-btn>
-                    <v-btn color="blue darken-1" text @click="dialog = false">Сохранить</v-btn>
+                    <v-btn color="red darken-1" text @click="dialog = false">Отмена</v-btn>
+                    <v-btn color="green darken-1" text @click="dialog = false">Сохранить</v-btn>
+                    <v-btn color="blue darken-1" text @click="dialog = false">Добавить</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -98,6 +125,8 @@
     export default {
         data (){
             return {
+                countries: ['Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola', 'Anguilla', 'Antigua &amp; Barbuda', 'Argentina', 'Armenia', 'Aruba', 'Australia', 'Austria', 'Azerbaijan', 'Bahamas', 'Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium', 'Belize', 'Benin', 'Bermuda', 'Bhutan', 'Bolivia', 'Bosnia &amp; Herzegovina', 'Botswana', 'Brazil', 'British Virgin Islands', 'Brunei', 'Bulgaria', 'Burkina Faso', 'Burundi', 'Cambodia', 'Cameroon', 'Cape Verde', 'Cayman Islands', 'Chad', 'Chile', 'China', 'Colombia', 'Congo', 'Cook Islands', 'Costa Rica', 'Cote D Ivoire', 'Croatia', 'Cruise Ship', 'Cuba', 'Cyprus', 'Czech Republic', 'Denmark', 'Djibouti', 'Dominica', 'Dominican Republic', 'Ecuador', 'Egypt', 'El Salvador', 'Equatorial Guinea', 'Estonia', 'Ethiopia', 'Falkland Islands', 'Faroe Islands', 'Fiji', 'Finland', 'France', 'French Polynesia', 'French West Indies', 'Gabon', 'Gambia', 'Georgia', 'Germany', 'Ghana', 'Gibraltar', 'Greece', 'Greenland', 'Grenada', 'Guam', 'Guatemala', 'Guernsey', 'Guinea', 'Guinea Bissau', 'Guyana', 'Haiti', 'Honduras', 'Hong Kong', 'Hungary', 'Iceland', 'India', 'Indonesia', 'Iran', 'Iraq', 'Ireland', 'Isle of Man', 'Israel', 'Italy', 'Jamaica', 'Japan', 'Jersey', 'Jordan', 'Kazakhstan', 'Kenya', 'Kuwait', 'Kyrgyz Republic', 'Laos', 'Latvia', 'Lebanon', 'Lesotho', 'Liberia', 'Libya', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Macau', 'Macedonia', 'Madagascar', 'Malawi', 'Malaysia', 'Maldives', 'Mali', 'Malta', 'Mauritania', 'Mauritius', 'Mexico', 'Moldova', 'Monaco', 'Mongolia', 'Montenegro', 'Montserrat', 'Morocco', 'Mozambique', 'Namibia', 'Nepal', 'Netherlands', 'Netherlands Antilles', 'New Caledonia', 'New Zealand', 'Nicaragua', 'Niger', 'Nigeria', 'Norway', 'Oman', 'Pakistan', 'Palestine', 'Panama', 'Papua New Guinea', 'Paraguay', 'Peru', 'Philippines', 'Poland', 'Portugal', 'Puerto Rico', 'Qatar', 'Reunion', 'Romania', 'Russia', 'Rwanda', 'Saint Pierre &amp; Miquelon', 'Samoa', 'San Marino', 'Satellite', 'Saudi Arabia', 'Senegal', 'Serbia', 'Seychelles', 'Sierra Leone', 'Singapore', 'Slovakia', 'Slovenia', 'South Africa', 'South Korea', 'Spain', 'Sri Lanka', 'St Kitts &amp; Nevis', 'St Lucia', 'St Vincent', 'St. Lucia', 'Sudan', 'Suriname', 'Swaziland', 'Sweden', 'Switzerland', 'Syria', 'Taiwan', 'Tajikistan', 'Tanzania', 'Thailand', "Timor L'Este", 'Togo', 'Tonga', 'Trinidad &amp; Tobago', 'Tunisia', 'Turkey', 'Turkmenistan', 'Turks &amp; Caicos', 'Uganda', 'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States', 'Uruguay', 'Uzbekistan', 'Venezuela', 'Vietnam', 'Virgin Islands (US)', 'Yemen', 'Zambia', 'Zimbabwe'],
+                country : '',
                 itemsPerPageOptions: [4, 8, 12],
                 itemsPerPage: 4,
                 name : "PortfoliosAdmin",
@@ -169,6 +198,9 @@
         methods : {
             showPortfolio(){
                this.dialog = true;
+            },
+            deleteItem(item){
+
             }
         }
     }
