@@ -5,8 +5,9 @@ const state = {
     editedItem: {
         id: '',
         name: '',
-        price: '',
+        text: '',
     },
+    editedItemPrices: []
 };
 
 // getters
@@ -48,6 +49,7 @@ const actions = {
         await axios.get('/api/services/' + id + '/edit')
             .then(({data}) => {
                 commit('setEditedItem', {items: data.item});
+                commit('setEditedItemPrices', {items: data.prices});
             })
     },
     async updateItem({commit, state}) {
@@ -86,6 +88,9 @@ const mutations = {
     },
     setEditedItem(state, {items}) {
         state.editedItem = items;
+    },
+    setEditedItemPrices(state, {items}) {
+        state.editedItemPrices = items;
     },
 };
 

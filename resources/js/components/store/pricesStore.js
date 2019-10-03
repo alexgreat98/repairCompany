@@ -8,7 +8,9 @@ const state = {
         name: '',
         price: '',
         type: '',
+        service: ''
     },
+    services: null
 };
 
 // getters
@@ -33,6 +35,7 @@ const actions = {
             .then(({data}) => {
                 commit('clearEditedPrice');
                 commit('setTypes', {items: data.type});
+                commit('setServices', {items: data.services});
             })
             .catch(({error}) => {
                 console.log(error);
@@ -53,6 +56,7 @@ const actions = {
             .then(({data}) => {
                 commit('setEditedPrice', {items: data.price});
                 commit('setTypes', {items: data.type});
+                commit('setServices', {items: data.services});
             })
     },
     async updatePrice({commit, state}) {
@@ -87,6 +91,7 @@ const mutations = {
             name: '',
             price: '',
             type: '',
+            service: ''
         }
     },
     setEditedPrice(state, {items}) {
@@ -94,6 +99,9 @@ const mutations = {
     },
     setTypes(state, {items}) {
         state.types = items;
+    },
+    setServices(state, {items}) {
+        state.services = items;
     },
 };
 

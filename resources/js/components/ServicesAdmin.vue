@@ -1,8 +1,8 @@
 <template>
-    <v-container fluid>
+
         <v-card width="100%">
             <v-card-title>
-                Цены
+                Услуги
                 <div class="flex-grow-1"></div>
                 <v-text-field
                     v-model="search"
@@ -34,9 +34,9 @@
                     </v-icon>
                 </template>
             </v-data-table>
-            <v-dialog v-model="dialogEdit" persistent max-width="600">
+            <v-dialog v-model="dialogEdit" persistent max-width="900">
                 <v-card>
-                    <v-card-title class="headline">Редактировать цену</v-card-title>
+                    <v-card-title class="headline">Редактировать услугу</v-card-title>
                     <v-card-text>
                         <v-container grid-list-md v-if="editedItem">
                             <v-layout wrap>
@@ -44,12 +44,13 @@
                                     <v-text-field v-model="editedItem.name" label="Название" required></v-text-field>
                                 </v-flex>
                                 <v-flex xs12>
-                                    <v-textarea v-model="editedItem.text" label="Цена" required></v-textarea>
+                                    <v-textarea v-model="editedItem.text" label="Текст" required></v-textarea>
                                 </v-flex>
                             </v-layout>
                         </v-container>
+                        <prices-admin v-if="editedItemPrices" :editedItemPrices="editedItemPrices"></prices-admin>
                     </v-card-text>
-                    <v-card-actions>
+                    <v-card-actions class="pt-5">
                         <div class="flex-grow-1"></div>
                         <v-btn small color="red darken-1" text @click="dialogEdit = false">Отмена</v-btn>
                         <v-btn small color="green darken-1" text v-if="userCreatedBtn===true" outlined
@@ -74,19 +75,22 @@
                 <v-icon>mdi-plus</v-icon>
             </v-btn>
         </v-card>
-    </v-container>
+
 </template>
 
 <script>
     import {mapState, mapActions} from 'vuex'
+    import PricesAdmin from "./PricesAdmin";
 
 
     export default {
         name: "ServicesAdmin",
+        components: {PricesAdmin},
         computed: {
             ...mapState('servicesStore', {
                 items: state => state.items,
                 editedItem: state => state.editedItem,
+                editedItemPrices: state => state.editedItemPrices,
             }),
         },
         watch: {

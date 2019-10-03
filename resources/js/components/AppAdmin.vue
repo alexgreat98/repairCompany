@@ -232,7 +232,7 @@
             dialog: false,
             drawer: null,
             navItems: [
-                { icon: 'contacts', text: 'Услуги', link: 'services' },
+                { icon: 'mdi-clipboard-list-outline', text: 'Услуги', link: 'services' },
                 { icon: 'contacts', text: 'Прайсы', link: 'prices' },
                 { icon: 'contacts', text: 'Портфолио', link: 'portfolios' },
                 { icon: 'content_copy', text: 'Галерея', link: '/' },

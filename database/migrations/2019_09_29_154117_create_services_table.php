@@ -17,10 +17,10 @@ class CreateServicesTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('text');
-            $table->string('image');
-            $table->string('title');
-            $table->string('description');
-            $table->string('keywords');
+            $table->string('image')->nullable();
+            $table->string('title')->nullable();
+            $table->string('description')->nullable();
+            $table->string('keywords')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

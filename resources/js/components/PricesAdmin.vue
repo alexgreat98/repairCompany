@@ -13,7 +13,7 @@
         </v-card-title>
         <v-data-table
             :headers="headers"
-            :items="prices"
+            :items="editedItemPrices || prices"
             :search="search"
             :loading="progresses"
         >
@@ -53,6 +53,14 @@
                                 >
                                 </v-select>
                             </v-flex>
+                            <v-flex xs12>
+                                <v-select
+                                    v-model="editedPrice.service"
+                                    :items="services"
+                                    label="Ед. изм."
+                                >
+                                </v-select>
+                            </v-flex>
                         </v-layout>
                     </v-container>
                 </v-card-text>
@@ -71,10 +79,11 @@
         </v-dialog>
         <v-btn
             bottom
+            small
             color="pink"
             dark
             fab
-            fixed
+            absolute
             right
             @click="createItemInfo"
         >
@@ -87,6 +96,9 @@
     import {mapState, mapActions} from 'vuex'
 
     export default {
+        props: {
+            editedItemPrices: Array
+        },
         name: "PricesAdmin",
         computed: {
             ...mapState('pricesStore', {
@@ -118,8 +130,6 @@
                     {text: 'Название', value: 'name'},
                     {text: 'Цена', value: 'price'},
                     {text: 'Ед.Изм.', value: 'type'},
-                    {text: 'Создание', value: 'created_at'},
-                    {text: 'Измение', value: 'updated_at'},
                     {text: 'Actions', value: 'action', sortable: false},
                 ],
             }
@@ -158,8 +168,6 @@
             async deleteItem(item){
                 await this.deletePrice(item.id);
             },
-
-
         },
         created() {
             this.getPrices()

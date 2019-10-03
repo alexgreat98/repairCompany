@@ -18,6 +18,7 @@ class CreatePricesTable extends Migration
             $table->string('name');
             $table->integer('price');
             $table->string('type');
+            $table->bigInteger('services_id');
             $table->timestamps();
             $table->softDeletes();
         });

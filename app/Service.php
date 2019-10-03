@@ -23,8 +23,8 @@ class Service extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
-    public function prices()
-    {
-        return $this->belongsToMany(ServicesHasPrices::class, 'services_has_prices', 'services_id', 'prices_id');
+
+    public function prices (){
+        return $this->hasMany(Price::class, 'services_id', 'id');
     }
 }
