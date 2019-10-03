@@ -8,12 +8,11 @@ const state = {
         text: '',
         type: null
     },
+    editedItemImages: null
 };
 
 // getters
-const getters = {
-
-};
+const getters = {};
 
 // actions
 const actions = {
@@ -69,6 +68,21 @@ const actions = {
                 console.log(error);
             })
     },
+    async getItemImage({commit}, id) {
+        await axios.get('/api/services_images/' + id)
+            .then(({data}) => {
+                commit('setEditedItemImages', {images: data.images});
+            })
+    },
+    async deleteItemImage({commit, state}, id) {
+        await axios.delete('/api/services_image_delete/' + id)
+            .then(({data}) => {
+
+            })
+            .catch(({error}) => {
+                console.log(error);
+            })
+    }
 
 };
 
@@ -77,16 +91,20 @@ const mutations = {
     setItems(state, {items}) {
         state.items = items;
     },
-    clearEditedItem(state){
+    clearEditedItem(state) {
         state.editedItem = {
             id: null,
             name: '',
             price: '',
             type: null,
-        }
+        };
+        state.editedItemImages = null
     },
     setEditedItem(state, {items}) {
         state.editedItem = items;
+    },
+    setEditedItemImages(state, {images}) {
+        state.editedItemImages = images
     },
 
 };

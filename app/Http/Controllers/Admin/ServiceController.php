@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Image;
 use App\Service;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -87,5 +88,24 @@ class ServiceController extends Controller
         return response()->json([
             'items' => Service::all()
         ]);
+    }
+
+    /**
+     * @param Service $service
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function ServicesImage(Service $service)
+    {
+        return response()->json([
+            'images' => $service->images()->get()
+        ]);
+    }
+
+    /**
+     * @param Image $image
+     */
+    public function ServicesImageDelete(Image $image)
+    {
+        $image->services()->detach();
     }
 }

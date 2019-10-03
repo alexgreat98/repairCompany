@@ -18,6 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::resource('services', 'Admin\ServiceController');
+Route::get('services_images/{service}', 'Admin\ServiceController@ServicesImage');
+Route::delete('services_image_delete/{image}', 'Admin\ServiceController@ServicesImageDelete');
 Route::get('services_prices/{service}', 'Admin\PriceController@ServicesPrice');
 Route::resource('prices', 'Admin\PriceController');
 Route::resource('params', 'Admin\ParamsController');

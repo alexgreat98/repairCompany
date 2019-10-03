@@ -47,6 +47,43 @@
                                     <v-textarea v-model="editedItem.text" label="Текст" required></v-textarea>
                                 </v-flex>
                             </v-layout>
+                            <v-row>
+                                <v-col
+                                    v-for="image in images"
+                                    :key="image.id"
+                                    class="d-flex child-flex"
+                                    cols="4"
+                                >
+                                    <v-card flat tile class="d-flex position-relative">
+                                        <v-img
+                                            :src="'/storage/portfolio/'+image.url"
+                                            aspect-ratio="1"
+                                            class="grey lighten-2"
+                                        >
+                                            <template v-slot:placeholder>
+                                                <v-row
+                                                    class="fill-height ma-0"
+                                                    align="center"
+                                                    justify="center"
+                                                >
+                                                    <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                                                </v-row>
+                                            </template>
+                                            <v-btn
+                                                icon
+                                                @click="deleteImage(editedItem.id, image.id)"
+                                                absolute
+                                                bottom
+                                                right
+                                                large
+                                                color="red"
+                                            >
+                                                <v-icon>mdi-delete</v-icon>
+                                            </v-btn>
+                                        </v-img>
+                                    </v-card>
+                                </v-col>
+                            </v-row>
                         </v-container>
                         <prices-admin v-if="editedItem.id" :serviceId="editedItem.id"></prices-admin>
                     </v-card-text>
@@ -90,6 +127,7 @@
             ...mapState('servicesStore', {
                 items: state => state.items,
                 editedItem: state => state.editedItem,
+                images: state => state.editedItemImages
             }),
         },
         watch: {
@@ -127,7 +165,9 @@
                 create: 'createItem',
                 getItem: 'updateItemInfo',
                 update: 'updateItem',
-                delete: 'deleteItem'
+                delete: 'deleteItem',
+                getImage: 'getItemImage',
+                deleteItemImage: 'deleteItemImage',
             }),
             ...mapMutations('servicesStore', {
                 clear: 'clearEditedItem'
@@ -144,10 +184,11 @@
             },
             async createItem(){
                 await this.create();
-                this.dialogEdit = false;
+                // this.dialogEdit = false;
             },
             async editItem(item) {
                 await this.getItem(item.id);
+                this.getImage(item.id);
                 this.dialogEdit = true
             },
             async updateItem() {
@@ -157,7 +198,10 @@
             async deleteItem(item){
                 await this.delete(item.id);
             },
-
+            async deleteImage(item ,image){
+                await this.deleteItemImage(image);
+                this.getImage(item)
+            }
 
         },
         created() {
