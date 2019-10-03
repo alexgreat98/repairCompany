@@ -13,7 +13,7 @@
         </v-card-title>
         <v-data-table
             :headers="headers"
-            :items="editedItemPrices || prices"
+            :items="prices"
             :search="search"
             :loading="progresses"
         >
@@ -55,9 +55,12 @@
                             </v-flex>
                             <v-flex xs12>
                                 <v-select
-                                    v-model="editedPrice.service"
+                                    v-model="editedPrice.services_id"
+                                    item-text="name"
                                     :items="services"
-                                    label="Ед. изм."
+                                    label="Услуга"
+                                    item-value="id"
+                                    :disabled="!!(serviceId)"
                                 >
                                 </v-select>
                             </v-flex>
@@ -97,7 +100,8 @@
 
     export default {
         props: {
-            editedItemPrices: Array
+            editedItemPrices: Array,
+            serviceId: Number
         },
         name: "PricesAdmin",
         computed: {
@@ -105,6 +109,7 @@
                 types: state => state.types,
                 prices: state => state.prices,
                 editedPrice: state => state.editedPrice,
+                services: state => state.services,
             }),
         },
         watch: {
@@ -137,6 +142,7 @@
         methods: {
             ...mapActions('pricesStore', [
                 'getAllPrices',
+                'getAllServicePrices',
                 'getPriceInfo',
                 'createPriceInfo',
                 'createPrice',
@@ -145,32 +151,47 @@
             ]),
             async getPrices() {
                 this.progresses = true;
-                await this.getAllPrices({});
+                if(this.serviceId){
+                    await this.getAllServicePrices(this.serviceId);
+                }else{
+                    await this.getAllPrices({});
+                }
                 this.progresses = false;
             },
             async createItemInfo() {
                 this.userCreatedBtn = true;
                 await this.createPriceInfo({});
+                if(this.serviceId){
+                    this.editedPrice.services_id = this.serviceId
+                }
                 this.dialogEdit = true
             },
             async createItem(){
                 await this.createPrice({});
                 this.dialogEdit = false;
+                this.getPrices();
             },
             async editPrice(item) {
                 await this.getPriceInfo(item.id);
+                if(this.serviceId){
+                    this.editedPrice.services_id = this.serviceId
+                }
                 this.dialogEdit = true
             },
             async updatePriceAction() {
                 await this.updatePrice({});
+                this.getPrices();
                 this.dialogEdit = false
             },
             async deleteItem(item){
                 await this.deletePrice(item.id);
+                this.getPrices()
             },
         },
         created() {
-            this.getPrices()
+            this.getPrices();
+            console.log('id');
+            console.log(this.serviceId)
         }
     }
 </script>

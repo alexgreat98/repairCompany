@@ -60,7 +60,6 @@ class ServiceController extends Controller
     {
         return response()->json([
             'item' => $service,
-            'prices' => $service->prices()->get()
         ]);
     }
 

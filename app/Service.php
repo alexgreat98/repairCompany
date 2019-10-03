@@ -27,4 +27,5 @@ class Service extends Model
     public function prices (){
         return $this->hasMany(Price::class, 'services_id', 'id');
     }
+
 }

@@ -48,7 +48,7 @@
                                 </v-flex>
                             </v-layout>
                         </v-container>
-                        <prices-admin v-if="editedItemPrices" :editedItemPrices="editedItemPrices"></prices-admin>
+                        <prices-admin v-if="editedItem.id" :serviceId="editedItem.id"></prices-admin>
                     </v-card-text>
                     <v-card-actions class="pt-5">
                         <div class="flex-grow-1"></div>
@@ -79,7 +79,7 @@
 </template>
 
 <script>
-    import {mapState, mapActions} from 'vuex'
+    import {mapState, mapActions, mapMutations} from 'vuex'
     import PricesAdmin from "./PricesAdmin";
 
 
@@ -90,13 +90,13 @@
             ...mapState('servicesStore', {
                 items: state => state.items,
                 editedItem: state => state.editedItem,
-                editedItemPrices: state => state.editedItemPrices,
             }),
         },
         watch: {
             dialogEdit(val) {
                 if(!val){
                     this.userCreatedBtn = false;
+                    this.clear()
                 }
             }
         },
@@ -128,6 +128,9 @@
                 getItem: 'updateItemInfo',
                 update: 'updateItem',
                 delete: 'deleteItem'
+            }),
+            ...mapMutations('servicesStore', {
+                clear: 'clearEditedItem'
             }),
             async getItems() {
                 this.progresses = true;

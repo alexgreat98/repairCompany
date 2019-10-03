@@ -20,7 +20,9 @@ class Price extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
-    public function images (){
-        return $this->hasMany(Image::class, 'portfolio_id', 'id');
+
+    public function service()
+    {
+        return $this->belongsTo(Service::class, 'services_id');
     }
 }

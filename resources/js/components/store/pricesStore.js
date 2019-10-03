@@ -8,20 +8,27 @@ const state = {
         name: '',
         price: '',
         type: '',
-        service: ''
+        services_id: ''
     },
     services: null
 };
 
 // getters
-const getters = {
-
-};
+const getters = {};
 
 // actions
 const actions = {
     async getAllPrices({commit}) {
         await axios.get('/api/prices')
+            .then(({data}) => {
+                commit('setPrices', {items: data.prices});
+            })
+            .catch(({error}) => {
+                console.log(error);
+            });
+    },
+    async getAllServicePrices({commit}, id) {
+        await axios.get('/api/services_prices/'+id)
             .then(({data}) => {
                 commit('setPrices', {items: data.prices});
             })
@@ -45,7 +52,7 @@ const actions = {
     async createPrice({commit, state}) {
         await axios.post('/api/prices', state.editedPrice)
             .then(({data}) => {
-                commit('setPrices', {items: data.prices});
+                return data
             })
             .catch(({error}) => {
                 console.log(error);
@@ -62,7 +69,7 @@ const actions = {
     async updatePrice({commit, state}) {
         await axios.put('/api/prices/' + state.editedPrice.id, state.editedPrice)
             .then(({data}) => {
-                commit('setPrices', {items: data.prices});
+                return data
             })
             .catch(({error}) => {
                 console.log(error);
@@ -71,7 +78,7 @@ const actions = {
     async deletePrice({commit, state}, id) {
         await axios.delete('/api/prices/' + id)
             .then(({data}) => {
-                commit('setPrices', {items: data.prices});
+                return data
             })
             .catch(({error}) => {
                 console.log(error);
@@ -85,13 +92,13 @@ const mutations = {
     setPrices(state, {items}) {
         state.prices = items;
     },
-    clearEditedPrice(state){
+    clearEditedPrice(state) {
         state.editedPrice = {
             id: null,
             name: '',
             price: '',
             type: '',
-            service: ''
+            services_id: ''
         }
     },
     setEditedPrice(state, {items}) {

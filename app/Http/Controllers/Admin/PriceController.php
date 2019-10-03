@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Price;
+use App\Service;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -12,6 +13,7 @@ class PriceController extends Controller
         'м2',
         'ч/час'
     ];
+
     /**
      * Display a listing of the resource.
      *
@@ -31,7 +33,8 @@ class PriceController extends Controller
     public function create()
     {
         return response()->json([
-            'type' => $this->type
+            'type' => $this->type,
+            'services' => Service::all(),
         ]);
 
     }
@@ -42,15 +45,18 @@ class PriceController extends Controller
      */
     public function store(Request $request)
     {
-        Price::create($request->all());
-        $prices = Price::all();
-        return response()->json(compact('prices'));
+        $service = Service::findOrFail($request->services_id);
+        $service->prices()->create($request->all());
+
+        return response()->json([
+            'status' => 'success'
+        ]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -66,9 +72,11 @@ class PriceController extends Controller
      */
     public function edit(Price $price)
     {
+//        $price['services_id'] = $price->service()->first();
         return response()->json([
             'price' => $price,
-            'type' => $this->type
+            'type' => $this->type,
+            'services' => Service::all(),
         ]);
     }
 
@@ -79,9 +87,10 @@ class PriceController extends Controller
      */
     public function update(Request $request, Price $price)
     {
+        $price->service()->associate(Service::findOrFail($request->services_id));
         $price->update($request->all());
         return response()->json([
-           'prices' => Price::all()
+            'status' => 'success'
         ]);
     }
 
@@ -94,7 +103,17 @@ class PriceController extends Controller
     {
         $price->delete();
         return response()->json([
-            'prices' => Price::all()
+            'status' => 'success'
+        ]);
+    }
+
+    /**
+     * @param Service $service
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function ServicesPrice(Service $service){
+        return response()->json([
+            'prices' => $service->prices()->get()
         ]);
     }
 }
