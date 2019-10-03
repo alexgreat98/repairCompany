@@ -16,10 +16,10 @@ class CreatePortfolioTable extends Migration
         Schema::create('portfolio', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('text');
-            $table->string('title');
-            $table->string('description');
-            $table->string('keywords');
+            $table->string('text')->nullable();
+            $table->string('title')->nullable();;
+            $table->string('description')->nullable();;
+            $table->string('keywords')->nullable();;
             $table->timestamps();
             $table->softDeletes();
         });

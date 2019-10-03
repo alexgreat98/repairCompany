@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Portfolio;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,7 +15,9 @@ class PortfolioController extends Controller
      */
     public function index()
     {
-        //
+        $portfolio = Portfolio::get();
+        //$image = Image::portfolio($portfolio->id);
+        return response()->json($portfolio);
     }
 
     /**
@@ -35,7 +38,17 @@ class PortfolioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:255',
+            'text' => '',
+            'description'=>'',
+            'title'=>''
+        ]);
+        $param = new Portfolio;
+        $param->fill($request->all());
+        $param->save();
+
+        return response()->json($param);
     }
 
     /**
@@ -80,6 +93,7 @@ class PortfolioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Portfolio::destroy($id);
+        return response()->json('ok');
     }
 }

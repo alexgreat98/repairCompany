@@ -11,7 +11,7 @@
                 <v-row>
                     <v-col
                             v-for="item in props.items"
-                            :key="item.name"
+                            :key="item.id"
                             cols="12"
                             sm="6"
                             md="4"
@@ -20,10 +20,10 @@
                         <v-card >
                             <v-card-title><h4>{{ item.name }}</h4></v-card-title>
                             <v-divider></v-divider>
-                            <v-container fluid v-on:click="showPortfolio" class="my-card">
+                            <v-container fluid v-on:click="showPortfolio(item)" class="my-card">
                                 <v-row>
                                     <v-col
-                                            v-for="n in 9"
+                                            v-for="n in 4"
                                             :key="n"
                                             class="d-flex child-flex"
                                             cols="4"
@@ -55,12 +55,14 @@
                 </v-row>
             </template>
         </v-data-iterator>
+
+
         <v-dialog v-model="dialog" scrollable max-width="500px">
             <template v-slot:activator="{ on }">
-                <v-btn color="primary" dark v-on="on">Open Dialog</v-btn>
+                <!--<v-btn color="primary" dark v-on="on">Open Dialog</v-btn>-->
             </template>
             <v-card>
-                <v-card-title><div>Упраление показом </div><v-icon
+                <v-card-title><div>{{current.name}} </div><v-icon
                         medium
                         color="red"
                         @click="deleteItem()"
@@ -130,10 +132,11 @@
         >
             <v-icon>mdi-plus</v-icon>
         </v-btn>
+
         <v-row justify="center">
             <v-dialog v-model="dialogNew" persistent max-width="600px">
                 <template v-slot:activator="{ on }">
-                    <v-btn color="primary" dark v-on="on">Open Dialog</v-btn>
+                    <!--<v-btn color="primary" dark v-on="on">Open Dialog</v-btn>-->
                 </template>
                 <v-card>
                     <v-card-title>
@@ -143,11 +146,16 @@
                         <v-container>
                             <v-row>
                                 <v-col cols="12" sm="6" md="4">
-                                    <v-text-field label="Название*" required></v-text-field>
+                                    <v-text-field label="Название*" required v-model="nItem.name"></v-text-field>
                                 </v-col>
-<!--                                <v-col cols="12" sm="6" md="4">
-                                    <v-text-field label="Название" hint="example of helper text only on focus"></v-text-field>
-                                </v-col>-->
+                                <v-col cols="12" sm="6" md="4">
+                                    <v-text-field label="Заголовок" v-model="nItem.title" hint="example of helper text only on focus"></v-text-field>
+                                </v-col>
+                            </v-row>
+                            <v-row>
+                                <v-col cols="12" sm="6" md="4">
+                                    <v-text-field label="Описание" required v-model="nItem.description"></v-text-field>
+                                </v-col>
                             </v-row>
                         </v-container>
                         <small>*обязательно к заполнению</small>
@@ -155,7 +163,7 @@
                     <v-card-actions>
                         <div class="flex-grow-1"></div>
                         <v-btn color="red darken-1" text @click="dialogNew = false">Отмена</v-btn>
-                        <v-btn color="green darken-1" text @click="dialogNew = false">Сохранить</v-btn>
+                        <v-btn color="green darken-1" text @click="newItem">Сохранить</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>
@@ -172,79 +180,59 @@
                 itemsPerPageOptions: [4, 8, 12],
                 itemsPerPage: 4,
                 name : "PortfoliosAdmin",
-                items: [
-                    {
-                        name: 'Объект № 1',
-                        calories: 159,
-                        fat: 6.0,
-                        carbs: 24,
-                        protein: 4.0,
-                        sodium: 87,
-                        calcium: '14%',
-                        iron: '1%',
-                    },
-                    {
-                        name: 'Объект № 3',
-                        calories: 237,
-                        fat: 9.0,
-                        carbs: 37,
-                        protein: 4.3,
-                        sodium: 129,
-                        calcium: '8%',
-                        iron: '1%',
-                    },
-                    {
-                        name: 'Объект № 2',
-                        calories: 262,
-                        fat: 16.0,
-                        carbs: 23,
-                        protein: 6.0,
-                        sodium: 337,
-                        calcium: '6%',
-                        iron: '7%',
-                    },
-                    {
-                        name: 'Объект № 4',
-                        calories: 305,
-                        fat: 3.7,
-                        carbs: 67,
-                        protein: 4.3,
-                        sodium: 413,
-                        calcium: '3%',
-                        iron: '8%',
-                    },
-                    {
-                        name: 'Объект № 5',
-                        calories: 356,
-                        fat: 16.0,
-                        carbs: 49,
-                        protein: 3.9,
-                        sodium: 327,
-                        calcium: '7%',
-                        iron: '16%',
-                    },
-                    {
-                        name: 'Объект № 6',
-                        calories: 375,
-                        fat: 0.0,
-                        carbs: 94,
-                        protein: 0.0,
-                        sodium: 50,
-                        calcium: '0%',
-                        iron: '0%',
-                    },
-                ],
+                items: [],
                 dialog : false,
-                dialogNew : false
+                dialogNew : false,
+                nItem:{
+                    name : '',
+                    text : '',
+                    title : '',
+                    description : ''
+                },
+                defItem:{
+                    name : '',
+                    text : '',
+                    title : '',
+                    description : ''
+                },
+                current : {}
             }
         },
         methods : {
-            showPortfolio(){
+            showPortfolio(item){
+                this.current = item;
                this.dialog = true;
             },
-            deleteItem(item){
+            deleteItem(){
+                if(confirm('Вы уверрены')){
+                    this.axios.delete('api/portfolio/' + this.current.id)
+                        .then(_=>{
+                            this.dialog = false;
+                            this.initialize();
+                        });
+                }
+            },
+            initialize(){
+                this.axios.get('api/portfolio')
+                    .then(data=>{
+                      this.items = data.data;
+                    })
+            },
+            newItem(){
+                this.axios.post('api/portfolio', this.nItem)
+                    .then(data=>{
+                        console.log(data.data);
+                        Object.assign(this.nItem, this.defItem);
+                        this.dialogNew = false;
+                        this.initialize();
+                    })
+            },
+            deleteImage(item){
 
-            }
+            },
+        },
+        mounted() {
+            this.initialize()
         }
     }
 </script>
