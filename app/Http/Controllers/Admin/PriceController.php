@@ -45,8 +45,7 @@ class PriceController extends Controller
      */
     public function store(Request $request)
     {
-        $service = Service::findOrFail($request->services_id);
-        $service->prices()->create($request->all());
+        Price::create($request->all());
 
         return response()->json([
             'status' => 'success'
@@ -87,7 +86,6 @@ class PriceController extends Controller
      */
     public function update(Request $request, Price $price)
     {
-        $price->service()->associate(Service::findOrFail($request->services_id));
         $price->update($request->all());
         return response()->json([
             'status' => 'success'
