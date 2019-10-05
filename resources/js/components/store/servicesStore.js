@@ -38,7 +38,7 @@ const actions = {
     async createItem({commit, state}) {
         await axios.post('/api/services', state.editedItem)
             .then(({data}) => {
-                commit('setItems', {items: data.items});
+                commit('setEditedItem', {items: data.item});
             })
             .catch(({error}) => {
                 console.log(error);
@@ -53,7 +53,7 @@ const actions = {
     async updateItem({commit, state}) {
         await axios.put('/api/services/' + state.editedItem.id, state.editedItem)
             .then(({data}) => {
-                commit('setItems', {items: data.items});
+                commit('setEditedItem', {items: data.item});
             })
             .catch(({error}) => {
                 console.log(error);
@@ -62,7 +62,7 @@ const actions = {
     async deleteItem({commit, state}, id) {
         await axios.delete('/api/services/' + id)
             .then(({data}) => {
-                commit('setItems', {items: data.items});
+
             })
             .catch(({error}) => {
                 console.log(error);
@@ -75,7 +75,7 @@ const actions = {
             })
     },
     async deleteItemImage({commit, state}, id) {
-        await axios.delete('/api/services_image_delete/' + id)
+        await axios.delete('/api/services_images_detach/' + id)
             .then(({data}) => {
 
             })

@@ -1,53 +1,58 @@
 <template>
 
-        <v-card width="100%">
-            <v-card-title>
-                Услуги
-                <div class="flex-grow-1"></div>
-                <v-text-field
-                    v-model="search"
-                    append-icon="search"
-                    label="Поиск цен"
-                    single-line
-                    hide-details
-                ></v-text-field>
-            </v-card-title>
-            <v-data-table
-                :headers="headers"
-                :items="items"
-                :search="search"
-                :loading="progresses"
-            >
-                <template v-slot:item.action="{ item }">
-                    <v-icon
-                        small
-                        class="mr-2"
-                        @click="editItem(item)"
-                    >
-                        edit
-                    </v-icon>
-                    <v-icon
-                        small
-                        @click="deleteItem(item)"
-                    >
-                        delete
-                    </v-icon>
-                </template>
-            </v-data-table>
-            <v-dialog v-model="dialogEdit" persistent max-width="900">
-                <v-card>
-                    <v-card-title class="headline">Редактировать услугу</v-card-title>
-                    <v-card-text>
-                        <v-container grid-list-md v-if="editedItem">
-                            <v-layout wrap>
-                                <v-flex xs12>
-                                    <v-text-field v-model="editedItem.name" label="Название" required></v-text-field>
-                                </v-flex>
-                                <v-flex xs12>
-                                    <v-textarea v-model="editedItem.text" label="Текст" required></v-textarea>
-                                </v-flex>
-                            </v-layout>
+    <v-card width="100%">
+        <v-card-title>
+            Услуги
+            <div class="flex-grow-1"></div>
+            <v-text-field
+                v-model="search"
+                append-icon="search"
+                label="Поиск цен"
+                single-line
+                hide-details
+            ></v-text-field>
+        </v-card-title>
+        <v-data-table
+            :headers="headers"
+            :items="items"
+            :search="search"
+            :loading="progresses"
+        >
+            <template v-slot:item.action="{ item }">
+                <v-icon
+                    small
+                    class="mr-2"
+                    @click="editItem(item)"
+                >
+                    edit
+                </v-icon>
+                <v-icon
+                    small
+                    @click="deleteItem(item)"
+                >
+                    delete
+                </v-icon>
+            </template>
+        </v-data-table>
+        <v-dialog v-model="dialogEdit" persistent max-width="900">
+            <v-card>
+                <v-card-title class="headline">Редактировать услугу</v-card-title>
+                <v-card-text>
+                    <v-container grid-list-md v-if="editedItem">
+                        <v-layout wrap>
+                            <v-flex xs12>
+                                <v-text-field v-model="editedItem.name" label="Название" required></v-text-field>
+                            </v-flex>
+                            <v-flex xs12>
+                                <v-textarea v-model="editedItem.text" label="Текст" required></v-textarea>
+                            </v-flex>
+                        </v-layout>
+                    </v-container>
+                    <v-card width="100%" class="mb-5" v-if="editedItem.id">
+                        <v-card-title>Изображение из портфолио</v-card-title>
+                        <v-container>
                             <v-row>
+
                                 <v-col
                                     v-for="image in images"
                                     :key="image.id"
@@ -66,7 +71,8 @@
                                                     align="center"
                                                     justify="center"
                                                 >
-                                                    <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                                                    <v-progress-circular indeterminate
+                                                                         color="grey lighten-5"></v-progress-circular>
                                                 </v-row>
                                             </template>
                                             <v-btn
@@ -83,46 +89,53 @@
                                         </v-img>
                                     </v-card>
                                 </v-col>
+
                             </v-row>
+
+                            <dialog-images-attach :serviceId="editedItem.id"></dialog-images-attach>
+
                         </v-container>
-                        <prices-admin v-if="editedItem.id" :serviceId="editedItem.id"></prices-admin>
-                    </v-card-text>
-                    <v-card-actions class="pt-5">
-                        <div class="flex-grow-1"></div>
-                        <v-btn small color="red darken-1" text @click="dialogEdit = false">Отмена</v-btn>
-                        <v-btn small color="green darken-1" text v-if="userCreatedBtn===true" outlined
-                               @click="createItem()">
-                            Создать
-                        </v-btn>
-                        <v-btn small color="green darken-1" v-else outlined @click="updateItem()">
-                            Сохранить
-                        </v-btn>
-                    </v-card-actions>
-                </v-card>
-            </v-dialog>
-            <v-btn
-                bottom
-                color="pink"
-                dark
-                fab
-                fixed
-                right
-                @click="createItemInfo"
-            >
-                <v-icon>mdi-plus</v-icon>
-            </v-btn>
-        </v-card>
+                    </v-card>
+
+                    <prices-admin v-if="editedItem.id" :serviceId="editedItem.id"></prices-admin>
+                </v-card-text>
+                <v-card-actions class="pt-5">
+                    <div class="flex-grow-1"></div>
+                    <v-btn small color="red darken-1" text @click="dialogEdit = false">Отмена</v-btn>
+                    <v-btn small color="green darken-1" text v-if="userCreatedBtn===true" outlined
+                           @click="createItem()">
+                        Создать
+                    </v-btn>
+                    <v-btn small color="green darken-1" v-else outlined @click="updateItem()">
+                        Сохранить
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+        <v-btn
+            bottom
+            color="pink"
+            dark
+            fab
+            fixed
+            right
+            @click="createItemInfo"
+        >
+            <v-icon>mdi-plus</v-icon>
+        </v-btn>
+    </v-card>
 
 </template>
 
 <script>
     import {mapState, mapActions, mapMutations} from 'vuex'
     import PricesAdmin from "./PricesAdmin";
+    import DialogImagesAttach from "./DialogImagesAttach";
 
 
     export default {
         name: "ServicesAdmin",
-        components: {PricesAdmin},
+        components: {DialogImagesAttach, PricesAdmin},
         computed: {
             ...mapState('servicesStore', {
                 items: state => state.items,
@@ -132,7 +145,7 @@
         },
         watch: {
             dialogEdit(val) {
-                if(!val){
+                if (!val) {
                     this.userCreatedBtn = false;
                     this.clear()
                 }
@@ -182,9 +195,10 @@
                 await this.createInfo();
                 this.dialogEdit = true
             },
-            async createItem(){
+            async createItem() {
                 await this.create();
-                // this.dialogEdit = false;
+                this.getItems();
+                this.userCreatedBtn = false;
             },
             async editItem(item) {
                 await this.getItem(item.id);
@@ -193,15 +207,18 @@
             },
             async updateItem() {
                 await this.update();
-                this.dialogEdit = false
+                this.dialogEdit = false;
+                this.getItems();
             },
-            async deleteItem(item){
+            async deleteItem(item) {
                 await this.delete(item.id);
+                this.getItems();
             },
-            async deleteImage(item ,image){
+            async deleteImage(item, image) {
                 await this.deleteItemImage(image);
                 this.getImage(item)
-            }
+            },
+
 
         },
         created() {
