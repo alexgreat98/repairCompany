@@ -59,7 +59,9 @@ class PortfolioController extends Controller
      */
     public function show($id)
     {
-        //
+        $portfolio = Portfolio::findOrFail($id);
+        $images = $portfolio->images;
+        return response()->json(compact('portfolio', 'images'));
     }
 
     /**

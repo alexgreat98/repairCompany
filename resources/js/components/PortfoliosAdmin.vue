@@ -123,11 +123,7 @@
                     <v-btn color="blue darken-1" text @click="uploadStart" type="file">Загрузить</v-btn>
                 </v-card-actions>
                 <v-divider></v-divider>
-                <!--<v-file-input show-size counter multiple label="Загрузить файлы" @change="upload"></v-file-input>-->
-                <form enctype="multipart/form-data">
-                    <br><br>
-                    <input multiple="multiple" name="photos[]" type="file">
-                </form>
+                <v-file-input show-size counter multiple label="Загрузить файлы" @change="upload"></v-file-input>
             </v-card>
         </v-dialog>
                 <v-btn
@@ -217,6 +213,10 @@
             showPortfolio(item){
                 this.current = item;
                this.dialog = true;
+               this.axios.get('api/portfolio/' + item.id)
+                   .then(data=>{
+                       console.log(data);
+                   })
             },
             deleteItem(){
                 if(confirm('Вы уверрены')){
@@ -266,14 +266,20 @@
                     let formData = new FormData();
 
                     // files
+                    let i = 0;
                     for (let file of this.files) {
-                        formData.append("file", file, file.name);
+                        formData.append("file[]", file, file.name);
                     }
 
                     // additional data
                     formData.append("portfolio", this.current.id);
                     this.axios
-                        .post("api/image", formData)
+                        .post("api/image", formData,{
+                            headers: {
+                                'Content-Type': 'multipart/form-data',
+
+                            }
+                        })
                         .then(response => {
                             console.log("Success!");
                             console.log({ response });

@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 class ImageController extends Controller
 {
     /**
@@ -39,14 +40,22 @@ class ImageController extends Controller
     {
         $request->validate([
             'portfolio' => 'required',
-            //'file' => 'required|image|mimes:jpeg,bmp,png'
+            'file.*' => 'required|image|mimes:jpeg,bmp,png'
         ]);
-        $name = [];
-        foreach ($request->file as $f) {
-            //$filename = $photo->store('photos');
-            $name[] = $f;
+        $portfolio = $request->portfolio;
+        foreach ($request->file('file') as $image){
+            $filename  = Str::random(). '.' . $image->clientExtension();
+            $photo[] = $image->storeAs('/', $filename);
+            Image::make($image)
+                ->fit(100, 100)
+                ->save('../storage/app/public/portfolio/prev-'.$filename);
+            $img = new \App\Image;
+            $img->url = $filename;
+            $img->portfolio_id = $portfolio;
+            $img->save();
         }
-        return response()->json($name);
+
+        return response()->json($photo);
 
     }
 
