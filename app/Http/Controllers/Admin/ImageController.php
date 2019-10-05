@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Image;
+//use App\Image;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
+
 class ImageController extends Controller
 {
     /**
@@ -48,10 +50,10 @@ class ImageController extends Controller
         $portfolio = $request->portfolio;
         foreach ($request->file('file') as $image){
             $filename  = Str::random(). '.' . $image->clientExtension();
-            $photo[] = $image->storeAs('/', $filename);
+            $photo[] = $image->storeAs('/public/p-img', $filename);
             Image::make($image)
                 ->fit(100, 100)
-                ->save('../storage/app/public/portfolio/prev-'.$filename);
+                ->save('../storage/app/public/p-img/prev-'.$filename);
             $img = new \App\Image;
             $img->url = $filename;
             $img->portfolio_id = $portfolio;
@@ -104,6 +106,8 @@ class ImageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $img = \App\Image::findOrFail($id);
+        Storage::delete(['app/public/p-img/'.$img, 'app/public/p-img/prev-'.$img]);
+        $img->delete();
     }
 }

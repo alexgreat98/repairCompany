@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Image;
 use App\Portfolio;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -17,6 +18,11 @@ class PortfolioController extends Controller
     {
         $portfolio = Portfolio::get();
         //$image = Image::portfolio($portfolio->id);
+        $pr = [];
+        foreach ($portfolio as $p){
+          $p->images = Image::where('portfolio_id', $p->id)->get();
+        }
+        //$portfolio->images()->get();
         return response()->json($portfolio);
     }
 

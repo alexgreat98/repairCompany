@@ -10,7 +10,7 @@
             <template v-slot:default="props">
                 <v-row>
                     <v-col
-                            v-for="item in props.items"
+                            v-for="item of props.items"
                             :key="item.id"
                             cols="12"
                             sm="6"
@@ -23,15 +23,14 @@
                             <v-container fluid v-on:click="showPortfolio(item)" class="my-card">
                                 <v-row>
                                     <v-col
-                                            v-for="n in 4"
-                                            :key="n"
+                                            v-for="p in item.images"
+                                            :key="p.id"
                                             class="d-flex child-flex"
                                             cols="4"
                                     >
                                         <v-card flat tile class="d-flex">
-                                            <v-img
-                                                    :src="`https://picsum.photos/500/300?image=${n * 5 + 10}`"
-                                                    :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
+                                            <v-img  :src="`storage/p-img/prev-` + p.url"
+                                                    :lazy-src="`storage/p-img/prev-` + p.url"
                                                     aspect-ratio="1"
                                                     class="grey lighten-2"
                                             >
@@ -65,7 +64,7 @@
                 <v-card-title><div>{{current.name}} </div><v-icon
                         medium
                         color="red"
-                        @click="deleteItem()"
+                        @click="deleteItem(current.id)"
                 >
                     delete
                 </v-icon></v-card-title>
@@ -81,32 +80,18 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr v-for="n in byImage"
-                                :key="n">
+                            <tr v-for="im of current.images"
+                                :key="im.id">
                                 <td><v-img
-                                        :src="`https://picsum.photos/500/300?image=${n * 5 + 10}`"
-                                        :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
+                                        :src="`storage/p-img/prev-` + im.url"
+                                        :lazy-src="`storage/p-img/prev-` + im.url"
                                         aspect-ratio="1"
                                         class="grey lighten-2"
                                 ></v-img></td>
                                 <td>
-                                    <v-select
-                                            max-width="300px"
-                                            ref="country"
-                                            :v-model="byImage[n]"
-                                            :items="services"
-                                            item-text="name"
-                                            item-value="id"
-                                            label="Категория"
-                                            placeholder="Выберите..."
-                                            required
-                                            @change="serviceSelect(n)"
-                                    ></v-select>
-                                </td>
-                                <td>
                                     <v-icon
                                             medium
-                                            @click="deleteItem(n)"
+                                            @click="deleteImage(im.id)"
                                     >
                                         delete
                                     </v-icon>
@@ -231,19 +216,9 @@
                 this.axios.get('api/portfolio')
                     .then(data=>{
                       this.items = data.data;
+                        console.log(data.data);
                     });
-                this.axios.get('api/services')
-                    .then(data=>{
-                        if (data && data.data){
-                            console.log(data);
-                             data.data.items.map(s => {
-                                 this.services.push({
-                                     id : s.id,
-                                     name : s.name
-                                 })
-                            });
-                        }
-                    })
+
             },
             newItem(){
                 this.axios.post('api/portfolio', this.nItem)
@@ -255,7 +230,10 @@
                     })
             },
             deleteImage(item){
-
+                this.axios.delete('api/images/' + item)
+                    .then(data=>{
+                        console.log(data);
+                    })
             },
             upload(files){
                 this.files = files;
@@ -274,7 +252,7 @@
                     // additional data
                     formData.append("portfolio", this.current.id);
                     this.axios
-                        .post("api/image", formData,{
+                        .post("api/images", formData,{
                             headers: {
                                 'Content-Type': 'multipart/form-data',
 
