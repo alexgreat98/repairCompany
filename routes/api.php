@@ -25,3 +25,4 @@ Route::resource('prices', 'Admin\PriceController');
 Route::resource('params', 'Admin\ParamsController');
 Route::resource('users', 'Admin\UserController');
 Route::resource('portfolio', 'Admin\PortfolioController');
+Route::resource('image', 'Admin\ImageController');

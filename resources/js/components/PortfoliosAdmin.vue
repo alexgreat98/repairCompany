@@ -81,7 +81,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr v-for="n in 9"
+                            <tr v-for="n in byImage"
                                 :key="n">
                                 <td><v-img
                                         :src="`https://picsum.photos/500/300?image=${n * 5 + 10}`"
@@ -93,11 +93,14 @@
                                     <v-select
                                             max-width="300px"
                                             ref="country"
-                                            v-model="country"
-                                            :items="countries"
+                                            :v-model="byImage[n]"
+                                            :items="services"
+                                            item-text="name"
+                                            item-value="id"
                                             label="Категория"
                                             placeholder="Выберите..."
                                             required
+                                            @change="serviceSelect(n)"
                                     ></v-select>
                                 </td>
                                 <td>
@@ -117,8 +120,14 @@
                 <v-card-actions>
                     <v-btn color="red darken-1" text @click="dialog = false">Отмена</v-btn>
                     <v-btn color="green darken-1" text @click="dialog = false">Сохранить</v-btn>
-                    <v-btn color="blue darken-1" text @click="dialog = false">Добавить</v-btn>
+                    <v-btn color="blue darken-1" text @click="uploadStart" type="file">Загрузить</v-btn>
                 </v-card-actions>
+                <v-divider></v-divider>
+                <!--<v-file-input show-size counter multiple label="Загрузить файлы" @change="upload"></v-file-input>-->
+                <form enctype="multipart/form-data">
+                    <br><br>
+                    <input multiple="multiple" name="photos[]" type="file">
+                </form>
             </v-card>
         </v-dialog>
                 <v-btn
@@ -183,6 +192,12 @@
                 items: [],
                 dialog : false,
                 dialogNew : false,
+                files: [],
+                services : [{
+                    id : 0,
+                    name : ''
+                }],
+                byImage: [1, 2, 3, 4, 5, 6],
                 nItem:{
                     name : '',
                     text : '',
@@ -216,6 +231,18 @@
                 this.axios.get('api/portfolio')
                     .then(data=>{
                       this.items = data.data;
+                    });
+                this.axios.get('api/services')
+                    .then(data=>{
+                        if (data && data.data){
+                            console.log(data);
+                             data.data.items.map(s => {
+                                 this.services.push({
+                                     id : s.id,
+                                     name : s.name
+                                 })
+                            });
+                        }
                     })
             },
             newItem(){
@@ -230,6 +257,40 @@
             deleteImage(item){
 
             },
+            upload(files){
+                this.files = files;
+                console.log(files);
+            },
+            uploadStart(){
+                if (this.files) {
+                    let formData = new FormData();
+
+                    // files
+                    for (let file of this.files) {
+                        formData.append("file", file, file.name);
+                    }
+
+                    // additional data
+                    formData.append("portfolio", this.current.id);
+                    this.axios
+                        .post("api/image", formData)
+                        .then(response => {
+                            console.log("Success!");
+                            console.log({ response });
+                        })
+                        .catch(error => {
+                            console.log({ error });
+                        });
+                } else {
+                    console.log("there are no files.");
+
+                }
+
+            },
+            serviceSelect(current){
+                console.log(current, this.byImage[current]);
+            }
+
         },
         mounted() {
             this.initialize()

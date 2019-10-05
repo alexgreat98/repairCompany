@@ -8,13 +8,15 @@ use App\Http\Controllers\Controller;
 class ImageController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Отображение всех фото из портфолио. Возвращает массив url-фото. Превью получается путем добавления суффикса
+     *  _prev к имени файла. Пример image.jpg и image_prev.jpg
+     * Параметр pid=id_портфолио , если не передается возвращается ошибка
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        return response()->json($request);
     }
 
     /**
@@ -35,7 +37,17 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'portfolio' => 'required',
+            //'file' => 'required|image|mimes:jpeg,bmp,png'
+        ]);
+        $name = [];
+        foreach ($request->file as $f) {
+            //$filename = $photo->store('photos');
+            $name[] = $f;
+        }
+        return response()->json($name);
+
     }
 
     /**
