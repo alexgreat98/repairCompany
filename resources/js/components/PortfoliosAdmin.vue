@@ -70,42 +70,42 @@
                 </v-icon></v-card-title>
                 <v-divider></v-divider>
                 <v-card-text style="height: 500px;">
-                    <v-simple-table>
-                        <template v-slot:default>
-                            <thead>
-                            <tr>
-                                <th class="text-left" width="100px"></th>
-                                <th class="text-left">Категория</th>
-                                <th class="text-center" width="40px"></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr v-for="im of current.images"
-                                :key="im.id">
-                                <td><v-img
-                                        :src="`storage/p-img/prev-` + im.url"
-                                        :lazy-src="`storage/p-img/prev-` + im.url"
-                                        aspect-ratio="1"
-                                        class="grey lighten-2"
-                                ></v-img></td>
-                                <td>
+                    <v-data-iterator
+                            :items="current.images"
+                    >
+                        <template v-slot:default="props">
+                            <v-row>
+                                <v-col
+                                        v-for="im in props.items"
+                                        :key="im.id"
+                                        cols="12"
+                                        sm="6"
+                                        md="4"
+                                        lg="3"
+                                >
+                                    <v-img
+                                            :src="`storage/p-img/prev-` + im.url"
+                                            :lazy-src="`storage/p-img/prev-` + im.url"
+                                            aspect-ratio="1"
+                                            class="grey lighten-2"
+                                    ></v-img>
                                     <v-icon
                                             medium
                                             @click="deleteImage(im.id)"
                                     >
                                         delete
                                     </v-icon>
-                                </td>
-                            </tr>
-                            </tbody>
+                                </v-col>
+                            </v-row>
                         </template>
-                    </v-simple-table>
+                    </v-data-iterator>
                 </v-card-text>
                 <v-divider></v-divider>
                 <v-card-actions>
                     <v-btn color="red darken-1" text @click="close">Закрыть</v-btn>
                     <!--<v-btn color="green darken-1" text @click="dialog = false">Сохранить</v-btn>-->
                     <v-btn color="blue darken-1" text @click="uploadStart" type="file" v-bind:disabled="!(files.length > 0)">Загрузить</v-btn>
+                    <v-icon medium color="green" v-if="loadState">fa-check-circle</v-icon>
                 </v-card-actions>
                 <v-divider></v-divider>
                 <v-file-input show-size counter multiple label="Загрузить фото" @change="upload" v-model="files" ></v-file-input>
@@ -166,6 +166,7 @@
         data (){
             return {
                 value : 0,
+                loadState : false,
                 itemsPerPageOptions: [4, 8, 12],
                 itemsPerPage: 4,
                 name : "PortfoliosAdmin",
@@ -233,6 +234,7 @@
                 this.axios.delete('api/images/' + item)
                     .then(data=>{
                         console.log(data);
+                        this.current.images = this.current.images.filter(im=> im.id !== item)
                     })
             },
             upload(files){
@@ -261,6 +263,7 @@
                         .then(response => {
                             console.log("Success!");
                             console.log({ response });
+                            this.loadState = true;
                         })
                         .catch(error => {
                             console.log({ error });
@@ -274,6 +277,8 @@
 
             close(){
                 this.dialog = false;
+                this.loadState = false;
+                this.files = [];
                 this.initialize();
             },
             underThan(item){
