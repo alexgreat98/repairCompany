@@ -161,13 +161,21 @@
                 </v-card>
             </v-dialog>
         </v-row>
+        <v-snackbar v-model="snack" :timeout="3000" :color="snackColor">
+            {{ snackText }}
+            <v-btn text @click="snack = false">Close</v-btn>
+        </v-snackbar>
     </v-container>
+
 </template>
 
 <script>
     export default {
         data (){
             return {
+                snack: false,
+                snackColor: '',
+                snackText: '',
                 value : 0,
                 loadState : false,
                 itemsPerPageOptions: [4, 8, 12],
@@ -263,7 +271,9 @@
                         .then(response => {
                             console.log("Success!");
                             console.log({ response });
-                            this.loadState = true;
+                            this.snack = true
+                            this.snackColor = 'success'
+                            this.snackText = 'Данные сохранены'
                         })
                         .catch(error => {
                             console.log({ error });
@@ -277,7 +287,6 @@
 
             close(){
                 this.dialog = false;
-                this.loadState = false;
                 this.files = [];
                 this.initialize();
             },
