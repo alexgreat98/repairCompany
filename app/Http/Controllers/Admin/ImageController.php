@@ -108,7 +108,8 @@ class ImageController extends Controller
     public function destroy($id)
     {
         $img = \App\Image::findOrFail($id);
-        Storage::delete(['app/public/portfolio/'.$img, 'app/public/portfolio/prev-'.$img]);
+        $res = Storage::disk('public')->delete(['portfolio/'.$img->url, 'portfolio/prev-'.$img->url]);
         $img->delete();
+        return response()->json(compact('img', 'res'));
     }
 }
