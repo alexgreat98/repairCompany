@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 //use App\Image;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+//use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
@@ -21,7 +22,7 @@ class ImageController extends Controller
     public function index()
     {
         return response()->json([
-            'items' => Image::all()
+            'items' => \App\Image::all()
         ]);
     }
 
