@@ -29,8 +29,8 @@
                                             cols="4"
                                     >
                                         <v-card flat tile class="d-flex">
-                                            <v-img  :src="`storage/p-img/prev-` + p.url"
-                                                    :lazy-src="`storage/p-img/prev-` + p.url"
+                                            <v-img  :src="`storage/portfolio/prev-` + p.url"
+                                                    :lazy-src="`storage/portfolio/prev-` + p.url"
                                                     aspect-ratio="1"
                                                     class="grey lighten-2"
                                             >
@@ -84,8 +84,8 @@
                                         lg="3"
                                 >
                                     <v-img
-                                            :src="`storage/p-img/prev-` + im.url"
-                                            :lazy-src="`storage/p-img/prev-` + im.url"
+                                            :src="`storage/portfolio/prev-` + im.url"
+                                            :lazy-src="`storage/portfolio/prev-` + im.url"
                                             aspect-ratio="1"
                                             class="grey lighten-2"
                                     ></v-img>

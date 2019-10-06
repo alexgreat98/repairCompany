@@ -51,10 +51,10 @@ class ImageController extends Controller
         $portfolio = $request->portfolio;
         foreach ($request->file('file') as $image){
             $filename  = Str::random(). '.' . $image->clientExtension();
-            $photo[] = $image->storeAs('/public/p-img', $filename);
+            $photo[] = $image->storeAs('/public/portfolio', $filename);
             Image::make($image)
                 ->fit(100, 100)
-                ->save('../storage/app/public/p-img/prev-'.$filename);
+                ->save('../storage/app/public/portfolio/prev-'.$filename);
             $img = new \App\Image;
             $img->url = $filename;
             $img->portfolio_id = $portfolio;
@@ -108,7 +108,7 @@ class ImageController extends Controller
     public function destroy($id)
     {
         $img = \App\Image::findOrFail($id);
-        Storage::delete(['app/public/p-img/'.$img, 'app/public/p-img/prev-'.$img]);
+        Storage::delete(['app/public/portfolio/'.$img, 'app/public/portfolio/prev-'.$img]);
         $img->delete();
     }
 }
