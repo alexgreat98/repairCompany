@@ -6,6 +6,7 @@
                 :items="items"
                 :items-per-page.sync="itemsPerPage"
                 :footer-props="{ itemsPerPageOptions }"
+                :hide-default-footer="true"
         >
             <template v-slot:default="props">
                 <v-row>
@@ -72,6 +73,8 @@
                 <v-card-text style="height: 500px;">
                     <v-data-iterator
                             :items="current.images"
+                            :items-per-page="200"
+                            :hide-default-footer="true"
                     >
                         <template v-slot:default="props">
                             <v-row>
@@ -168,7 +171,7 @@
                 value : 0,
                 loadState : false,
                 itemsPerPageOptions: [4, 8, 12],
-                itemsPerPage: 4,
+                itemsPerPage: 1000,
                 name : "PortfoliosAdmin",
                 items: [],
                 dialog : false,
@@ -178,7 +181,6 @@
                     id : 0,
                     name : ''
                 }],
-                byImage: [1, 2, 3, 4, 5, 6],
                 nItem:{
                     name : '',
                     text : '',
@@ -245,8 +247,6 @@
                 if (this.files) {
                     let formData = new FormData();
 
-                    // files
-                    let i = 0;
                     for (let file of this.files) {
                         formData.append("file[]", file, file.name);
                     }
