@@ -20,7 +20,7 @@
 
                             <v-card flat tile class="d-flex position-relative">
                                 <v-img
-                                    :src="'/storage/portfolio/'+image.url"
+                                    :src="'/storage/portfolio/prev-'+image.url"
                                     aspect-ratio="1"
                                     class="grey lighten-2"
 
