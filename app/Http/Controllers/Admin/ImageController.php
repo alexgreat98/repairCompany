@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-//use App\Image;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-//use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
@@ -100,10 +98,9 @@ class ImageController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
     public function destroy($id)
     {

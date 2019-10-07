@@ -44,7 +44,8 @@
                                 <v-text-field v-model="editedItem.name" label="Название" required></v-text-field>
                             </v-flex>
                             <v-flex xs12>
-                                <v-textarea v-model="editedItem.text" label="Текст" required></v-textarea>
+                                <div class="subtitle-2">Детальный текст</div>
+                                <ckeditor :editor="this.editor" v-model="editedItem.text" :config="this.editorConfig"></ckeditor>
                             </v-flex>
                         </v-layout>
                     </v-container>
@@ -165,7 +166,7 @@
                         value: 'id',
                     },
                     {text: 'Название', value: 'name'},
-                    {text: 'Создан', value: 'created_at'},
+                    {text: 'Текст', value: 'text'},
                     {text: 'Изменен', value: 'updated_at'},
                     {text: 'Действия', value: 'action', sortable: false},
                 ],

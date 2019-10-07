@@ -7,6 +7,8 @@ import Vue from 'vue'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import VueRouter from 'vue-router';
+import CKEditor from '@ckeditor/ckeditor5-vue';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import App from './components/AppAdmin';
 import PortfolioAdmin from './components/PortfolioAdmin';
 import PortfoliosAdmin from './components/PortfoliosAdmin';
@@ -32,10 +34,13 @@ import servicesStore from './components/store/servicesStore'
 
 Vue.prototype.axios = axios;
 Vue.prototype.vue = Vue;
+Vue.prototype.editor =  ClassicEditor;
+Vue.prototype.editorConfig = {};
 
 Vue.use(Vuetify);
 Vue.use(Vuex);
 Vue.use(VueRouter);
+Vue.use( CKEditor );
 
 const opts = {
     icons: {
@@ -62,10 +67,10 @@ const store =
         },
     };
 
-
-new Vue({
+let vm = new Vue({
     router,
     store: new Vuex.Store(store),
     vuetify: new Vuetify(opts),
-    render: h => h(App),
+    components: {ClassicEditor},
+    render: h => h(App)
 }).$mount('#app');

@@ -10,6 +10,8 @@
     "watch-poll": "npm run watch -- --watch-poll"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^12.4.0",
+    "@ckeditor/ckeditor5-vue": "^1.0.0",
     "bootstrap": "^4.3.1",
     "jquery": "^3.4.1",
     "materialize-css": "^1.0.0-rc.2",
