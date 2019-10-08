@@ -9,6 +9,7 @@ import 'vuetify/dist/vuetify.min.css'
 import VueRouter from 'vue-router';
 import CKEditor from '@ckeditor/ckeditor5-vue';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import cyrillicToTranslit from 'cyrillic-to-translit-js';
 import App from './components/AppAdmin';
 import PortfolioAdmin from './components/PortfolioAdmin';
 import PortfoliosAdmin from './components/PortfoliosAdmin';
@@ -36,6 +37,7 @@ Vue.prototype.axios = axios;
 Vue.prototype.vue = Vue;
 Vue.prototype.editor =  ClassicEditor;
 Vue.prototype.editorConfig = {};
+Vue.prototype.cyrillicToTranslit = cyrillicToTranslit;
 
 Vue.use(Vuetify);
 Vue.use(Vuex);

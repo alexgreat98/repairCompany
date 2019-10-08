@@ -7,7 +7,7 @@
 
 window.Vue = require('vue');
 import Swiper from 'swiper';
-
+import 'fslightbox/fslightbox.min.js'
 
 // import Vuetify from 'vuetify/lib'
 

@@ -16,6 +16,7 @@
             :items="prices"
             :search="search"
             :loading="progresses"
+            dense
         >
             <template v-slot:item.action="{ item }">
                 <v-icon

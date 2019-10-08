@@ -14,7 +14,8 @@ class Service extends Model
         'image',
         'title',
         'description',
-        'keywords'
+        'keywords',
+        'slug'
     ];
 
     /**

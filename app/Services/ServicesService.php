@@ -18,4 +18,10 @@ class ServicesService
             }
             return $services;
         }
+        public function getServicePage(Service $service)
+        {
+            $service['prices'] = $service->prices()->get();
+            $service['images'] = $service->images()->get();
+            return $service;
+        }
 }

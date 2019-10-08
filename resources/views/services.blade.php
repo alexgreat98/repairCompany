@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <div class="services__list-item-btn">
-                        <a href="/services/electro" class="btn btn-secondary">Подробнее</a>
+                        <a href="/services/{{$service->slug}}" class="btn btn-secondary">Подробнее</a>
                     </div>
                 </div>
             @endforeach

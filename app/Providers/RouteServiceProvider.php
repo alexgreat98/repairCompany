@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Service;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 
@@ -23,7 +24,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Route::bind('web_service', function ($value) {
+            return Service::where('slug', $value)->first();
+        });
 
         parent::boot();
     }

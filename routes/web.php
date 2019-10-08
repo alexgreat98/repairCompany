@@ -18,6 +18,7 @@ Route::get('/about-us', function () {
     return view('pageAbout');
 });
 Route::get('/services', 'Client\PageController@GetServices');
+Route::get('/services/{web_service}', 'Client\PageController@GetService');
 Route::get('/portfolio', 'Client\PageController@GetPortfolio');
 Route::get('/portfolio/item', function () {
     return view('portfolioItem');

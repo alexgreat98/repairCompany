@@ -18,6 +18,9 @@
             :search="search"
             :loading="progresses"
         >
+            <template v-slot:item.text="{ item }">
+                <p v-html="item.text"></p>
+            </template>
             <template v-slot:item.action="{ item }">
                 <v-icon
                     small
@@ -40,8 +43,18 @@
                 <v-card-text>
                     <v-container grid-list-md v-if="editedItem">
                         <v-layout wrap>
-                            <v-flex xs12>
+                            <v-flex xs12 sm6>
                                 <v-text-field v-model="editedItem.name" label="Название" required></v-text-field>
+                            </v-flex>
+                            <v-flex xs12 sm6 row>
+                                <v-btn @click="translit" icon>
+                                    <v-icon>mdi-link</v-icon>
+                                </v-btn>
+                                <v-text-field
+                                    v-model="editedItem.slug"
+                                    label="Ссылка алиас"
+                                    required
+                                ></v-text-field>
                             </v-flex>
                             <v-flex xs12>
                                 <div class="subtitle-2">Детальный текст</div>
@@ -219,7 +232,9 @@
                 await this.deleteItemImage(image);
                 this.getImage(item)
             },
-
+            translit: function () {
+                this.editedItem.slug = this.cyrillicToTranslit().transform(this.editedItem.name, "_").toLowerCase().replace('?', '')
+            }
 
         },
         created() {

@@ -30,4 +30,9 @@ class PageController extends Controller
         $services = $this->services->getAllServicesPage();
         return view('services', compact('services'));
     }
+    public function GetService(Service $service)
+    {
+        $service = $this->services->getServicePage($service);
+        return view('service', compact('service'));
+    }
 }

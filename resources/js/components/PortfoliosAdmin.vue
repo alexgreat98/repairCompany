@@ -85,6 +85,7 @@
                                         sm="6"
                                         md="4"
                                         lg="3"
+                                        class="position-relative"
                                 >
                                     <v-img
                                             :src="`storage/portfolio/prev-` + im.url"
@@ -92,12 +93,17 @@
                                             aspect-ratio="1"
                                             class="grey lighten-2"
                                     ></v-img>
-                                    <v-icon
-                                            medium
-                                            @click="deleteImage(im.id)"
+                                    <v-btn
+                                        icon
+                                        @click="deleteImage(im.id)"
+                                        absolute
+                                        bottom
+                                        right
+                                        large
+                                        color="red"
                                     >
-                                        delete
-                                    </v-icon>
+                                        <v-icon>mdi-delete</v-icon>
+                                    </v-btn>
                                 </v-col>
                             </v-row>
                         </template>
@@ -291,7 +297,7 @@
                 this.initialize();
             },
             underThan(item){
-                let size = item.length
+                let size = item.length;
                 size = Math.min(6, size);
                 return item.slice(0, size);
             }
