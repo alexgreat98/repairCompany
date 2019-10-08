@@ -3,14 +3,31 @@
 namespace App\Http\Controllers\Client;
 
 use App\Portfolio;
-use Illuminate\Http\Request;
+use App\Service;
 use App\Http\Controllers\Controller;
+use App\Services\ServicesService;
 
 class PageController extends Controller
 {
-    public function GetPortfolio()
+
+    protected $services;
+
+    public function __construct(
+        ServicesService $services
+    )
     {
-        $portfolio = Portfolio::all();
-        return view('portfolio', $portfolio);
+        $this->services = $services;
+    }
+
+    public function GetPortfolios()
+    {
+        $portfolios = Portfolio::all();
+        return view('portfolios', compact('portfolios'));
+    }
+
+    public function GetServices()
+    {
+        $services = $this->services->getAllServicesPage();
+        return view('services', compact('services'));
     }
 }

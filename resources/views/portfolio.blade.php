@@ -19,11 +19,11 @@
         </div>
         <div class="portfolio__list-list">
             <div class="row">
+                @foreach($portfolio as $po)
                 <div class="col-md-6">
                     <div class="portfolio__list-item">
                         <a href="/portfolio/item" class="project-img text-center"
                            style="background-image: url({{Storage::url('portfolio/sdfbd2f.jpg')}});">
-
                         </a>
                         <div class="desc row align-items-center">
                             <h3>
@@ -39,66 +39,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="portfolio__list-item">
-                        <a href="/portfolio/item" class="project-img text-center"
-                           style="background-image: url({{Storage::url('portfolio/sdfbd2f.jpg')}});">
 
-                        </a>
-                        <div class="desc row align-items-center">
-                            <h3>
-                                <div class="float-left">
-                                    <a href="/portfolio/item">Кухня</a>
-                                </div>
-                                <div class="float-right">
-                                    <a href="/portfolio/item" class="text-main">
-                                        Подробнее
-                                    </a>
-                                </div>
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="portfolio__list-item">
-                        <a href="/portfolio/item" class="project-img text-center"
-                           style="background-image: url({{Storage::url('portfolio/sdfbd2f.jpg')}});">
-
-                        </a>
-                        <div class="desc row align-items-center">
-                            <h3>
-                                <div class="float-left">
-                                    <a href="/portfolio/item">Ванная комната</a>
-                                </div>
-                                <div class="float-right">
-                                    <a href="/portfolio/item" class="text-main">
-                                        Подробнее
-                                    </a>
-                                </div>
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="portfolio__list-item">
-                        <a href="/portfolio/item" class="project-img text-center"
-                           style="background-image: url({{Storage::url('portfolio/sdfbd2f.jpg')}});">
-
-                        </a>
-                        <div class="desc row align-items-center">
-                            <h3>
-                                <div class="float-left">
-                                    <a href="/portfolio/item">СОВРЕМЕННАЯ КВАРТИРА</a>
-                                </div>
-                                <div class="float-right">
-                                    <a href="/portfolio/item" class="text-main">
-                                        Подробнее
-                                    </a>
-                                </div>
-                            </h3>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
         <div class="portfolio__list-text">

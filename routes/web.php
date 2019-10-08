@@ -17,9 +17,7 @@ Route::get('/', function () {
 Route::get('/about-us', function () {
     return view('pageAbout');
 });
-Route::get('/services', function () {
-    return view('services');
-});
+Route::get('/services', 'Client\PageController@GetServices');
 Route::get('/portfolio', 'Client\PageController@GetPortfolio');
 Route::get('/portfolio/item', function () {
     return view('portfolioItem');

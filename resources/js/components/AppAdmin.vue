@@ -91,6 +91,7 @@
                 <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
                 <span class="hidden-sm-and-down">Администрирование</span>
             </v-toolbar-title>
+            <v-btn small text route-to="/" href="/" target="_blank">Сайт<v-icon>mdi-open-in-new</v-icon></v-btn>
             <v-text-field
                     flat
                     solo-inverted
