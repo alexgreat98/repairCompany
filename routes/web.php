@@ -19,13 +19,8 @@ Route::get('/about-us', function () {
 });
 Route::get('/services', 'Client\PageController@GetServices');
 Route::get('/services/{web_service}', 'Client\PageController@GetService');
-Route::get('/portfolio', 'Client\PageController@GetPortfolio');
-Route::get('/portfolio/item', function () {
-    return view('portfolioItem');
-});
+Route::get('/portfolio', 'Client\PageController@GetPortfolios');
+Route::get('/portfolio/{portfolio}', 'Client\PageController@GetPortfolio');
 Route ::get('/admin', function(){
     return view('admin/index');
-});
-Route::get('/services/electro', function () {
-    return view('service');
 });

@@ -51,7 +51,7 @@ class ImageController extends Controller
             $filename  = Str::random(). '.' . $image->clientExtension();
             $photo[] = $image->storeAs('/public/portfolio', $filename);
             Image::make($image)
-                ->fit(100, 70)
+                ->fit(450, 300)
                 ->save('../storage/app/public/portfolio/prev-'.$filename);
             $img = new \App\Image;
             $img->url = $filename;
