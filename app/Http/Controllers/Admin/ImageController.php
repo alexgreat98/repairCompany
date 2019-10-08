@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\Common\FileSystem;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
@@ -44,22 +45,24 @@ class ImageController extends Controller
     {
         $request->validate([
             'portfolio' => 'required',
+            'serv' => '',
             'file.*' => 'required|image|mimes:jpeg,bmp,png'
         ]);
         $portfolio = $request->portfolio;
         foreach ($request->file('file') as $image){
             $filename  = Str::random(). '.' . $image->clientExtension();
-            $photo[] = $image->storeAs('/public/portfolio', $filename);
-            Image::make($image)
-                ->fit(100, 70)
-                ->save('../storage/app/public/portfolio/prev-'.$filename);
-            $img = new \App\Image;
-            $img->url = $filename;
-            $img->portfolio_id = $portfolio;
-            $img->save();
+            //$photo = $image->storeAs('/public/portfolio', $filename);
+            FileSystem::save_portfolio($filename, $image);
+
+            $image_prev = Image::make($image)->fit(100, 70);
+
+            FileSystem::save_portfolio('prev-'.$filename, $image_prev);
+               // ->save('../storage/app/public/portfolio/prev-'.$filename);
+            $img_db = \App\Image::create([ 'url'=> $filename,
+                                        'portfolio_id' => $portfolio]);
         }
 
-        return response()->json($photo);
+        return response()->json('ok');
 
     }
 
@@ -105,7 +108,9 @@ class ImageController extends Controller
     public function destroy($id)
     {
         $img = \App\Image::findOrFail($id);
-        $res = Storage::disk('public')->delete(['portfolio/'.$img->url, 'portfolio/prev-'.$img->url]);
+        //$res = Storage::disk('public')->delete(['portfolio/'.$img->url, 'portfolio/prev-'.$img->url]);
+        FileSystem::rem_portfolio($img->url);
+        FileSystem::rem_portfolio('prev-'.$img->url);
         $img->delete();
         return response()->json(compact('img', 'res'));
     }

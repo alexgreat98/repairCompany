@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Image extends Model
 {
+    protected $fillable = ['url', 'portfolio_id'];
+
     public function portfolio()
     {
         return $this->belongsTo(Portfolio::class, 'portfolio_id');
