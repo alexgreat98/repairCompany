@@ -37,10 +37,25 @@
                 </v-icon>
             </template>
         </v-data-table>
-        <v-dialog v-model="dialogEdit" persistent max-width="900">
+        <v-dialog v-model="dialogEdit" persistent fullscreen hide-overlay scrollable transition="dialog-bottom-transition">
             <v-card>
-                <v-card-title class="headline">Редактировать услугу</v-card-title>
-                <v-card-text>
+                <v-toolbar dark color="primary">
+
+                    <v-btn icon dark @click="dialogEdit = false">
+                        <v-icon>mdi-close</v-icon>
+                    </v-btn>
+                    <v-toolbar-title>{{(userCreatedBtn)?'Создание услуги':'Редактирование услуги'}}</v-toolbar-title>
+                    <div class="flex-grow-1"></div>
+                    <v-toolbar-items>
+                        <v-btn small dark text v-if="userCreatedBtn===true" @click="createItem()">
+                            Создать
+                        </v-btn>
+                        <v-btn small v-else dark text @click="updateItem()">
+                            Сохранить
+                        </v-btn>
+                    </v-toolbar-items>
+                </v-toolbar>
+                <v-card-text three-line subheader>
                     <v-container grid-list-md v-if="editedItem">
                         <v-layout wrap>
                             <v-flex xs12 sm6>
@@ -58,60 +73,63 @@
                             </v-flex>
                             <v-flex xs12>
                                 <div class="subtitle-2">Детальный текст</div>
-                                <ckeditor :editor="this.editor" v-model="editedItem.text" :config="this.editorConfig"></ckeditor>
+                                <ckeditor :editor="this.editor" v-model="editedItem.text"
+                                          :config="this.editorConfig"></ckeditor>
                             </v-flex>
                         </v-layout>
                     </v-container>
-                    <v-card width="100%" class="mb-5" v-if="editedItem.id">
-                        <v-card-title>Изображение из портфолио</v-card-title>
-                        <v-container>
-                            <v-row>
+                    <v-container grid-list-md>
+                        <v-card width="100%" class="mb-5" v-if="editedItem.id">
+                            <v-card-title>Изображение из портфолио</v-card-title>
+                            <v-container>
+                                <v-row>
 
-                                <v-col
-                                    v-for="image in images"
-                                    :key="image.id"
-                                    class="d-flex child-flex"
-                                    cols="4"
-                                >
-                                    <v-card flat tile class="d-flex position-relative">
-                                        <v-img
-                                            :src="'/storage/portfolio/prev-'+image.url"
-                                            aspect-ratio="1"
-                                            class="grey lighten-2"
-                                        >
-                                            <template v-slot:placeholder>
-                                                <v-row
-                                                    class="fill-height ma-0"
-                                                    align="center"
-                                                    justify="center"
-                                                >
-                                                    <v-progress-circular indeterminate
-                                                                         color="grey lighten-5"></v-progress-circular>
-                                                </v-row>
-                                            </template>
-                                            <v-btn
-                                                icon
-                                                @click="deleteImage(editedItem.id, image.id)"
-                                                absolute
-                                                bottom
-                                                right
-                                                large
-                                                color="red"
+                                    <v-col
+                                        v-for="image in images"
+                                        :key="image.id"
+                                        class="d-flex child-flex"
+                                        cols="3"
+                                    >
+                                        <v-card flat tile class="d-flex position-relative">
+                                            <v-img
+                                                :src="'/storage/portfolio/prev-'+image.url"
+                                                aspect-ratio="1"
+                                                class="grey lighten-2"
                                             >
-                                                <v-icon>mdi-delete</v-icon>
-                                            </v-btn>
-                                        </v-img>
-                                    </v-card>
-                                </v-col>
+                                                <template v-slot:placeholder>
+                                                    <v-row
+                                                        class="fill-height ma-0"
+                                                        align="center"
+                                                        justify="center"
+                                                    >
+                                                        <v-progress-circular indeterminate
+                                                                             color="grey lighten-5"></v-progress-circular>
+                                                    </v-row>
+                                                </template>
+                                                <v-btn
+                                                    icon
+                                                    @click="deleteImage(editedItem.id, image.id)"
+                                                    absolute
+                                                    bottom
+                                                    right
+                                                    large
+                                                    color="red"
+                                                >
+                                                    <v-icon>mdi-delete</v-icon>
+                                                </v-btn>
+                                            </v-img>
+                                        </v-card>
+                                    </v-col>
 
-                            </v-row>
+                                </v-row>
 
-                            <dialog-images-attach :serviceId="editedItem.id"></dialog-images-attach>
+                                <dialog-images-attach :serviceId="editedItem.id"></dialog-images-attach>
 
-                        </v-container>
-                    </v-card>
+                            </v-container>
+                        </v-card>
 
-                    <prices-admin v-if="editedItem.id" :serviceId="editedItem.id"></prices-admin>
+                        <prices-admin v-if="editedItem.id" :serviceId="editedItem.id"></prices-admin>
+                    </v-container>
                 </v-card-text>
                 <v-card-actions class="pt-5">
                     <div class="flex-grow-1"></div>
@@ -206,7 +224,7 @@
             },
             async createItemInfo() {
                 this.userCreatedBtn = true;
-                await this.createInfo();
+                await this.clear();
                 this.dialogEdit = true
             },
             async createItem() {
