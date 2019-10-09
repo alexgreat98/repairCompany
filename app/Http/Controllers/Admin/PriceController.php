@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Param;
 use App\Price;
 use App\Service;
 use Illuminate\Http\Request;
@@ -9,10 +10,11 @@ use App\Http\Controllers\Controller;
 
 class PriceController extends Controller
 {
-    protected $type = [
-        'м2',
-        'ч/час'
-    ];
+    protected $type;
+    public function __construct()
+    {
+        $this->type = unserialize(Param::where('key', 'PRICE_TYPE')->first()->value)[0];
+    }
 
     /**
      * Display a listing of the resource.

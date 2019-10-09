@@ -12,7 +12,8 @@ class Price extends Model
         'name',
         'price',
         'type',
-        'services_id'
+        'services_id',
+        'sort'
     ];
 
     /**

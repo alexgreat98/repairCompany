@@ -8,7 +8,8 @@ const state = {
         name: '',
         price: '',
         type: '',
-        services_id: ''
+        services_id: '',
+        sort: null
     },
     services: null
 };
@@ -98,7 +99,8 @@ const mutations = {
             name: '',
             price: '',
             type: '',
-            services_id: ''
+            services_id: '',
+            sort: ''
         }
     },
     setEditedPrice(state, {items}) {

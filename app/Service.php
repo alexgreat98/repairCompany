@@ -15,7 +15,9 @@ class Service extends Model
         'title',
         'description',
         'keywords',
-        'slug'
+        'slug',
+        'sort',
+        'show_on_main'
     ];
 
     /**

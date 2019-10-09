@@ -39,7 +39,7 @@
         </v-data-table>
         <v-dialog v-model="dialogEdit" persistent fullscreen hide-overlay scrollable transition="dialog-bottom-transition">
             <v-card>
-                <v-toolbar dark color="primary">
+                <v-toolbar dark flat color="primary">
 
                     <v-btn icon dark @click="dialogEdit = false">
                         <v-icon>mdi-close</v-icon>
@@ -47,6 +47,7 @@
                     <v-toolbar-title>{{(userCreatedBtn)?'Создание услуги':'Редактирование услуги'}}</v-toolbar-title>
                     <div class="flex-grow-1"></div>
                     <v-toolbar-items>
+                        <v-btn small dark text @click="dialogEdit = false">Отмена</v-btn>
                         <v-btn small dark text v-if="userCreatedBtn===true" @click="createItem()">
                             Создать
                         </v-btn>
@@ -251,7 +252,7 @@
                 this.getImage(item)
             },
             translit: function () {
-                this.editedItem.slug = this.cyrillicToTranslit().transform(this.editedItem.name, "_").toLowerCase().replace('?', '')
+                this.editedItem.slug = this.cyrillicToTranslit().transform(this.editedItem.name, "-").toLowerCase().replace('?', '')
             }
 
         },

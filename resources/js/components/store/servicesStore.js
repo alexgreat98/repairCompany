@@ -7,7 +7,9 @@ const state = {
         name: '',
         text: '',
         type: null,
-        slug: null
+        slug: null,
+        sort: null,
+        show_on_main: null
     },
     editedItemImages: null
 };
@@ -98,7 +100,9 @@ const mutations = {
             name: '',
             price: '',
             type: null,
-            slug: null
+            slug: null,
+            sort: null,
+            show_on_main: null
         };
         state.editedItemImages = null
     },
