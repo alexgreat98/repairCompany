@@ -59,6 +59,23 @@
                 <v-card-text three-line subheader>
                     <v-container grid-list-md v-if="editedItem">
                         <v-layout wrap>
+
+                            <v-flex xs12 sm6>
+                                <v-switch
+                                    v-model="editedItem.show_on_main"
+                                    :label="`Показывать на главной: ${(editedItem.show_on_main)?'да': 'нет'}`"
+                                ></v-switch>
+                            </v-flex>
+                            <v-flex xs6>
+                                <v-select
+                                    v-model="editedItem.sort"
+                                    :items="this.sortList"
+                                    menu-props="auto"
+                                    label="Сортировка"
+                                    hide-details
+                                    single-line
+                                ></v-select>
+                            </v-flex>
                             <v-flex xs12 sm6>
                                 <v-text-field v-model="editedItem.name" label="Название" required></v-text-field>
                             </v-flex>

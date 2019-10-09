@@ -9,7 +9,7 @@ const state = {
         price: '',
         type: '',
         services_id: '',
-        sort: null
+        sort: 250
     },
     services: null
 };
@@ -100,7 +100,7 @@ const mutations = {
             price: '',
             type: '',
             services_id: '',
-            sort: ''
+            sort: 250
         }
     },
     setEditedPrice(state, {items}) {

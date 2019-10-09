@@ -8,8 +8,8 @@ const state = {
         text: '',
         type: null,
         slug: null,
-        sort: null,
-        show_on_main: null
+        sort: 250,
+        show_on_main: false
     },
     editedItemImages: null
 };
@@ -101,8 +101,8 @@ const mutations = {
             price: '',
             type: null,
             slug: null,
-            sort: null,
-            show_on_main: null
+            sort: 250,
+            show_on_main: false
         };
         state.editedItemImages = null
     },

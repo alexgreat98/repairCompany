@@ -40,8 +40,18 @@
                 <v-card-text>
                     <v-container grid-list-md v-if="editedPrice">
                         <v-layout wrap>
-                            <v-flex xs12>
+                            <v-flex xs12 sm8>
                                 <v-text-field v-model="editedPrice.name" label="Название" required></v-text-field>
+                            </v-flex>
+                            <v-flex xs12 sm4>
+                                    <v-select
+                                        v-model="editedPrice.sort"
+                                        :items="this.sortList"
+                                        menu-props="auto"
+                                        label="Сортировка"
+                                        hide-details
+                                        single-line
+                                    ></v-select>
                             </v-flex>
                             <v-flex xs12 sm8>
                                 <v-text-field v-model="editedPrice.price" label="Цена" required></v-text-field>

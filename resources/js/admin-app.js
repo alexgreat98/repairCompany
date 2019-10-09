@@ -38,6 +38,7 @@ Vue.prototype.vue = Vue;
 Vue.prototype.editor =  ClassicEditor;
 Vue.prototype.editorConfig = {};
 Vue.prototype.cyrillicToTranslit = cyrillicToTranslit;
+Vue.prototype.sortList = Array.from(Array(501).keys());
 
 Vue.use(Vuetify);
 Vue.use(Vuex);
