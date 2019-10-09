@@ -13,11 +13,12 @@ use Illuminate\Support\Facades\Storage;
 class FileSystem
 {
     public static function save_portfolio($name, $file){
-        $res = Storage::disk('portfolio')->put($name, $file);
+        //$res = Storage::disk('portfolio')->put('p', $file);
+        $res= Storage::putFileAs('p', $file, $name);
         return $res;
     }
     public static function rem_portfolio($name){
-        $res = Storage::disk('portfolio')->delete($name);
+        $res = Storage::disk('portfolio')->delete('portfolio/'.$name);
         return $res;
     }
 
