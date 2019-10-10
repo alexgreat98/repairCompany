@@ -90,7 +90,17 @@ class PortfolioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:255',
+            'text' => '',
+            'description'=>'',
+            'title'=>''
+        ]);
+        $param = Portfolio::findOrFail($id);
+        $param->fill($request->all());
+        $param->save();
+
+        return response()->json($param);
     }
 
     /**

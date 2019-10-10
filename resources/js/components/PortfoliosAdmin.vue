@@ -55,122 +55,110 @@
                 </v-row>
             </template>
         </v-data-iterator>
-
-
-        <v-dialog v-model="dialog" scrollable max-width="500px">
-            <template v-slot:activator="{ on }">
-                <!--<v-btn color="primary" dark v-on="on">Open Dialog</v-btn>-->
-            </template>
-            <v-card>
-                <v-card-title><div>{{current.name}} </div><v-icon
-                        medium
-                        color="red"
-                        @click="deleteItem(current.id)"
-                >
-                    delete
-                </v-icon></v-card-title>
-                <v-divider></v-divider>
-                <v-card-text style="height: 500px;">
-                    <v-data-iterator
-                            :items="current.images"
-                            :items-per-page="200"
-                            :hide-default-footer="true"
-                    >
-                        <template v-slot:default="props">
-                            <v-row>
-                                <v-col
-                                        v-for="im in props.items"
-                                        :key="im.id"
-                                        cols="12"
-                                        sm="6"
-                                        md="4"
-                                        lg="3"
-                                        class="position-relative"
-                                >
-                                    <v-img
-                                            :src="`storage/portfolio/prev-` + im.url"
-                                            :lazy-src="`storage/portfolio/prev-` + im.url"
-                                            aspect-ratio="1"
-                                            class="grey lighten-2"
-                                    ></v-img>
-                                    <v-btn
-                                        icon
-                                        @click="deleteImage(im.id)"
-                                        absolute
-                                        bottom
-                                        right
-                                        large
-                                        color="red"
-                                    >
-                                        <v-icon>mdi-delete</v-icon>
-                                    </v-btn>
-                                </v-col>
-                            </v-row>
-                        </template>
-                    </v-data-iterator>
-                </v-card-text>
-                <v-divider></v-divider>
-                <v-card-actions>
-                    <v-btn color="red darken-1" text @click="close">Закрыть</v-btn>
-                    <!--<v-btn color="green darken-1" text @click="dialog = false">Сохранить</v-btn>-->
-                    <v-btn color="blue darken-1" text @click="uploadStart" type="file" v-bind:disabled="!(files.length > 0)">Загрузить</v-btn>
-                    <v-icon medium color="green" v-if="loadState">fa-check-circle</v-icon>
-                </v-card-actions>
-                <v-divider></v-divider>
-                <v-file-input show-size counter multiple label="Загрузить фото" @change="upload" v-model="files" ></v-file-input>
-            </v-card>
-        </v-dialog>
-                <v-btn
-                bottom
-                color="pink"
-                dark
-                fab
-                fixed
-                right
-                @click="dialogNew = !dialogNew"
-        >
-            <v-icon>mdi-plus</v-icon>
-        </v-btn>
-
         <v-row justify="center">
-            <v-dialog v-model="dialogNew" persistent max-width="600px">
+            <v-dialog v-model="dialog" persistent max-width="600px">
                 <template v-slot:activator="{ on }">
                     <!--<v-btn color="primary" dark v-on="on">Open Dialog</v-btn>-->
                 </template>
                 <v-card>
                     <v-card-title>
-                        <span class="headline">Новый Альбом</span>
+                        <span class="headline">{{current.name}}</span>
                     </v-card-title>
                     <v-card-text>
                         <v-container>
                             <v-row>
                                 <v-col cols="12" sm="6" md="4">
-                                    <v-text-field label="Название*" required v-model="nItem.name"></v-text-field>
+                                    <v-text-field label="Название*" required v-model="current.name"></v-text-field>
                                 </v-col>
                                 <v-col cols="12" sm="6" md="4">
-                                    <v-text-field label="Заголовок" v-model="nItem.title" hint="example of helper text only on focus"></v-text-field>
+                                    <v-text-field label="Заголовок*" required v-model="current.title" hint="Заголовок выводимый на сайте"></v-text-field>
                                 </v-col>
                             </v-row>
                             <v-row>
                                 <v-col cols="12" sm="6" md="4">
-                                    <v-text-field label="Описание" required v-model="nItem.description"></v-text-field>
+                                    <v-text-field label="Описание" required v-model="current.description"></v-text-field>
                                 </v-col>
                             </v-row>
+                            <v-divider></v-divider>
+                            <v-card-text>
+                                <v-data-iterator
+                                        :items="current.images"
+                                        :items-per-page="200"
+                                        :hide-default-footer="true"
+                                >
+                                    <template v-slot:default="props">
+                                        <v-row>
+                                            <v-col
+                                                    v-for="im in props.items"
+                                                    :key="im.id"
+                                                    cols="12"
+                                                    sm="6"
+                                                    md="4"
+                                                    lg="3"
+                                                    class="position-relative"
+                                            >
+                                                <v-img
+                                                        :src="`storage/portfolio/prev-` + im.url"
+                                                        :lazy-src="`storage/portfolio/prev-` + im.url"
+                                                        aspect-ratio="1"
+                                                        width="100"
+                                                        heigth="100"
+                                                        class="grey lighten-2"
+                                                ></v-img>
+                                                <v-btn
+                                                        icon
+                                                        @click="deleteImage(im.id)"
+                                                        absolute
+                                                        bottom
+                                                        right
+                                                        large
+                                                        color="red"
+                                                >
+                                                    <v-icon>mdi-delete</v-icon>
+                                                </v-btn>
+                                            </v-col>
+                                        </v-row>
+                                    </template>
+                                </v-data-iterator>
+                            </v-card-text>
+                            <v-divider></v-divider>
+                            <v-flex xs12>
+                                <div class="subtitle-2">Детальный текст</div>
+                                <ckeditor :editor="this.editor" v-model="current.text"
+                                          :config="this.editorConfig"></ckeditor>
+                            </v-flex>
+                            <v-divider></v-divider>
+                            <v-file-input show-size counter multiple label="Загрузить фото" @change="upload" v-model="files" ></v-file-input>
+                            <v-divider></v-divider>
+                            <v-card-actions>
+                                <v-btn color="blue darken-1" text @click="uploadStart" type="file" v-if="files.length > 0">Загрузить</v-btn>
+                            </v-card-actions>
                         </v-container>
                         <small>*обязательно к заполнению</small>
                     </v-card-text>
                     <v-card-actions>
                         <div class="flex-grow-1"></div>
-                        <v-btn color="red darken-1" text @click="dialogNew = false">Отмена</v-btn>
-                        <v-btn color="green darken-1" text @click="newItem">Сохранить</v-btn>
+                        <v-btn color="red darken-1" text @click="close">Отмена</v-btn>
+                        <v-btn color="green darken-1" text @click="save">Сохранить</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>
         </v-row>
         <v-snackbar v-model="snack" :timeout="3000" :color="snackColor">
             {{ snackText }}
-            <v-btn text @click="snack = false">Close</v-btn>
+            <v-btn text @click="snack = false">Закрыть</v-btn>
         </v-snackbar>
+        <v-btn
+                bottom
+                color="pink"
+                dark
+                fab
+                fixed
+                right
+                @click="openCreateForm"
+        >
+            <v-icon>mdi-plus</v-icon>
+        </v-btn>
     </v-container>
 
 </template>
@@ -183,41 +171,37 @@
                 snackColor: '',
                 snackText: '',
                 value : 0,
-                loadState : false,
                 itemsPerPageOptions: [4, 8, 12],
                 itemsPerPage: 1000,
                 name : "PortfoliosAdmin",
                 items: [],
                 dialog : false,
-                dialogNew : false,
                 files: [],
                 services : [{
                     id : 0,
                     name : ''
                 }],
-                nItem:{
-                    name : '',
-                    text : '',
-                    title : '',
-                    description : ''
-                },
                 defItem:{
-                    name : '',
+                    name : 'Новый Альбом',
                     text : '',
                     title : '',
-                    description : ''
+                    description : '',
+                    images : []
                 },
-                current : {}
+                current : {},
+                isNew : false
             }
         },
         methods : {
             showPortfolio(item){
                 this.current = item;
-               this.dialog = true;
-               this.axios.get('api/portfolio/' + item.id)
+                this.isNew = false;
+                this.dialog = true;
+
+/*               this.axios.get('api/portfolio/' + item.id)
                    .then(data=>{
-                       console.log(data);
-                   })
+                       console.log(data.data)
+                   })*/
             },
             deleteItem(){
                 if(confirm('Вы уверрены')){
@@ -236,15 +220,10 @@
                     });
 
             },
-
-            newItem(){
-                this.axios.post('api/portfolio', this.nItem)
-                    .then(data=>{
-                        console.log(data.data);
-                        Object.assign(this.nItem, this.defItem);
-                        this.dialogNew = false;
-                        this.initialize();
-                    })
+            openCreateForm(){
+               Object.assign(this.current, this.defItem);
+               this.isNew = true;
+               this.dialog = true;
             },
             deleteImage(item){
                 this.axios.delete('api/images/' + item)
@@ -280,6 +259,7 @@
                             this.snack = true
                             this.snackColor = 'success'
                             this.snackText = 'Данные сохранены'
+                            this.files = [];
                         })
                         .catch(error => {
                             console.log({ error });
@@ -295,6 +275,21 @@
                 this.dialog = false;
                 this.files = [];
                 this.initialize();
+            },
+            save(){
+                if(this.isNew){
+                    this.axios.post('api/portfolio', this.current)
+                        .then(data=>{
+                            this.dialog = false;
+                            this.initialize();
+                        })
+                }else{
+                    this.axios.put('api/portfolio/' + this.current.id, this.current)
+                        .then(data=>{
+                            this.dialog = false;
+                            this.initialize();
+                        })
+                }
             },
             underThan(item){
                 let size = item.length;
