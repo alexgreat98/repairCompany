@@ -37,36 +37,41 @@
                 </v-icon>
             </template>
         </v-data-table>
-        <v-dialog v-model="dialogEdit" persistent fullscreen hide-overlay scrollable transition="dialog-bottom-transition">
-            <v-card>
-                <v-toolbar dark flat color="primary">
+        <v-dialog v-model="dialogEdit" fullscreen hide-overlay scrollable
+                  transition="dialog-bottom-transition">
 
-                    <v-btn icon dark @click="dialogEdit = false">
-                        <v-icon>mdi-close</v-icon>
-                    </v-btn>
-                    <v-toolbar-title>{{(userCreatedBtn)?'Создание услуги':'Редактирование услуги'}}</v-toolbar-title>
-                    <div class="flex-grow-1"></div>
-                    <v-toolbar-items>
-                        <v-btn small dark text @click="dialogEdit = false">Отмена</v-btn>
-                        <v-btn small dark text v-if="userCreatedBtn===true" @click="createItem()">
-                            Создать
+            <v-card tile>
+                <v-card-title class="p-0">
+                    <v-toolbar dark flat color="primary">
+
+                        <v-btn icon dark @click="dialogEdit = false">
+                            <v-icon>mdi-close</v-icon>
                         </v-btn>
-                        <v-btn small v-else dark text @click="updateItem()">
-                            Сохранить
-                        </v-btn>
-                    </v-toolbar-items>
-                </v-toolbar>
+                        <v-toolbar-title>{{(userCreatedBtn)?'Создание услуги':'Редактирование услуги'}}</v-toolbar-title>
+                        <div class="flex-grow-1"></div>
+                        <v-toolbar-items>
+                            <v-btn small dark text @click="dialogEdit = false">Отмена</v-btn>
+                            <v-btn small dark text v-if="userCreatedBtn===true" @click="createItem()">
+                                Создать
+                            </v-btn>
+                            <v-btn small v-else dark text @click="updateItem()">
+                                Сохранить
+                            </v-btn>
+                        </v-toolbar-items>
+                    </v-toolbar>
+
+                </v-card-title>
+
                 <v-card-text three-line subheader>
                     <v-container grid-list-md v-if="editedItem">
                         <v-layout wrap>
 
-                            <v-flex xs12 sm6>
+                            <v-flex xs12 wrap>
                                 <v-switch
                                     v-model="editedItem.show_on_main"
                                     :label="`Показывать на главной: ${(editedItem.show_on_main)?'да': 'нет'}`"
                                 ></v-switch>
-                            </v-flex>
-                            <v-flex xs6>
+
                                 <v-select
                                     v-model="editedItem.sort"
                                     :items="this.sortList"
@@ -88,6 +93,8 @@
                                     label="Ссылка алиас"
                                     required
                                 ></v-text-field>
+                            </v-flex>
+                            <v-flex xs12>
                             </v-flex>
                             <v-flex xs12>
                                 <div class="subtitle-2">Детальный текст</div>

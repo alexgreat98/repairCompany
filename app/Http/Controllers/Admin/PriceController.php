@@ -13,6 +13,7 @@ class PriceController extends Controller
     protected $type;
     public function __construct()
     {
+        $qweq = Param::where('key', 'PRICE_TYPE')->first();
         $this->type = unserialize(Param::where('key', 'PRICE_TYPE')->first()->value)[0];
     }
 
