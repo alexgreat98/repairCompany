@@ -47,7 +47,8 @@
                         <v-btn icon dark @click="dialogEdit = false">
                             <v-icon>mdi-close</v-icon>
                         </v-btn>
-                        <v-toolbar-title>{{(userCreatedBtn)?'Создание услуги':'Редактирование услуги'}}</v-toolbar-title>
+                        <v-toolbar-title>{{(userCreatedBtn)?'Создание услуги':'Редактирование услуги'}}
+                        </v-toolbar-title>
                         <div class="flex-grow-1"></div>
                         <v-toolbar-items>
                             <v-btn small dark text @click="dialogEdit = false">Отмена</v-btn>
@@ -66,20 +67,28 @@
                     <v-container grid-list-md v-if="editedItem">
                         <v-layout wrap>
 
-                            <v-flex xs12 wrap>
-                                <v-switch
-                                    v-model="editedItem.show_on_main"
-                                    :label="`Показывать на главной: ${(editedItem.show_on_main)?'да': 'нет'}`"
-                                ></v-switch>
+                            <v-flex xs12>
+                                <v-row align="center">
 
-                                <v-select
-                                    v-model="editedItem.sort"
-                                    :items="this.sortList"
-                                    menu-props="auto"
-                                    label="Сортировка"
-                                    hide-details
-                                    single-line
-                                ></v-select>
+
+                                    <v-col cols-6>
+                                        <v-switch
+                                            v-model="editedItem.show_on_main"
+                                            :label="`Показывать на главной: ${(editedItem.show_on_main)?'да': 'нет'}`"
+                                        ></v-switch>
+                                    </v-col>
+                                    <v-col cols-3>
+                                        <v-select
+                                            v-model="editedItem.sort"
+                                            :items="this.sortList"
+                                            menu-props="auto"
+                                            label="Сортировка"
+                                            hide-details
+                                            single-line
+                                        ></v-select>
+                                    </v-col>
+
+                                </v-row>
                             </v-flex>
                             <v-flex xs12 sm6>
                                 <v-text-field v-model="editedItem.name" label="Название" required></v-text-field>
@@ -94,7 +103,41 @@
                                     required
                                 ></v-text-field>
                             </v-flex>
-                            <v-flex xs12>
+                            <v-flex xs12 class="justify-start">
+                                <div class="subtitle-2">Изображение услуги</div>
+                                <v-img
+                                    :src="'/storage/portfolio/prev-'+image.url"
+                                    aspect-ratio="1"
+                                    class="grey lighten-2"
+                                >
+                                    <template v-slot:placeholder>
+                                        <v-row
+                                            class="fill-height ma-0"
+                                            align="center"
+                                            justify="center"
+                                        >
+                                            <v-progress-circular indeterminate
+                                                                 color="grey lighten-5"></v-progress-circular>
+                                        </v-row>
+                                    </template>
+                                    <v-btn
+                                        icon
+                                        @click="deleteServiceImage()"
+                                        absolute
+                                        bottom
+                                        right
+                                        large
+                                        color="red"
+                                    >
+                                        <v-icon>mdi-delete</v-icon>
+                                    </v-btn>
+                                </v-img>
+                                <v-file-input
+                                    v-if="editedItem.image"
+                                    label="File input"
+                                    show-size
+
+                                ></v-file-input>
                             </v-flex>
                             <v-flex xs12>
                                 <div class="subtitle-2">Детальный текст</div>
@@ -156,17 +199,7 @@
                         <prices-admin v-if="editedItem.id" :serviceId="editedItem.id"></prices-admin>
                     </v-container>
                 </v-card-text>
-                <v-card-actions class="pt-5">
-                    <div class="flex-grow-1"></div>
-                    <v-btn small color="red darken-1" text @click="dialogEdit = false">Отмена</v-btn>
-                    <v-btn small color="green darken-1" text v-if="userCreatedBtn===true" outlined
-                           @click="createItem()">
-                        Создать
-                    </v-btn>
-                    <v-btn small color="green darken-1" v-else outlined @click="updateItem()">
-                        Сохранить
-                    </v-btn>
-                </v-card-actions>
+
             </v-card>
         </v-dialog>
         <v-btn
@@ -238,6 +271,7 @@
                 delete: 'deleteItem',
                 getImage: 'getItemImage',
                 deleteItemImage: 'deleteItemImage',
+                deleteServiceImage: 'deleteServiceImage',
             }),
             ...mapMutations('servicesStore', {
                 clear: 'clearEditedItem'
@@ -275,6 +309,7 @@
                 await this.deleteItemImage(image);
                 this.getImage(item)
             },
+
             translit: function () {
                 this.editedItem.slug = this.cyrillicToTranslit().transform(this.editedItem.name, "-").toLowerCase().replace('?', '')
             }

@@ -20,7 +20,7 @@ class ServicesService
         }
         public function getServicePage(Service $service)
         {
-            $service['prices'] = $service->prices()->get();
+            $service['prices'] = $service->prices()->orderBy('sort')->get();
             $service['images'] = $service->images()->get();
             return $service;
         }

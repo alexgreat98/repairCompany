@@ -21,6 +21,7 @@ Route::resource('services', 'Admin\ServiceController');
 Route::get('services_images/{service}', 'Admin\ServiceController@ServicesImage');
 Route::put('services_images_attach/{service}/image/{image}', 'Admin\ServiceController@ServicesImageAttach');
 Route::delete('services_images_detach/{image}', 'Admin\ServiceController@ServicesImageDetach');
+Route::delete('services_image_delete/{service}', 'Admin\ServiceController@ServiceImageDelete');
 Route::get('services_prices/{service}', 'Admin\PriceController@ServicesPrice');
 Route::resource('prices', 'Admin\PriceController');
 Route::resource('params', 'Admin\ParamsController');

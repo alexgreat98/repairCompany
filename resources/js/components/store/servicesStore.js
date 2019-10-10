@@ -85,6 +85,15 @@ const actions = {
             .catch(({error}) => {
                 console.log(error);
             })
+    },
+    async deleteServiceImage({commit, state}, id) {
+        await axios.delete('/api/services_image_delete/' + id)
+            .then(({data}) => {
+
+            })
+            .catch(({error}) => {
+                console.log(error);
+            })
     }
 
 };

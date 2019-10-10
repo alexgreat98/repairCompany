@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\Common\FileSystem;
 use App\Image;
 use App\Service;
 use Illuminate\Http\Request;
@@ -110,5 +111,10 @@ class ServiceController extends Controller
     public function ServicesImageDetach(Image $image)
     {
         $image->services()->detach();
+    }
+
+    public function ServiceImageDelete(Service $service)
+    {
+        FileSystem::delete_service_image($service);
     }
 }

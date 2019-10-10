@@ -91,6 +91,29 @@
                     </v-card-title>
                     <v-card-text>
                         <v-container>
+                            <v-flex xs12>
+                                <v-row align="center">
+
+
+                                    <v-col cols-6>
+                                        <v-switch
+                                            v-model="current.show_on_main"
+                                            :label="`Показывать на главной: ${(current.show_on_main)?'да': 'нет'}`"
+                                        ></v-switch>
+                                    </v-col>
+                                    <v-col cols-3>
+                                        <v-select
+                                            v-model="current.sort"
+                                            :items="this.sortList"
+                                            menu-props="auto"
+                                            label="Сортировка"
+                                            hide-details
+                                            single-line
+                                        ></v-select>
+                                    </v-col>
+
+                                </v-row>
+                            </v-flex>
                             <v-row>
                                 <v-col cols="12" sm="6" md="4">
                                     <v-text-field label="Название*" required v-model="current.name"></v-text-field>

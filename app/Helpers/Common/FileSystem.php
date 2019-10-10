@@ -22,4 +22,8 @@ class FileSystem
         return $res;
     }
 
+    public static function delete_service_image($service)
+    {
+        return Storage::disk('services')->delete($service->image);
+    }
 }

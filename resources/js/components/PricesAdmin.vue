@@ -143,6 +143,7 @@
                         sortable: false,
                         value: 'id',
                     },
+                    {text: 'Сортировка', value: 'sort'},
                     {text: 'Название', value: 'name'},
                     {text: 'Цена', value: 'price'},
                     {text: 'Ед.Изм.', value: 'type'},

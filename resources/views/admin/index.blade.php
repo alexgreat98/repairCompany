@@ -43,7 +43,6 @@
             @endauth
         </div>
     @endif
-    <div class="footer__copyright">Copyright © 2019 лого , All Right Reserved</div>
 </div>
 </body>
 <script src="{{asset('js/admin-app.js')}}" async></script>
