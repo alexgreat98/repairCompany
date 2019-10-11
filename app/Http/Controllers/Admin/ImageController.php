@@ -36,7 +36,7 @@ class ImageController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
+     * type = [service|portfolio]
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -47,16 +47,20 @@ class ImageController extends Controller
             'file.*' => 'required|image|mimes:jpeg,bmp,png'
         ]);
         $portfolio = $request->portfolio;
+        $photo = [];
         foreach ($request->file('file') as $image){
             $filename  = Str::random(). '.' . $image->clientExtension();
-            $photo[] = $image->storeAs('/public/portfolio', $filename);
+            $image->storeAs('/public/portfolio', $filename);
             Image::make($image)
                 ->fit(400, 320)
                 ->save('../storage/app/public/portfolio/prev-'.$filename);
-            $img = new \App\Image;
-            $img->url = $filename;
-            $img->portfolio_id = $portfolio;
-            $img->save();
+
+            $img = \App\Image::create([
+                'url'=>$filename,
+                'portfolio_id'=>$portfolio
+            ]);
+
+            $photo[] = $img;
         }
 
         return response()->json($photo);
