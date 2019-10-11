@@ -24,7 +24,32 @@
             margin: 0;
             overflow-y: auto !important;
         }
-
+         .parallax-bg {
+             position: absolute;
+             left: 0;
+             top: 0;
+             width: 130%;
+             height: 100%;
+             -webkit-background-size: cover;
+             background-size: cover;
+             background-position: center;
+         }
+        .index__page-banner-parallax {
+            position: relative;
+            /*opacity: 0.65;*/
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-image: url({{Storage::url('/site/remont-ofisov-.jpg')}});
+            min-height: 100%;
+        }
+        /* Turn off parallax scrolling for tablets and phones */
+        @media only screen and (max-device-width: 1024px) {
+            .index__page-banner-parallax {
+                background-attachment: scroll;
+            }
+        }
     </style>
 
 </head>
@@ -84,6 +109,8 @@
             </div>
         </nav>
     </div>
+        @yield('banner')
+
     <div class="main__app">
 
         <div class="main__app-wrap">

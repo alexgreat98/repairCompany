@@ -73,7 +73,14 @@ new Swiper('.index_banner', {
         el: '.swiper-pagination',
     },
 });
-
+new Swiper('.index_banner_parallax', {
+    speed: 600,
+    parallax: true,
+    pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+    },
+});
 
 
 document.querySelectorAll('img[data-src]')

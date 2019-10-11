@@ -104,40 +104,45 @@
                                 ></v-text-field>
                             </v-flex>
                             <v-flex xs12 class="justify-start">
-                                <div class="subtitle-2">Изображение услуги</div>
-                                <v-img
-                                    :src="'/storage/portfolio/prev-'+image.url"
-                                    aspect-ratio="1"
-                                    class="grey lighten-2"
-                                >
-                                    <template v-slot:placeholder>
-                                        <v-row
-                                            class="fill-height ma-0"
-                                            align="center"
-                                            justify="center"
-                                        >
-                                            <v-progress-circular indeterminate
-                                                                 color="grey lighten-5"></v-progress-circular>
-                                        </v-row>
-                                    </template>
-                                    <v-btn
-                                        icon
-                                        @click="deleteServiceImage()"
-                                        absolute
-                                        bottom
-                                        right
-                                        large
-                                        color="red"
+                                <v-flex sm5 class="justify-start">
+                                    <div class="subtitle-2">Изображение услуги</div>
+                                    <v-img
+                                        v-if="editedItem.image !== null"
+                                        :src="'/storage/services/'+editedItem.image"
+                                        aspect-ratio="1"
+                                        class="grey lighten-2"
                                     >
-                                        <v-icon>mdi-delete</v-icon>
-                                    </v-btn>
-                                </v-img>
-                                <v-file-input
-                                    v-if="editedItem.image"
-                                    label="File input"
-                                    show-size
+                                        <template v-slot:placeholder>
+                                            <v-row
+                                                class="fill-height ma-0"
+                                                align="center"
+                                                justify="center"
+                                            >
+                                                <v-progress-circular indeterminate
+                                                                     color="grey lighten-5"></v-progress-circular>
+                                            </v-row>
+                                        </template>
+                                        <v-btn
+                                            icon
+                                            @click="delServiceImage"
+                                            absolute
+                                            bottom
+                                            right
+                                            large
+                                            color="red"
+                                        >
+                                            <v-icon>mdi-delete</v-icon>
+                                        </v-btn>
+                                    </v-img>
+                                    <v-file-input
+                                        v-else
+                                        label="Прикрепить изображение портфолио"
+                                        v-model="serviceFile"
+                                        @change="serviceImageUpload"
+                                        show-size
 
-                                ></v-file-input>
+                                    ></v-file-input>
+                                </v-flex>
                             </v-flex>
                             <v-flex xs12>
                                 <div class="subtitle-2">Детальный текст</div>
@@ -259,6 +264,7 @@
                     {text: 'Изменен', value: 'updated_at'},
                     {text: 'Действия', value: 'action', sortable: false},
                 ],
+                serviceFile: null
             }
         },
         methods: {
@@ -271,6 +277,7 @@
                 delete: 'deleteItem',
                 getImage: 'getItemImage',
                 deleteItemImage: 'deleteItemImage',
+                addServiceImage: 'addServiceImage',
                 deleteServiceImage: 'deleteServiceImage',
             }),
             ...mapMutations('servicesStore', {
@@ -309,7 +316,13 @@
                 await this.deleteItemImage(image);
                 this.getImage(item)
             },
-
+            async serviceImageUpload() {
+                await this.addServiceImage(this.serviceFile);
+                this.serviceFile = null
+            },
+            async delServiceImage() {
+                await this.deleteServiceImage();
+            },
             translit: function () {
                 this.editedItem.slug = this.cyrillicToTranslit().transform(this.editedItem.name, "-").toLowerCase().replace('?', '')
             }

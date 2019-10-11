@@ -140,46 +140,52 @@
                                           :config="this.editorConfig"></ckeditor>
                             </v-flex>
 
-                            <v-divider></v-divider>
-                            <v-data-iterator
-                                :items="current.images"
-                                :items-per-page="200"
-                                :hide-default-footer="true"
-                            >
-                                <template v-slot:default="props">
-                                    <v-row>
-                                        <v-col
-                                            v-for="im in props.items"
-                                            :key="im.id"
-                                            cols="12"
-                                            sm="6"
-                                            md="4"
-                                            lg="3"
-                                            class="position-relative"
-                                        >
+
+                            <v-container>
+                                <v-row>
+
+                                    <v-col
+                                        v-for="image in current.images"
+                                        :key="image.id"
+                                        class="d-flex child-flex"
+                                        cols="2"
+                                    >
+                                        <v-card flat tile class="d-flex position-relative">
                                             <v-img
-                                                :src="`storage/portfolio/prev-` + im.url"
-                                                :lazy-src="`storage/portfolio/prev-` + im.url"
+                                                :src="`storage/portfolio/prev-` + image.url"
+                                                :lazy-src="`storage/portfolio/prev-` + image.url"
                                                 aspect-ratio="1"
-                                                width="100"
-                                                heigth="100"
                                                 class="grey lighten-2"
-                                            ></v-img>
-                                            <v-btn
-                                                icon
-                                                @click="deleteImage(im.id)"
-                                                absolute
-                                                bottom
-                                                right
-                                                large
-                                                color="red"
                                             >
-                                                <v-icon>mdi-delete</v-icon>
-                                            </v-btn>
-                                        </v-col>
-                                    </v-row>
-                                </template>
-                            </v-data-iterator>
+                                                <template v-slot:placeholder>
+                                                    <v-row
+                                                        class="fill-height ma-0"
+                                                        align="center"
+                                                        justify="center"
+                                                    >
+                                                        <v-progress-circular indeterminate
+                                                                             color="grey lighten-5"></v-progress-circular>
+                                                    </v-row>
+                                                </template>
+                                                <v-btn
+                                                    icon
+                                                    @click="deleteImage(image.id)"
+                                                    absolute
+                                                    bottom
+                                                    right
+                                                    large
+                                                    color="red"
+                                                >
+                                                    <v-icon>mdi-delete</v-icon>
+                                                </v-btn>
+                                            </v-img>
+                                        </v-card>
+                                    </v-col>
+
+                                </v-row>
+
+
+                            </v-container>
                             <v-divider></v-divider>
 
                             <v-row>

@@ -113,8 +113,23 @@ class ServiceController extends Controller
         $image->services()->detach();
     }
 
+    /**
+     * @param Request $request
+     * @param Service $service
+     * @return bool|mixed|string
+     */
+    public function ServiceImageAdd(Request $request, Service $service)
+    {
+        $fileUrl = FileSystem::add_service_image($request);
+        $service->image = $fileUrl;
+        $service->save();
+        return $service->image;
+
+    }
     public function ServiceImageDelete(Service $service)
     {
-        FileSystem::delete_service_image($service);
+        FileSystem::delete_service_image($service->image);
+        $service->image = null;
+        $service->save();
     }
 }

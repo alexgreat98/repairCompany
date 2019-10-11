@@ -4,8 +4,8 @@ const state = {
     items: [],
     editedItem: {
         id: null,
-        name: '',
-        text: '',
+        name: null,
+        text: null,
         type: null,
         slug: null,
         sort: 250,
@@ -86,10 +86,29 @@ const actions = {
                 console.log(error);
             })
     },
-    async deleteServiceImage({commit, state}, id) {
-        await axios.delete('/api/services_image_delete/' + id)
+    async addServiceImage({commit, state}, file) {
+        let formData = new FormData();
+        formData.append('file', file);
+        await axios.post('/api/services_image_add/' + state.editedItem.id,
+            formData,
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                }
+            }
+        )
             .then(({data}) => {
-
+                console.log(data);
+                commit('addServiceImage', data);
+            })
+            .catch(({error}) => {
+                console.log(error);
+            })
+    },
+    async deleteServiceImage({commit, state}) {
+        await axios.delete('/api/services_image_delete/' + state.editedItem.id)
+            .then(({data}) => {
+                commit('deleteServiceImage');
             })
             .catch(({error}) => {
                 console.log(error);
@@ -106,12 +125,13 @@ const mutations = {
     clearEditedItem(state) {
         state.editedItem = {
             id: null,
-            name: '',
-            price: '',
+            name: null,
+            price: null,
             type: null,
             slug: null,
             sort: 250,
-            show_on_main: false
+            show_on_main: false,
+            image: null
         };
         state.editedItemImages = null
     },
@@ -121,6 +141,13 @@ const mutations = {
     setEditedItemImages(state, {images}) {
         state.editedItemImages = images
     },
+    addServiceImage(state, image) {
+        state.editedItem.image = image
+    },
+    deleteServiceImage(state){
+        state.editedItem.image = null
+    },
+
 
 };
 
