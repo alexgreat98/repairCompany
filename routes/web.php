@@ -24,3 +24,7 @@ Route::get('/portfolio/{portfolio}', 'Client\PageController@GetPortfolio');
 Route ::get('/admin', function(){
     return view('admin/index');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
