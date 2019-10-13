@@ -11,7 +11,7 @@ class ParamsTableSeeder extends Seeder
      */
     public function run()
     {
-        $pricesTypes = array(['м²', 'шт.', 'конт.', 'мешок', 'тн.', 'ч./час', 'п.м.']);
+        $pricesTypes = ['м²', 'шт.', 'конт.', 'мешок', 'тн.', 'ч./час', 'п.м.'];
         Param::create([
             'key' => 'SITE_NAME',
             'value' => 'Строительство и ремонт',
@@ -24,8 +24,8 @@ class ParamsTableSeeder extends Seeder
         ]);
         Param::create([
             'key' => 'PRICE_TYPE',
-            'value' => serialize($pricesTypes),
-            'description' => 'Телефоны для связи',
+            'value' => implode(';', $pricesTypes),
+            'description' => 'Ед. измирения, через точку с запятой',
         ]);
     }
 }
