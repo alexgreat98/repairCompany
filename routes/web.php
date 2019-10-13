@@ -27,9 +27,7 @@ Auth::routes(['register' => false]);
 
 Route::group(['middleware' => 'auth'], function()
 {
-    Route ::get('/admin', function(){
-        return view('admin/index');
-    });
+    Route ::get('/admin', 'Admin\AdminController');
 });
 
 

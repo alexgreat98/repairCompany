@@ -26,7 +26,10 @@
         }
 
     </style>
-
+    <script type="text/javascript">
+        window.csrf_token = "{{ csrf_token() }}"
+        window.api_token = "{{ $api_token }}"
+    </script>
 </head>
 <body>
 <div class="flex-center position-ref full-height" id="app">
