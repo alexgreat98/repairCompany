@@ -14,7 +14,7 @@ class PriceController extends Controller
     public function __construct()
     {
         $qweq = Param::where('key', 'PRICE_TYPE')->first();
-        $this->type = unserialize(Param::where('key', 'PRICE_TYPE')->first()->value)[0];
+        $this->type = explode(';', Param::where('key', 'PRICE_TYPE')->first()->value);
     }
 
     /**

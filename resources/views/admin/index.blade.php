@@ -27,7 +27,7 @@
 
     </style>
     <script type="text/javascript">
-        window.csrf_token = "{{ csrf_token() }}"
+        window.csrf_token = "{{ csrf_token() }}";
         window.api_token = "{{ $api_token }}"
     </script>
 </head>

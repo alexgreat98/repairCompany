@@ -202,8 +202,6 @@
         },
         created() {
             this.getPrices();
-            console.log('id');
-            console.log(this.serviceId)
         }
     }
 </script>

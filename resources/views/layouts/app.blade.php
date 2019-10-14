@@ -24,34 +24,11 @@
             margin: 0;
             overflow-y: auto !important;
         }
-
     </style>
 
 </head>
 <body>
 <div class="flex-center position-ref full-height @if (Route::current()->uri !== '/')padding_page_top @endif" id="app">
-{{--    @if (Route::has('login'))
-        <div class="top-right links">
-            @auth
-                <a href="{{ url('/home') }}">Home</a>
-            @else
-                <a href="{{ route('login') }}">Login</a>
-
-                @if (Route::has('register'))
-                    <a href="{{ route('register') }}">Register</a>
-                @endif
-            @endauth
-        </div>
-    @endif--}}
-    {{--<div class="header__top main__app-wrap">
-        <div class="d-none d-md-block">Ремонтно-строительные работы под ключ</div>
-        <div class="header__top-phone">
-            <a href="#">+7(123)412-412-42</a>
-        </div>
-        <div class="header__top-mail">
-            <a href="mailto:zakaz@mail.ru">zakaz@mail.ru</a>
-        </div>
-    </div>--}}
 
     <div
         class="header @if (Route::current()->uri == '/')index_page index_scroll @endif"

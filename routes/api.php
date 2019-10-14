@@ -18,7 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('services_images/{service}', 'Admin\ServiceController@ServicesImage');
     Route::put('services_images_attach/{service}/image/{image}', 'Admin\ServiceController@ServicesImageAttach');
@@ -26,10 +25,17 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('services_image_add/{service}', 'Admin\ServiceController@ServiceImageAdd');
     Route::delete('services_image_delete/{service}', 'Admin\ServiceController@ServiceImageDelete');
     Route::get('services_prices/{service}', 'Admin\PriceController@ServicesPrice');
-    Route::resource('services', 'Admin\ServiceController');
-    Route::resource('prices', 'Admin\PriceController');
-    Route::resource('params', 'Admin\ParamsController');
-    Route::resource('users', 'Admin\UserController');
-    Route::resource('portfolio', 'Admin\PortfolioController');
-    Route::resource('images', 'Admin\ImageController');
+
+    Route::resources([
+        'services' => 'Admin\ServiceController',
+        'prices' => 'Admin\PriceController',
+        'params' => 'Admin\ParamsController',
+        'users' => 'Admin\UserController',
+        'portfolio' => 'Admin\PortfolioController',
+        'images' => 'Admin\ImageController',
+    ]);
+
+    Route::resource('callback', 'Admin\CallbackController')->only([
+        'index', 'edit', 'update', 'destroy'
+    ]);
 });

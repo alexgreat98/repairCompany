@@ -13,6 +13,7 @@ import cyrillicToTranslit from 'cyrillic-to-translit-js';
 import App from './components/AppAdmin';
 import PortfolioAdmin from './components/PortfolioAdmin';
 import PortfoliosAdmin from './components/PortfoliosAdmin';
+import CallbackAdmin from './components/CallbackAdmin';
 import PricesAdmin from './components/PricesAdmin';
 import ServicesAdmin from './components/ServicesAdmin';
 import ServiceAdmin from './components/ServiceAdmin';
@@ -24,6 +25,7 @@ import Vuex from 'vuex'
 
 import pricesStore from './components/store/pricesStore'
 import servicesStore from './components/store/servicesStore'
+import callbackStore from './components/store/callbackStore'
 
 axios.defaults.headers.common = {
     'X-CSRF-TOKEN': window.csrf_token,
@@ -56,11 +58,10 @@ const opts = {
     },
 };
 const routes = [
-    {path: '/portfolios/:id', component: PortfolioAdmin},
     {path: '/portfolios', component: PortfoliosAdmin},
-    {path: '/services/:id', component: ServiceAdmin},
     {path: '/services', component: ServicesAdmin},
-    {path: '/prices/', component: PricesAdmin},
+    {path: '/callback', component: CallbackAdmin},
+    {path: '/prices', component: PricesAdmin},
     {path: '/parameters', component: ParametersAdmin},
     {path: '/users', component: UsersAdmin},
 ];
@@ -72,6 +73,7 @@ const store =
         modules: {
             pricesStore,
             servicesStore,
+            callbackStore
         },
     };
 

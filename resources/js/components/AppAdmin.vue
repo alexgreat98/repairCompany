@@ -130,9 +130,10 @@
             dialog: false,
             drawer: null,
             navItems: [
+                {icon: 'phone', text: 'Заказы', link: 'callback'},
                 {icon: 'mdi-clipboard-list-outline', text: 'Услуги', link: 'services'},
-                {icon: 'contacts', text: 'Прайсы', link: 'prices'},
-                {icon: 'contacts', text: 'Портфолио', link: 'portfolios'},
+                {icon: 'mdi-image-filter', text: 'Портфолио', link: 'portfolios'},
+                {icon: 'mdi-currency-usd', text: 'Прайсы', link: 'prices'},
                 {
                     icon: 'keyboard_arrow_up',
                     'icon-alt': 'keyboard_arrow_down',
@@ -147,7 +148,7 @@
                     ],
                 },
                 {icon: 'settings', text: 'Параметры', link: 'parameters'},
-                {icon: 'chat_bubble', text: 'Пользователи', link: 'users'},
+                {icon: 'mdi-account-card-details-outline', text: 'Пользователи', link: 'users'},
                 // { icon: 'help', text: 'Help' },
                 // { icon: 'phonelink', text: 'App downloads' },
                 // { icon: 'keyboard', text: 'Go to the old version' },
