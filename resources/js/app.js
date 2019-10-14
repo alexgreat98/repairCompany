@@ -4,6 +4,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+//require('./bootstrap');
 
 window.Vue = require('vue');
 import Swiper from 'swiper';
@@ -21,7 +22,6 @@ import 'fslightbox/fslightbox.min.js'
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-// Vue.use(Vuetify);
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 

@@ -18,4 +18,9 @@ class Std
         return $p->value;
     }
 
+    static public function getAndUnpack($key){
+        $p = Param::getP($key);
+        return explode(';', $p);
+    }
+
 }

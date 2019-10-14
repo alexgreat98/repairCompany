@@ -25,12 +25,17 @@ import Vuex from 'vuex'
 import pricesStore from './components/store/pricesStore'
 import servicesStore from './components/store/servicesStore'
 
-/*axios.defaults.headers.common = {
-    'X-CSRF-TOKEN': myToken.csrfToken,
+axios.defaults.headers.common = {
+    'X-CSRF-TOKEN': window.csrf_token,
     'X-Requested-With': 'XMLHttpRequest',
-    'Authorization': 'Bearer ' + myToken.apiToken,
+    'Authorization': 'Bearer ' + window.api_token,
     'Content-Type': 'application/json',
 
+};
+
+/*axios.defaults.headers.common = {
+    'X-Requested-With': 'XMLHttpRequest',
+    'X-CSRF-TOKEN': window.csrf_token
 };*/
 
 Vue.prototype.axios = axios;

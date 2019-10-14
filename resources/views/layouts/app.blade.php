@@ -30,7 +30,7 @@
 </head>
 <body>
 <div class="flex-center position-ref full-height @if (Route::current()->uri !== '/')padding_page_top @endif" id="app">
-    @if (Route::has('login'))
+{{--    @if (Route::has('login'))
         <div class="top-right links">
             @auth
                 <a href="{{ url('/home') }}">Home</a>
@@ -42,7 +42,7 @@
                 @endif
             @endauth
         </div>
-    @endif
+    @endif--}}
     {{--<div class="header__top main__app-wrap">
         <div class="d-none d-md-block">Ремонтно-строительные работы под ключ</div>
         <div class="header__top-phone">

@@ -103,6 +103,9 @@
                 label="Search"
                 class="hidden-sm-and-down"
             ></v-text-field>
+            <v-btn small text @click="logout">Выход
+                <v-icon color="black">mdi-open-in-new</v-icon>
+            </v-btn>
             <div class="flex-grow-1"></div>
 
         </v-app-bar>
@@ -115,7 +118,6 @@
                 <router-view></router-view>
             </v-container>
         </v-content>
-
     </v-app>
 </template>
 
@@ -151,5 +153,14 @@
                 // { icon: 'keyboard', text: 'Go to the old version' },
             ],
         }),
+        methods : {
+            logout(){
+                this.axios.post('logout').
+                then(data=>{
+                    console.log(data);
+                })
+                window.location='/';
+            }
+        }
     }
 </script>

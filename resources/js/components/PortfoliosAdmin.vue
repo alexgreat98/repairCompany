@@ -324,6 +324,8 @@
                             this.snackColor = 'success'
                             this.snackText = 'Данные сохранены'
                             this.files = [];
+                            //console.log(response)
+                            this.current.images.push(...response.data);
                         })
                         .catch(error => {
                             console.log({error});
