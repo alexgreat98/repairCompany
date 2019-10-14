@@ -20,41 +20,16 @@
             color: #636b6f;
             font-family: 'Nunito', sans-serif;
             font-weight: 200;
-            height: 100vh;
+            /*height: 100vh;*/
             margin: 0;
             overflow-y: auto !important;
         }
-         .parallax-bg {
-             position: absolute;
-             left: 0;
-             top: 0;
-             width: 130%;
-             height: 100%;
-             -webkit-background-size: cover;
-             background-size: cover;
-             background-position: center;
-         }
-        .index__page-banner-parallax {
-            position: relative;
-            /*opacity: 0.65;*/
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-image: url({{Storage::url('/site/remont-ofisov-.jpg')}});
-            min-height: 100%;
-        }
-        /* Turn off parallax scrolling for tablets and phones */
-        @media only screen and (max-device-width: 1024px) {
-            .index__page-banner-parallax {
-                background-attachment: scroll;
-            }
-        }
+
     </style>
 
 </head>
 <body>
-<div class="flex-center position-ref full-height" id="app">
+<div class="flex-center position-ref full-height @if (Route::current()->uri !== '/')padding_page_top @endif" id="app">
     @if (Route::has('login'))
         <div class="top-right links">
             @auth
@@ -68,7 +43,7 @@
             @endauth
         </div>
     @endif
-    <div class="header__top main__app-wrap">
+    {{--<div class="header__top main__app-wrap">
         <div class="d-none d-md-block">Ремонтно-строительные работы под ключ</div>
         <div class="header__top-phone">
             <a href="#">+7(123)412-412-42</a>
@@ -76,9 +51,12 @@
         <div class="header__top-mail">
             <a href="mailto:zakaz@mail.ru">zakaz@mail.ru</a>
         </div>
-    </div>
-    <div class="header">
+    </div>--}}
 
+    <div
+        class="header @if (Route::current()->uri == '/')index_page index_scroll @endif"
+        id="nav_bar_scroll"
+    >
         <nav class="navbar navbar-expand-md navbar-top">
 
             <div class="navbar-top-wrap">
@@ -109,38 +87,19 @@
             </div>
         </nav>
     </div>
-        @yield('banner')
+    @yield('banner')
 
     <div class="main__app">
 
         <div class="main__app-wrap">
             <div class="main__wrap">
-                {{--<div class="main__wrap-sidebar">
-                    <aside class="nav__bar">
-                        <nav class="section__menu">
-                            <h3 class="section__menu-title">что то</h3>
-                            <a href="/radios/" class="section__menu-all-category" title="Все станции">Все станции</a>
-                        </nav>
-                        <nav class="section__menu">
-                            <h3 class="section__menu-title">Меню</h3>
-                            <ul>
-                            </ul>
-                            <a href="/category/" class="section__menu-all-category" title="Все жанры">Все жанры</a>
-                        </nav>
-
-                    </aside>
-
-                </div>--}}
                 <div class="main__wrap-content">
                     <main>
                         @yield('content')
                     </main>
                 </div>
-
             </div>
-
         </div>
-
     </div>
 
     <footer class="main-footer">
@@ -152,7 +111,8 @@
                         <div id="text-2" class="column footer-widget widget_text">
                             <div class="textwidget">
                                 <p><span style="color: #ff6600;font-size: 2rem">LOGO</span></p>
-                                <p>Компания «Лого» работает на рынке ремонтов и дизайна интерьера уже много лет. За это время мы действительно научились создавать интерьеры, в которых приятно жить.</p>
+                                <p>Компания «Лого» работает на рынке ремонтов и дизайна интерьера уже много лет. За это
+                                    время мы действительно научились создавать интерьеры, в которых приятно жить.</p>
                             </div>
                         </div>
                     </div>
@@ -162,8 +122,10 @@
                             <div class="contact-widget">
                                 <h2>Контакты</h2>
                                 <ul class="list-style-one">
-                                    <li><span class="icon flaticon-maps-and-flags"></span>Москва, ул. Улица  10/10</li>
-                                    <li><span class="icon flaticon-phone-call"></span><a href="tel:234252352">(<a href="tel:234623423">067) 123 4567</a></a><br><a href="tel:123424612">(<a href="tel:0442284600">044) 123 4567</a></a>
+                                    <li><span class="icon flaticon-maps-and-flags"></span>Москва, ул. Улица 10/10</li>
+                                    <li><span class="icon flaticon-phone-call"></span><a href="tel:234252352">(<a
+                                                href="tel:234623423">067) 123 4567</a></a><br><a
+                                            href="tel:123424612">(<a href="tel:0442284600">044) 123 4567</a></a>
                                     </li>
                                     <li><span class="icon flaticon-clock-1"></span>Пн - Пт : C 10.00 до 19.00</li>
                                 </ul>
@@ -174,12 +136,24 @@
                         <div id="nav_menu-2" class="column footer-widget widget_nav_menu"><h2>Главные ссылки</h2>
                             <div class="menu-footer-menu-container">
                                 <ul id="menu-footer-menu" class="menu">
-                                    <li id="menu-item-2974" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2974"><a href="#">О Компании</a></li>
-                                    <li id="menu-item-2975" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2975"><a href="#">Ремонт</a></li>
-                                    <li id="menu-item-2977" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2977"><a href="#">Дизайн интерьера</a></li>
-                                    <li id="menu-item-2978" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2978"><a href="#">Портфолио</a></li>
-                                    <li id="menu-item-2979" class="menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-2979"><a href="#">Новости</a></li>
-                                    <li id="menu-item-2980" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2980"><a href="#">Контакты</a></li>
+                                    <li id="menu-item-2974"
+                                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2974">
+                                        <a href="#">О Компании</a></li>
+                                    <li id="menu-item-2975"
+                                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2975">
+                                        <a href="#">Ремонт</a></li>
+                                    <li id="menu-item-2977"
+                                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2977">
+                                        <a href="#">Дизайн интерьера</a></li>
+                                    <li id="menu-item-2978"
+                                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2978">
+                                        <a href="#">Портфолио</a></li>
+                                    <li id="menu-item-2979"
+                                        class="menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-2979">
+                                        <a href="#">Новости</a></li>
+                                    <li id="menu-item-2980"
+                                        class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2980">
+                                        <a href="#">Контакты</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -189,17 +163,20 @@
                             <div class="textwidget">
                                 <p>
                                     <a href="#" rel="nofollow">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="35" height="35">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="35"
+                                             height="35">
                                             <path fill="#29b6f6" d="M24 4A20 20 0 1 0 24 44A20 20 0 1 0 24 4Z"/>
                                             <path fill="#fff"
                                                   d="M33.95,15l-3.746,19.126c0,0-0.161,0.874-1.245,0.874c-0.576,0-0.873-0.274-0.873-0.274l-8.114-6.733 l-3.97-2.001l-5.095-1.355c0,0-0.907-0.262-0.907-1.012c0-0.625,0.933-0.923,0.933-0.923l21.316-8.468 c-0.001-0.001,0.651-0.235,1.126-0.234C33.667,14,34,14.125,34,14.5C34,14.75,33.95,15,33.95,15z"/>
-                                            <path fill="#b0bec5" d="M23,30.505l-3.426,3.374c0,0-0.149,0.115-0.348,0.12c-0.069,0.002-0.143-0.009-0.219-0.043 l0.964-5.965L23,30.505z"/>
+                                            <path fill="#b0bec5"
+                                                  d="M23,30.505l-3.426,3.374c0,0-0.149,0.115-0.348,0.12c-0.069,0.002-0.143-0.009-0.219-0.043 l0.964-5.965L23,30.505z"/>
                                             <path fill="#cfd8dc"
                                                   d="M29.897,18.196c-0.169-0.22-0.481-0.26-0.701-0.093L16,26c0,0,2.106,5.892,2.427,6.912 c0.322,1.021,0.58,1.045,0.58,1.045l0.964-5.965l9.832-9.096C30.023,18.729,30.064,18.416,29.897,18.196z"/>
                                         </svg>
                                     </a>
                                     <a href="#" rel="nofollow">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="35" height="35">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="35"
+                                             height="35">
                                             <path fill="#fff"
                                                   d="M24,5C21.361,5,13.33,5,8.89,9.054C6.246,11.688,5,15.494,5,21v3c0,5.506,1.246,9.312,3.921,11.976 c1.332,1.215,3.148,2.186,5.368,2.857L15,39.047v5.328C15,45,15.181,45,15.241,45c0.123,0,0.32-0.039,0.694-0.371 c0.09-0.089,0.75-0.803,3.96-4.399l0.324-0.363l0.485,0.031C21.779,39.965,22.888,40,24,40c2.639,0,10.67,0,15.11-4.055 C41.753,33.311,43,29.505,43,24v-3c0-5.506-1.246-9.312-3.921-11.976C34.67,5,26.639,5,24,5z"/>
                                             <path fill="#7e57c2"

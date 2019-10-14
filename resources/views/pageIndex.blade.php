@@ -4,8 +4,12 @@
 
 @section('banner')
     <div class="index__page-banner-parallax">
+        <div class="index__page-banner-center">
+            <div class="index__page-banner-title">Ремонт оффисов под ключ</div>
+            <div class="index__page-banner-form">
 
-
+            </div>
+        </div>
     </div>
 @endsection
 @section('content')
@@ -216,5 +220,6 @@ PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8v
         @include('includes.howWork')
 
     </div>
+
 
 @endsection

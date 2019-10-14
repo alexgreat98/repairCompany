@@ -29,4 +29,4 @@ Route::resource('params', 'Admin\ParamsController');
 Route::resource('users', 'Admin\UserController');
 Route::resource('portfolio', 'Admin\PortfolioController');
 Route::resource('images', 'Admin\ImageController'); //TODO вот тут я поменял урл, посмотри у себя чтоб запросы теперь слались на него
-
+Route::post('callback/store', 'Admin\CallbackController@storeCallbackForm');

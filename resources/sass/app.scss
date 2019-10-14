@@ -67,7 +67,9 @@ $c-grey: #BDBDBD;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
-
+.padding_page_top{
+    padding-top: 78px;
+}
 .main__wrap {
     //display: grid;
     //grid-template-columns: 1fr 3fr;
@@ -109,13 +111,6 @@ $c-grey: #BDBDBD;
     }
 }
 
-.header {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    box-shadow: 0 2px 7px -2px #777777;
-    //box-shadow: 0 0 10px rgba(0,0,0,0.3);
-}
 
 .navbar-collapse {
     transition: all 0.3s;
@@ -130,7 +125,7 @@ $c-grey: #BDBDBD;
     width: 100%;
     justify-content: space-between;
     align-items: center;
-
+    z-index: 1;
     .btn-callback {
         order: 4;
         align-self: stretch;
@@ -158,11 +153,59 @@ $c-grey: #BDBDBD;
 }
 
 .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    //box-shadow: 0 2px 7px -2px #777777;
+
     .navbar-top {
         background-color: #2a2a33 !important;
         color: #fff;
+        padding: 15px;
+        transition: padding 0.2s;
+        //transition-delay: 0.2s;
+        &:before {
+            content: "";
+            //transition: opacity 0.2s;
+            background-color: #000000b8;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            position: absolute;
+            width: 110%;
+            height: 140%;
+            top: -36%;
+            left: -5%;
+            z-index: 1;
+            -webkit-filter: blur(10px);
+            filter: blur(15px);
+            opacity: 0;
+        }
+    }
+    &.scroll .navbar-top {
         padding: 0 15px;
     }
+
+    &.index_scroll {
+        .navbar-top:before {
+            opacity: 1;
+        }
+        .navbar-top {
+            background-color: transparent !important;
+        }
+
+        .btn-callback {
+            opacity: 0;
+        }
+        .navbar-top {
+            padding: 15px;
+        }
+    }
+
+
+
 }
 
 .navbar-nav {
@@ -801,62 +844,49 @@ p {
     }
 }
 
-.index__page-banner-title {
+
+//index-banner
+.index__page-banner-center {
     position: absolute;
-    bottom: 30%;
-    left: 10%;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    text-align: center;
     color: #fff;
-    font-size: 3rem;
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.5s;
-    transition-delay: 0.2s;
-    @media(max-width: 991px) {
-        & {
-            bottom: 50%;
-        }
-    }
-    @media(max-width: 768px) {
-        & {
-            bottom: 60%;
-            left: 0;
-            right: 0;
-        }
-    }
-    @media(max-width: 576px) {
-        & {
-            font-size: 2rem;
-        }
-    }
 }
 
-.index__page-banner-text {
+.index__page-banner-title {
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+.parallax-bg {
     position: absolute;
-    bottom: 20%;
-    left: 10%;
-    color: #fff;
-    opacity: 0;
-    transition: all 0.5s;
-    transition-delay: 0.2s;
-    text-align: left;
-    @media(max-width: 991px) {
-        & {
-            bottom: 35%;
-        }
-    }
-    @media(max-width: 768px) {
-        & {
-            text-align: center;
-            bottom: 30%;
-            left: 0;
-            right: 0;
-            padding: 0 1rem;
-        }
-    }
-    @media(max-width: 576px) {
-        & {
-            font-size: 0.8rem;
-        }
+    left: 0;
+    top: 0;
+    width: 130%;
+    height: 100%;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: center;
+}
+
+.index__page-banner-parallax {
+    position: relative;
+    /*opacity: 0.65;*/
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url(('storage/app/public/site/remont-ofisov-.jpg'));
+    min-height: 100%;
+    height: 100vh;
+}
+
+/* Turn off parallax scrolling for tablets and phones */
+@media only screen and (max-device-width: 1024px) {
+    .index__page-banner-parallax {
+        background-attachment: scroll;
     }
 }
 
