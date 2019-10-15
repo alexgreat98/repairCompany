@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -46,6 +47,7 @@ class UserController extends Controller
         $param = new User;
         $data = $request->except(['created_at', 'updated_at']);
         $data['password'] = Hash::make($data['password']);
+        $data['api_token'] = Str::random();
         $param->fill($data);
         $param->save();
 
