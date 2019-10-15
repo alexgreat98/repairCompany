@@ -160,7 +160,7 @@
                 then(data=>{
                     console.log(data);
                 })
-                //window.location='/';
+                window.location='/';
             }
         }
     }
