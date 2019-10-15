@@ -39,3 +39,5 @@ Route::group(['middleware' => 'auth:api'], function () {
         'index', 'edit', 'update', 'destroy'
     ]);
 });
+
+Route::post('callback/store', 'Client\CallbackController@storeCallbackForm');

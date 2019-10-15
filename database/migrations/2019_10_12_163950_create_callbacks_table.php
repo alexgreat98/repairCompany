@@ -17,8 +17,8 @@ class CreateCallbacksTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->bigInteger('phone');
-            $table->boolean('look');
-            $table->boolean('answer');
+            $table->boolean('look')->default(false);
+            $table->boolean('answer')->default(false);
             $table->timestamps();
         });
     }

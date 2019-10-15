@@ -5,7 +5,7 @@ import 'material-design-icons-iconfont'
 // window.Vuetify = require('vuetify');
 import Vue from 'vue'
 import Vuetify from 'vuetify'
-import 'vuetify/dist/vuetify.min.css'
+import Vuelidate from 'vuelidate'
 import VueRouter from 'vue-router';
 import CKEditor from '@ckeditor/ckeditor5-vue';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
@@ -21,6 +21,7 @@ import ParametersAdmin from './components/ParametersAdmin';
 import UsersAdmin from './components/UsersAdmin';
 import axios from 'axios';
 import Vuex from 'vuex'
+import 'vuetify/dist/vuetify.min.css'
 //store
 
 import pricesStore from './components/store/pricesStore'
@@ -42,7 +43,7 @@ axios.defaults.headers.common = {
 
 Vue.prototype.axios = axios;
 Vue.prototype.vue = Vue;
-Vue.prototype.editor =  ClassicEditor;
+Vue.prototype.editor = ClassicEditor;
 Vue.prototype.editorConfig = {};
 Vue.prototype.cyrillicToTranslit = cyrillicToTranslit;
 Vue.prototype.sortList = Array.from(Array(501).keys());
@@ -50,7 +51,8 @@ Vue.prototype.sortList = Array.from(Array(501).keys());
 Vue.use(Vuetify);
 Vue.use(Vuex);
 Vue.use(VueRouter);
-Vue.use( CKEditor );
+Vue.use(CKEditor);
+Vue.use(Vuelidate);
 
 const opts = {
     icons: {

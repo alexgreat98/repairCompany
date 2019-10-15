@@ -1,18 +1,7 @@
 @extends('layouts.app')
 
-{{--@section('title', 'Page Title')--}}
-
+@section('breadcrumbs', Breadcrumbs::render('portfolio'))
 @section('content')
-    <ul class="breadcrumbs">
-        <li class="B_firstCrumb" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb"><a
-                class="B_homeCrumb" itemprop="url" rel="Home" href="#"><span itemprop="title">Главная</span></a>
-        </li>
-        <li itemscope="itemscope" class="B_crumb" itemtype="http://data-vocabulary.org/Breadcrumb"><a class="B_crumb"
-                                                                                                      itemprop="url"
-                                                                                                      href="uslugi"><span
-                    itemprop="title">Услуги</span></a></li>
-        <li>Офис</li>
-    </ul>
     <div class="portfolio__list">
         <div class="sec-title centered">
             <h1 class="title">Портфолио</h1>
@@ -22,13 +11,13 @@
                 @foreach($portfolios as $portfolio)
                     <div class="col-md-6">
                         <div class="portfolio__list-item">
-                            <a href="/portfolio/{{$portfolio->slug}}" class="project-img text-center"
+                            <a href="/portfolio/{{$portfolio->id}}" class="project-img text-center"
                                style="background-image: url({{Storage::url('portfolio/prev-'.$portfolio->image->url)}});">
                             </a>
                             <div class="desc row align-items-center">
                                 <div>
                                     <h3 class="float-left">
-                                        <a href="/portfolio/{{$portfolio->slug}}">Cемейный дом</a>
+                                        <a href="/portfolio/{{$portfolio->id}}">{{$portfolio->name}}</a>
                                     </h3>
                                     <div class="float-right">
                                         <a href="/portfolio/{{$portfolio->id}}" class="text-main">
@@ -54,6 +43,6 @@
             проектов – именно поэтому мы смело гарантируем наилучший результат. Свяжитесь с нами уже сейчас, чтобы
             воспользоваться услугами и убедиться в этом лично. Сделаем всё, чтобы вы остались довольны!
         </div>
-        @include('includes.formCallback')
+        <callback-client></callback-client>
     </div>
 @endsection

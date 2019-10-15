@@ -24,8 +24,16 @@ class StoreCallbackRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:2',
-            'phone' => 'number|size:9'
+            'name' => 'required|min:2|max:40',
+            'phone' => 'required|numeric'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'name',
+            'phone.required'  => 'phone',
         ];
     }
 }

@@ -21,6 +21,11 @@ class PortfolioService
     public function GetPortfolioPage(Portfolio $portfolio)
     {
         $portfolio['images'] = $portfolio->images()->get();
+        $portfolio['relative'] = Portfolio::all();
+        foreach ($portfolio['relative'] as $value)
+        {
+            $value['image'] = $value->images->first();
+        }
         return $portfolio;
     }
 }

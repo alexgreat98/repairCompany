@@ -67,9 +67,11 @@ $c-grey: #BDBDBD;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
-.padding_page_top{
+
+.padding_page_top {
     padding-top: 78px;
 }
+
 .main__wrap {
     //display: grid;
     //grid-template-columns: 1fr 3fr;
@@ -126,6 +128,7 @@ $c-grey: #BDBDBD;
     justify-content: space-between;
     align-items: center;
     z-index: 1;
+
     .btn-callback {
         order: 4;
         align-self: stretch;
@@ -163,9 +166,32 @@ $c-grey: #BDBDBD;
     .navbar-top {
         background-color: #2a2a33 !important;
         color: #fff;
-        padding: 15px;
+        //padding: 15px;
         transition: padding 0.2s;
         //transition-delay: 0.2s;
+        //background-color: rgba(255, 255, 255, 0.8) !important;
+
+        a {
+            //color: $c-dark;
+        }
+
+        .navbar-brand {
+            color: $c-mainColor;
+            font-weight: 800;
+            font-size: 2rem;
+            padding: 0;
+            transition: font-size 0.2s;
+        }
+
+        .navbar-toggler {
+            color: $c-white;
+            border-color: $c-white;
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(255, 255, 255, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
         &:before {
             content: "";
             //transition: opacity 0.2s;
@@ -184,14 +210,18 @@ $c-grey: #BDBDBD;
             opacity: 0;
         }
     }
+
     &.scroll .navbar-top {
-        padding: 0 15px;
+        .navbar-brand{
+            font-size: 1.5rem;
+        }
     }
 
     &.index_scroll {
         .navbar-top:before {
             opacity: 1;
         }
+
         .navbar-top {
             background-color: transparent !important;
         }
@@ -199,11 +229,11 @@ $c-grey: #BDBDBD;
         .btn-callback {
             opacity: 0;
         }
+
         .navbar-top {
-            padding: 15px;
+            //padding: 15px;
         }
     }
-
 
 
 }
@@ -264,30 +294,6 @@ p {
     color: $c-rDark;
 }
 
-//navbar
-.navbar-top {
-    background-color: rgba(255, 255, 255, 0.8) !important;
-
-    a {
-        color: $c-dark;
-    }
-
-    .navbar-brand {
-        color: $c-mainColor;
-        font-weight: 800;
-        font-size: 2rem;
-        padding: 0;
-    }
-
-    .navbar-toggler {
-        color: $c-white;
-        border-color: $c-white;
-    }
-
-    .navbar-toggler-icon {
-        background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(255, 255, 255, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-    }
-}
 
 .main__app {
     padding: 10px 1rem;
@@ -501,7 +507,7 @@ p {
 
 //portfolio item
 .portfolio__item {
-    padding: 2rem 0;
+    //padding: 2rem 0;
 }
 
 .portfolio__item-item .project-img {
@@ -905,6 +911,14 @@ p {
     background-color: white;
     width: 100%;
     padding: 20px;
+    @media(max-width: 768px){
+        &{
+            grid-template-columns: 1fr
+        }
+        & .main-callback-form-image{
+            display: none;
+        }
+    }
 }
 
 .main-callback-form-img {
@@ -967,53 +981,7 @@ p {
 }
 
 .main-callback-form-inputs {
-    form {
-        text-align: right;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
 
-        button {
-            align-self: flex-end;
-        }
-    }
-
-    input {
-        width: 100%;
-        padding: 8px;
-        font-size: 13px;
-        border-width: 0 0 2px 0;
-
-        &::-webkit-input-placeholder { /* Edge */
-            color: $c-grey;
-        }
-
-        &:-ms-input-placeholder { /* Internet Explorer 10-11 */
-            color: $c-grey;
-        }
-
-        &::placeholder {
-            color: $c-grey;
-        }
-    }
-
-    label {
-        display: inline-block;
-        text-align: left;
-        max-width: 370px;
-        width: 100%;
-        align-self: flex-start;
-        margin-left: 10px;
-
-        &:last-of-type {
-            margin-top: 10px;
-        }
-
-        span {
-            font-weight: 400;
-            margin-left: -7px;
-        }
-    }
 
     button {
         margin: 15px 0 10px 0;

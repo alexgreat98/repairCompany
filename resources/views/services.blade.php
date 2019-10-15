@@ -1,17 +1,8 @@
 @extends('layouts.app')
 
 {{--@section('title', 'Page Title')--}}
-
+@section('breadcrumbs', Breadcrumbs::render('services'))
 @section('content')
-    <ul class="breadcrumbs">
-        <li class="B_firstCrumb" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb"><a
-                class="B_homeCrumb" itemprop="url" rel="Home" href="#"><span itemprop="title">Главная</span></a></li>
-        <li itemscope="itemscope" class="B_crumb" itemtype="http://data-vocabulary.org/Breadcrumb"><a class="B_crumb"
-                                                                                                      itemprop="url"
-                                                                                                      href="uslugi"><span
-                    itemprop="title">Услуги</span></a></li>
-        <li>Электромонтажные работы</li>
-    </ul>
     <div class="services__list">
 
         <div class="services__list-banner jumbotron">
@@ -44,6 +35,6 @@
                 </div>
             @endforeach
         </div>
-        @include('includes.formCallback')
+        <callback-client></callback-client>
     </div>
 @endsection

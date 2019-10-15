@@ -11,7 +11,7 @@
 {{--<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">--}}
 
 <!-- Styles -->
-    <link href="{{asset('css/app.css')}}" rel="stylesheet">
+    <link href="{{mix('css/app.css')}}" rel="stylesheet">
     <link href="{{Storage::url('css/fslightbox.min.css')}}" rel="stylesheet">
 
     <style>
@@ -72,6 +72,7 @@
             <div class="main__wrap">
                 <div class="main__wrap-content">
                     <main>
+                        @yield('breadcrumbs')
                         @yield('content')
                     </main>
                 </div>
@@ -175,6 +176,6 @@
     <div class="footer__copyright">Copyright © 2019 лого , All Right Reserved</div>
 </div>
 </body>
-<script src="{{asset('js/app.js')}}" async></script>
+<script src="{{ mix('/js/app.js') }}" async></script>
 <script src="{{Storage::url('js/fslightbox.min.js')}}"></script>
 </html>

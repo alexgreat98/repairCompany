@@ -1,38 +1,37 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
-//require('./bootstrap');
-
-window.Vue = require('vue');
+import Vue from 'vue'
+import Vuetify from 'vuetify'
+import axios from 'axios';
 import Swiper from 'swiper';
 import 'fslightbox/fslightbox.min.js'
+import 'vuetify/dist/vuetify.min.css'
+import Vuelidate from 'vuelidate'
+import {validationMixin} from 'vuelidate'
+import CallbackClient from './components/CallbackClient'
+import callbackStore from './components/store/clientCallbackStore'
+import Vuex from 'vuex'
 
-// import Vuetify from 'vuetify/lib'
+Vue.use(Vuelidate);
+Vue.use(Vuetify);
+Vue.use(Vuex);
+Vue.prototype.axios = axios;
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
+const store =
+    {
+        modules: {
+            callbackStore,
+        },
+    };
 const app = new Vue({
     el: '#app',
+    store: new Vuex.Store(store),
+    mixins: [validationMixin],
+    vuetify: new Vuetify(),
+    components: {
+        CallbackClient
+    }
+
 });
 new Swiper('.services-portfolio-slider', {
 
@@ -111,7 +110,7 @@ if (nav_bar_scroll.classList.contains('index_page')) {
 }
 
 function scrollMenuIndex() {
-    if (document.body.scrollTop > (window.innerHeight -50) || document.documentElement.scrollTop > (window.innerHeight -50)) {
+    if (document.body.scrollTop > (window.innerHeight - 50) || document.documentElement.scrollTop > (window.innerHeight - 50)) {
         nav_bar_scroll.classList.remove('index_scroll')
     } else {
         nav_bar_scroll.classList.add('index_scroll')

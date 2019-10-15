@@ -217,7 +217,7 @@ PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8v
             </div>
         </div>
 
-        @include('includes.howWork')
+        <callback-client></callback-client>
 
     </div>
 

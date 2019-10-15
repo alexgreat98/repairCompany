@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Callback;
 use App\Http\Requests\StoreCallbackRequest;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 
 class CallbackController extends Controller
@@ -16,8 +16,13 @@ class CallbackController extends Controller
         $this->callback = $callback;
     }
 
+    /**
+     * @param StoreCallbackRequest $request
+     * @return JsonResponse
+     */
     public function storeCallbackForm(StoreCallbackRequest $request)
     {
-        $this->callback->create($request->all());
+        $status = $this->callback->create($request->all());
+        return response()->json(compact('status'));
     }
 }
