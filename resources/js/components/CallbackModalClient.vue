@@ -1,21 +1,13 @@
 <template>
-    <v-content>
-        <div class="main-callback-form-center">
-            <div class="main-callback-form">
-                <div class="main-callback-form-image" v-if="windowsWidth > 768">
-                    <v-img
-                        src="/storage/site/mainForm.jpg"
-                        aspect-ratio="1"
-                        class="grey lighten-2"
-                        max-height="300"
-                    ></v-img>
-                </div>
+    <div>
+        <v-dialog
+            v-model="$root.dialogCallback"
+            width="500"
+        >
+            <v-card class="dialog-callback">
                 <div class="main-callback-form-wrap" v-show="submitSuccess == 0">
                     <div class="main-callback-form-title">
-                        Доверьте дело профессионалам!
-                    </div>
-                    <div class="main-callback-form-description">
-                        Оставьте свои контактные данные и мы сами свяжемся с вами
+                        Оставить заявку
                     </div>
                     <div class="main-callback-form-inputs">
                         <v-form @submit.prevent="sendCallback">
@@ -119,20 +111,19 @@
                     <div class="main-callback-form-success-btn"><span
                         @click="resendCallback">Отправить еще одну заявку</span></div>
                 </div>
-            </div>
-        </div>
-    </v-content>
+            </v-card>
+        </v-dialog>
+    </div>
+
 </template>
 
 <script>
-
     import {required, minLength, maxLength, numeric} from 'vuelidate/lib/validators'
     import {mapState, mapActions, mapMutations} from 'vuex'
     import {mask} from 'vue-the-mask'
 
     export default {
-
-        name: "CallbackClient",
+        name: "CallbackModalClient",
         directives: {mask},
         data() {
             return {
@@ -200,46 +191,9 @@
                 }
             }
         },
-        mounted() {
-            console.log(this.submitSuccess)
-        }
     }
 </script>
 
 <style scoped>
-    .main-callback-form-success .icon {
-        width: 100px;
-        margin-right: 15px;
-    }
-
-    .main-callback-form-success {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    .main-callback-form-success-block {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-grow: 1;
-    }
-
-    .main-callback-form-success-text {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        text-align: left;
-    }
-
-    .main-callback-form-success-title {
-        font-size: 1.3rem;
-        color: #3eb39e;;
-    }
-
-    .main-callback-form-success-btn span {
-        font-size: 0.8rem;
-        cursor: pointer;
-    }
 
 </style>

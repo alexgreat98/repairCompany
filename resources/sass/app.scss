@@ -9,8 +9,9 @@
 @import '~bootstrap/scss/grid';
 @import '~bootstrap/scss/pagination';
 @import '~bootstrap/scss/utilities';
-@import '~bootstrap/scss/jumbotron';
+//@import '~bootstrap/scss/jumbotron';
 @import "~swiper/css/swiper.min.css";
+@import '~@mdi/font/css/materialdesignicons.css';
 
 .swiper-container {
     width: 100%;
@@ -40,8 +41,8 @@ $light-border: #BDBDBD;
 $c-white: rgb(255, 255, 255);
 $c-dark: #2a2a33;
 $c-rDark: #777777;
-$c-mainColor: #ff6600;
-$c-mainColorDark: #ff6e30;
+$c-mainColor: #ef6c00;
+$c-mainColorDark: #EF6C00;
 $c-rMainColor: #FFCDD2;
 $c-grey: #BDBDBD;
 
@@ -67,9 +68,11 @@ $c-grey: #BDBDBD;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
-.v-snack__wrapper{
-    background-color: #ff6602 !important;
+
+.v-application--wrap {
+    min-height: unset !important;
 }
+
 .padding_page_top {
     padding-top: 78px;
 }
@@ -214,7 +217,7 @@ $c-grey: #BDBDBD;
     }
 
     &.scroll .navbar-top {
-        .navbar-brand{
+        .navbar-brand {
             font-size: 1.5rem;
         }
     }
@@ -339,13 +342,15 @@ p {
         height: 1px;
         background-color: #ff6600;
     }
-    .sec-title-text{
-        .title-text{
+
+    .sec-title-text {
+        .title-text {
             font-weight: 200;
             max-width: 600px;
             display: inline-block;
         }
     }
+
     &.light .title {
         color: #ffffff;
         border-color: rgba(255, 255, 255, 0.10);
@@ -751,16 +756,19 @@ p {
     -moz-box-shadow: 0px 0px 15px 0px rgba(244, 244, 244, 1);
     box-shadow: 0px 0px 15px 0px rgba(244, 244, 244, 1);
     background-color: #fff;
+
     .services-price-table-item-checkbox {
         width: 100%;
     }
-    &:hover{
+
+    &:hover {
         border-color: $c-grey;
         box-shadow: none;
     }
-     &.active{
-         border-color: $c-mainColor;
-         box-shadow: none;
+
+    &.active {
+        border-color: $c-mainColor;
+        box-shadow: none;
     }
 
     .price {
@@ -927,11 +935,11 @@ p {
     background-color: white;
     width: 100%;
     padding: 20px;
-    @media(max-width: 768px){
-        &{
+    @media(max-width: 768px) {
+        & {
             grid-template-columns: 1fr
         }
-        & .main-callback-form-image{
+        & .main-callback-form-image {
             display: none;
         }
     }
@@ -953,7 +961,11 @@ p {
         }
     }
 }
-
+.dialog-callback{
+    .main-callback-form-wrap{
+        padding: 15px;
+    }
+}
 .main-callback-form-wrap {
     text-align: right;
     display: flex;

@@ -5,7 +5,8 @@ const state = {
         name: '',
         phone: '',
     },
-    submit: (localStorage.submitForm) ? localStorage.submitForm : 0
+    submit: (localStorage.submitForm) ? localStorage.submitForm : 0,
+    dialogCallback: false
 };
 
 // getters

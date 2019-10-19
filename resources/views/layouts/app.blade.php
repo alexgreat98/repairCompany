@@ -6,20 +6,17 @@
 
     <title>Строй компания</title>
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
 
-<!-- Styles -->
+    <!-- Styles -->
     <link href="{{mix('css/app.css')}}" rel="stylesheet">
-    <link href="{{Storage::url('css/fslightbox.min.css')}}" rel="stylesheet">
+
 
     <style>
         html, body {
             background-color: whitesmoke;
             color: #636b6f;
             font-family: 'Nunito', sans-serif;
-            font-weight: 200;
+            font-weight: 300;
             /*height: 100vh;*/
             margin: 0;
             overflow-y: auto !important;
@@ -71,10 +68,13 @@
         <div class="main__app-wrap">
             <div class="main__wrap">
                 <div class="main__wrap-content">
-                    <main>
-                        @yield('breadcrumbs')
-                        @yield('content')
-                    </main>
+                    <v-app>
+                        <main>
+                            @yield('breadcrumbs')
+                            @yield('content')
+                            <callback-modal-client></callback-modal-client>
+                        </main>
+                    </v-app>
                 </div>
             </div>
         </div>
@@ -174,8 +174,13 @@
         </div>
     </footer>
     <div class="footer__copyright">Copyright © 2019 лого , All Right Reserved</div>
+
 </div>
 </body>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+<link href="{{Storage::url('css/fslightbox.min.css')}}" rel="stylesheet">
 <script src="{{ mix('/js/app.js') }}" async></script>
 <script src="{{Storage::url('js/fslightbox.min.js')}}"></script>
 </html>

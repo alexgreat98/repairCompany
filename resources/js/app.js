@@ -1,19 +1,55 @@
-import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loader
 import Vue from 'vue'
-import Vuetify from 'vuetify'
+import {Ripple} from 'vuetify/lib/directives'
 import axios from 'axios';
 import Swiper from 'swiper';
 import Vuelidate from 'vuelidate'
 import {validationMixin} from 'vuelidate'
 import PricesClient from './components/PricesClient'
 import CallbackClient from './components/CallbackClient'
+import CallbackModalClient from './components/CallbackModalClient'
 import callbackStore from './components/store/clientCallbackStore'
 import Vuex from 'vuex'
 import 'fslightbox/fslightbox.min.js'
-import colors from 'vuetify/lib/util/colors'
-import 'vuetify/dist/vuetify.min.css'
+
+import Vuetify, {
+    VCard,
+    VContent,
+    VFlex,
+    VApp,
+    VCheckbox,
+    VTextField,
+    VSnackbar,
+    VBtn,
+    VImg,
+    VForm,
+    VContainer,
+    VRow,
+    VCol,
+    VDialog
+} from 'vuetify/lib'
+
 Vue.use(Vuelidate);
-Vue.use(Vuetify);
+Vue.use(Vuetify, {
+    components: {
+        VCard,
+        VContent,
+        VFlex,
+        VApp,
+        VCheckbox,
+        VTextField,
+        VSnackbar,
+        VBtn,
+        VImg,
+        VForm,
+        VContainer,
+        VRow,
+        VCol,
+        VDialog
+    },
+    directives: {
+        Ripple,
+    },
+});
 Vue.use(Vuex);
 Vue.prototype.axios = axios;
 
@@ -25,9 +61,7 @@ const opts = {
     theme: {
         themes: {
             light: {
-                primary: colors.red.darken1, // #E53935
-                secondary: colors.red.lighten4, // #FFCDD2
-                accent: colors.indigo.base, // #3F51B5
+                primary: '#ff6d00',
             },
         },
     },
@@ -38,14 +72,18 @@ const store =
             callbackStore,
         },
     };
-const app = new Vue({
+const App = new Vue({
     store: new Vuex.Store(store),
     mixins: [validationMixin],
     vuetify: new Vuetify(opts),
     components: {
         PricesClient,
-        CallbackClient
+        CallbackClient,
+        CallbackModalClient
     },
+    data: {
+        dialogCallback: false
+    }
 }).$mount('#app');
 
 new Swiper('.services-portfolio-slider', {
