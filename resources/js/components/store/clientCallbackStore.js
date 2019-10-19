@@ -3,7 +3,7 @@ import axios from 'axios';
 const state = {
     form: (localStorage.form) ? JSON.parse(localStorage.form) : {
         name: '',
-        phone: null,
+        phone: '',
     },
     submit: (localStorage.submitForm) ? localStorage.submitForm : 0
 };

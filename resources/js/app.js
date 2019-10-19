@@ -1,22 +1,37 @@
+import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loader
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import axios from 'axios';
 import Swiper from 'swiper';
-import 'fslightbox/fslightbox.min.js'
-import 'vuetify/dist/vuetify.min.css'
 import Vuelidate from 'vuelidate'
 import {validationMixin} from 'vuelidate'
+import PricesClient from './components/PricesClient'
 import CallbackClient from './components/CallbackClient'
 import callbackStore from './components/store/clientCallbackStore'
 import Vuex from 'vuex'
-
+import 'fslightbox/fslightbox.min.js'
+import colors from 'vuetify/lib/util/colors'
+import 'vuetify/dist/vuetify.min.css'
 Vue.use(Vuelidate);
 Vue.use(Vuetify);
 Vue.use(Vuex);
 Vue.prototype.axios = axios;
 
 
-
+const opts = {
+    icons: {
+        iconfont: 'mdi',
+    },
+    theme: {
+        themes: {
+            light: {
+                primary: colors.red.darken1, // #E53935
+                secondary: colors.red.lighten4, // #FFCDD2
+                accent: colors.indigo.base, // #3F51B5
+            },
+        },
+    },
+};
 const store =
     {
         modules: {
@@ -24,15 +39,15 @@ const store =
         },
     };
 const app = new Vue({
-    el: '#app',
     store: new Vuex.Store(store),
     mixins: [validationMixin],
-    vuetify: new Vuetify(),
+    vuetify: new Vuetify(opts),
     components: {
+        PricesClient,
         CallbackClient
-    }
+    },
+}).$mount('#app');
 
-});
 new Swiper('.services-portfolio-slider', {
 
     spaceBetween: 30,

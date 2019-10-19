@@ -25,7 +25,7 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         Route::bind('web_service', function ($value) {
-            return Service::where('slug', $value)->first();
+            return Service::where('slug', $value)->first() ?? abort(404);
         });
 
         parent::boot();

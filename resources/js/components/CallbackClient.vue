@@ -34,18 +34,19 @@
                                     </v-col>
                                     <v-col cols="12">
                                         <v-text-field
-                                            v-model.trim="form.phone"
+                                            v-model.trim.number="form.phone"
                                             @input="$v.form.phone.$touch()"
                                             @blur="$v.form.phone.$touch()"
                                             label="Контактный номер"
                                             :error-messages="phoneErrors"
                                             :counter="9"
-                                            type="number"
+                                            v-mask="mask"
+                                            type="tel"
                                             required
+                                            maxlength="9"
                                         ></v-text-field>
                                     </v-col>
                                 </v-row>
-
                                 <v-btn class="btn-primary" type="submit" :disabled="submitStatus === 'PENDING'">Оставить
                                     заявку
                                 </v-btn>
@@ -110,7 +111,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="main-callback-form-success-btn"><span @click="resendCallback">Отправить еще одну заявку</span></div>
+                    <div class="main-callback-form-success-btn"><span
+                        @click="resendCallback">Отправить еще одну заявку</span></div>
                 </div>
             </div>
         </div>
@@ -122,14 +124,16 @@
 
     import {required, minLength, maxLength, numeric} from 'vuelidate/lib/validators'
     import {mapState, mapActions, mapMutations} from 'vuex'
-
+    import {mask} from 'vue-the-mask'
     export default {
 
         name: "CallbackClient",
+        directives: {mask},
         data() {
             return {
                 windowsWidth: window.innerWidth,
                 submitStatus: null,
+                mask: '#########',
             }
         },
         methods: {
@@ -141,16 +145,15 @@
                 clearForm: 'clearForm'
             }),
             sendCallback() {
+                console.log(this.form.phone);
                 this.$v.$touch();
                 if (this.$v.$invalid) {
                     this.submitStatus = 'Заполните все данные'
                 } else {
-                    if (this.storeCallback()) {
-
-                    }
+                    this.storeCallback()
                 }
             },
-            resendCallback(){
+            resendCallback() {
                 this.clearForm()
             }
         },
@@ -209,12 +212,14 @@
         flex-direction: column;
         justify-content: center;
     }
+
     .main-callback-form-success-block {
         display: flex;
         justify-content: center;
         align-items: center;
         flex-grow: 1;
     }
+
     .main-callback-form-success-text {
         display: flex;
         flex-direction: column;
@@ -226,7 +231,8 @@
         font-size: 1.3rem;
         color: #3eb39e;;
     }
-    .main-callback-form-success-btn span{
+
+    .main-callback-form-success-btn span {
         font-size: 0.8rem;
         cursor: pointer;
     }
