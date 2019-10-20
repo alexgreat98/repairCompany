@@ -3,17 +3,21 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Helpers\Common\FileSystem;
+use App\Http\Requests\StoreServiceRequest;
 use App\Image;
 use App\Service;
+use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Response;
 
 class ServiceController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -21,21 +25,12 @@ class ServiceController extends Controller
         return response()->json(compact('items'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @param StoreServiceRequest $request
+     * @return JsonResponse
      */
-    public function store(Request $request)
+    public function store(StoreServiceRequest $request)
     {
         $service = Service::create($request->all());
         return response()->json([
@@ -43,20 +38,10 @@ class ServiceController extends Controller
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * @param Service $service
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function edit(Service $service)
     {
@@ -68,7 +53,7 @@ class ServiceController extends Controller
     /**
      * @param Request $request
      * @param Service $service
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function update(Request $request, Service $service)
     {
@@ -80,8 +65,8 @@ class ServiceController extends Controller
 
     /**
      * @param Service $service
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \Exception
+     * @return JsonResponse
+     * @throws Exception
      */
     public function destroy(Service $service)
     {
@@ -93,7 +78,7 @@ class ServiceController extends Controller
 
     /**
      * @param Service $service
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function ServicesImage(Service $service)
     {

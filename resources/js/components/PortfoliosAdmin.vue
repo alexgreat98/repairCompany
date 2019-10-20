@@ -188,18 +188,18 @@
 
                             <v-row v-if="!isNew">
                                 <v-progress-linear
-                                        v-model="progressValue"
-                                        v-if="progressValue !== 0"
+                                    v-model="progressValue"
+                                    v-if="progressValue !== 0"
                                 ></v-progress-linear>
                                 <v-col cols="12" sm="12">
                                     <v-file-input
-                                            show-size
-                                            counter
-                                            multiple
-                                            label="Загрузить фото"
-                                            @change="upload"
-                                            prepend-icon="mdi-camera"
-                                            v-model="files"
+                                        show-size
+                                        counter
+                                        multiple
+                                        label="Загрузить фото"
+                                        @change="upload"
+                                        prepend-icon="mdi-camera"
+                                        v-model="files"
                                     ></v-file-input>
                                 </v-col>
                                 <v-col cols="12" sm="4">
@@ -211,16 +211,16 @@
                                     <v-row>
 
                                         <v-col
-                                                v-for="image in imgPrepareToUpload"
-                                                :key="image.id"
-                                                class="d-flex child-flex"
-                                                cols="2"
+                                            v-for="image in imgPrepareToUpload"
+                                            :key="image.id"
+                                            class="d-flex child-flex"
+                                            cols="2"
                                         >
                                             <v-card flat tile class="d-flex position-relative">
                                                 <v-img
-                                                        :src="image"
-                                                        aspect-ratio="1"
-                                                        class="grey lighten-2"
+                                                    :src="image"
+                                                    aspect-ratio="1"
+                                                    class="grey lighten-2"
                                                 >
                                                 </v-img>
                                             </v-card>
@@ -284,7 +284,9 @@
                     description: '',
                     images: []
                 },
-                current: {},
+                current: {
+                    sort: 250
+                },
                 isNew: false
             }
         },
@@ -333,10 +335,10 @@
                 this.files = files;
                 console.log(files);
                 this.imgPrepareToUpload = [];
-                for(let f of this.files){
-                   let url = URL.createObjectURL(f)
+                for (let f of this.files) {
+                    let url = URL.createObjectURL(f)
                     console.log(url);
-                   this.imgPrepareToUpload.push(url);
+                    this.imgPrepareToUpload.push(url);
 
                 }
             },

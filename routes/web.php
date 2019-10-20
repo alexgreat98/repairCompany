@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('pageIndex');
-})->name('home');
+
+Route::get('/', 'Client\PageController@GetIndex')->name('home');
+
 Route::get('/about-us', function () {
     return view('pageAbout');
 });

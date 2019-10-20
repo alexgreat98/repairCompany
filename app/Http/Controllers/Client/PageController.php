@@ -23,6 +23,11 @@ class PageController extends Controller
         $this->portfolio = $portfolio;
     }
 
+    public function GetIndex(){
+        $services = $this->services->GetPortfolioIndexPage();
+        $portfolios = $this->portfolio->GetPortfolioIndexPage();
+        return view('pageIndex', compact('portfolios','services'));
+    }
     public function GetPortfolios()
     {
         $portfolios = $this->portfolio->GetAllPortfolioPage();
