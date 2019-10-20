@@ -26,7 +26,8 @@
                             <span class="unit">{{$service->price->type}}</span>
                         </div>
                         <div class="services__list-item-description-text">
-                            {!! $service->text !!}
+                            Цены на {{ $service->name }} и примерный подбор цен на {{ $service->name }}.
+                            Расчитайте примерную сумму за работы
                         </div>
                     </div>
                     <div class="services__list-item-btn">

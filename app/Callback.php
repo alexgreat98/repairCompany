@@ -8,6 +8,11 @@ class Callback extends Model
 {
     protected $fillable = [
         'name',
-        'phone'
+        'phone',
+        'comment'
+    ];
+    protected $guarded = [
+        'answer',
+        'look',
     ];
 }

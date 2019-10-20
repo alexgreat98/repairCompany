@@ -125,7 +125,7 @@ PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8v
                 @endfor
             </div>
         </div>
-        @include('includes.formCallback')
+        <callback-client></callback-client>
 
         <div class="index__page-portfolio">
             <div class="sec-title centered">
@@ -217,7 +217,7 @@ PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8v
             </div>
         </div>
 
-        <callback-client></callback-client>
+
 
     </div>
 

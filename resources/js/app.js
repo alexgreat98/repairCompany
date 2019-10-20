@@ -1,38 +1,93 @@
 import Vue from 'vue'
-import Vuetify from 'vuetify'
+import {Ripple} from 'vuetify/lib/directives'
 import axios from 'axios';
 import Swiper from 'swiper';
-import 'fslightbox/fslightbox.min.js'
-import 'vuetify/dist/vuetify.min.css'
 import Vuelidate from 'vuelidate'
 import {validationMixin} from 'vuelidate'
+import PricesClient from './components/PricesClient'
 import CallbackClient from './components/CallbackClient'
+import CallbackModalClient from './components/CallbackModalClient'
+import CallbackStoreModalClient from "./components/CallbackStoreModalClient";
 import callbackStore from './components/store/clientCallbackStore'
 import Vuex from 'vuex'
+import 'fslightbox/fslightbox.min.js'
+
+import Vuetify, {
+    VCard,
+    VContent,
+    VFlex,
+    VApp,
+    VCheckbox,
+    VTextField,
+    VSnackbar,
+    VBtn,
+    VImg,
+    VForm,
+    VContainer,
+    VRow,
+    VCol,
+    VDialog
+} from 'vuetify/lib'
 
 Vue.use(Vuelidate);
-Vue.use(Vuetify);
+Vue.use(Vuetify, {
+    components: {
+        VCard,
+        VContent,
+        VFlex,
+        VApp,
+        VCheckbox,
+        VTextField,
+        VSnackbar,
+        VBtn,
+        VImg,
+        VForm,
+        VContainer,
+        VRow,
+        VCol,
+        VDialog
+    },
+    directives: {
+        Ripple,
+    },
+});
 Vue.use(Vuex);
 Vue.prototype.axios = axios;
 
 
-
+const opts = {
+    icons: {
+        iconfont: 'mdi',
+    },
+    theme: {
+        themes: {
+            light: {
+                primary: '#ff6d00',
+            },
+        },
+    },
+};
 const store =
     {
         modules: {
             callbackStore,
         },
     };
-const app = new Vue({
-    el: '#app',
+const App = new Vue({
     store: new Vuex.Store(store),
     mixins: [validationMixin],
-    vuetify: new Vuetify(),
+    vuetify: new Vuetify(opts),
     components: {
-        CallbackClient
+        PricesClient,
+        CallbackClient,
+        CallbackModalClient,
+        CallbackStoreModalClient
+    },
+    data: {
+        dialogCallback: false
     }
+}).$mount('#app');
 
-});
 new Swiper('.services-portfolio-slider', {
 
     spaceBetween: 30,
@@ -104,6 +159,7 @@ function scrollMenu() {
 }
 
 if (nav_bar_scroll.classList.contains('index_page')) {
+    scrollMenuIndex();
     window.addEventListener('scroll', () => {
         scrollMenuIndex()
     });

@@ -6,23 +6,24 @@
 
     <title>Строй компания</title>
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-{{--<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">--}}
 
-<!-- Styles -->
+    <!-- Styles -->
     <link href="{{mix('css/app.css')}}" rel="stylesheet">
-    <link href="{{Storage::url('css/fslightbox.min.css')}}" rel="stylesheet">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,200,400,500,700,900" rel="stylesheet">
 
     <style>
         html, body {
             background-color: whitesmoke;
-            color: #636b6f;
-            font-family: 'Nunito', sans-serif;
-            font-weight: 200;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
+            line-height: 1.5;
             /*height: 100vh;*/
             margin: 0;
             overflow-y: auto !important;
+        }
+        html{
+            background-color: #2a2a33;
         }
     </style>
     @if(\App\Helpers\Common\Std::getP('GOOGLE_RECAPTCHA'))
@@ -40,13 +41,13 @@
 
             <div class="navbar-top-wrap">
 
-                <a href="/" class="navbar-brand" title="LOGO">LOGO</a>
+                <a @if (Route::current()->uri !== '/')href="/"@endif class="navbar-brand" title="LOGO">LOGO</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent"
                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <button class="btn btn-callback" style="order: 4;">Обратный звонок</button>
+                <callback-modal-client class="top-callback-btn-wrap" style="order: 4;"></callback-modal-client>
                 <div class="collapse navbar-collapse top__navigation order-1" id="navbarSupportedContent">
                     <ul class="navbar-nav">
                         <li class="nav-item">
@@ -73,10 +74,12 @@
         <div class="main__app-wrap">
             <div class="main__wrap">
                 <div class="main__wrap-content">
-                    <main>
-                        @yield('breadcrumbs')
-                        @yield('content')
-                    </main>
+                    <v-app class="v-application">
+                        <main>
+                            @yield('breadcrumbs')
+                            @yield('content')
+                        </main>
+                    </v-app>
                 </div>
             </div>
         </div>
@@ -176,8 +179,11 @@
         </div>
     </footer>
     <div class="footer__copyright">Copyright © 2019 лого , All Right Reserved</div>
+
 </div>
 </body>
+
+<link href="{{Storage::url('css/fslightbox.min.css')}}" rel="stylesheet">
 <script src="{{ mix('/js/app.js') }}" async></script>
 <script src="{{Storage::url('js/fslightbox.min.js')}}"></script>
 </html>

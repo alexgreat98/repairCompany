@@ -1,25 +1,17 @@
 <template>
-    <v-content>
-        <div class="main-callback-form-center">
-            <div class="main-callback-form">
-                <div class="main-callback-form-image" v-if="!inModal && windowsWidth > 768">
-                    <v-img
-                        src="/storage/site/mainForm.jpg"
-                        aspect-ratio="1"
-                        class="grey lighten-2"
-                        max-height="300"
-                    ></v-img>
-                </div>
+    <div>
+        <v-dialog
+            v-model="$root.dialogCallback"
+            width="500"
+        >
+            <v-card class="dialog-callback">
                 <div class="main-callback-form-wrap" v-show="submitSuccess == 0">
                     <div class="main-callback-form-title">
-                        Доверьте дело профессионалам!
-                    </div>
-                    <div class="main-callback-form-description">
-                        Оставьте свои контактные данные и мы сами свяжемся с вами
+                        Оставить заявку
                     </div>
                     <div class="main-callback-form-inputs">
                         <v-form @submit.prevent="sendCallback">
-                            <v-container>
+                            <v-container class="pt-0">
                                 <v-row>
                                     <v-col cols="12">
                                         <v-text-field
@@ -45,16 +37,6 @@
                                         ></v-text-field>
                                     </v-col>
                                 </v-row>
-                                <div class="form-group row" v-if="captchaKey">
-                                    <div class="col-md-6 offset-md-4">
-                                        <div class="g-recaptcha" :data-sitekey="captchaKey"></div>
-                                        <!--@if ($errors->has('g-recaptcha-response'))
-                                        <span class="invalid-feedback" style="display: block;">
-                                            <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
-                                        </span>
-                                        @endif-->
-                                    </div>
-                                </div>
                                 <v-btn
                                     class="btn-primary"
                                     type="submit"
@@ -124,34 +106,21 @@
                             </div>
                         </div>
                     </div>
-                    <div class="main-callback-form-success-btn"><span
-                        @click="resendCallback">Отправить еще одну заявку</span></div>
+                    <div class="main-callback-form-success-btn"><span>Форма закроется автоматически</span></div>
                 </div>
-            </div>
-        </div>
-    </v-content>
+            </v-card>
+        </v-dialog>
+    </div>
+
 </template>
 
 <script>
-
     import {required, minLength, maxLength, numeric} from 'vuelidate/lib/validators'
     import {mapState, mapActions, mapMutations} from 'vuex'
     import {mask} from 'vue-the-mask'
 
     export default {
-
-        name: "CallbackClient",
-        props: {
-            inModal:{
-                type: Boolean,
-                default: false
-            },
-            captchaKey :{
-                type: String,
-            default: ''
-            },
-
-        },
+        name: "CallbackStoreModalClient",
         directives: {mask},
         data() {
             return {
@@ -167,29 +136,24 @@
             }),
             ...mapMutations('callbackStore', {
                 clearForm: 'clearForm',
-                clearSubmitCallback: 'clearSubmitCallback',
-                saveSubmitCallback: 'saveSubmitCallback'
+                saveSubmit: 'saveSubmit'
             }),
             sendCallback() {
-                console.log(this.form.phone);
                 this.$v.$touch();
                 if (this.$v.$invalid) {
                     this.submitStatus = 'Заполните все данные'
                 } else {
-                    if(this.storeCallback()){
-                        this.saveSubmitCallback()
+                    if (this.storeCallback()){
+                        this.saveSubmit();
+                        setTimeout(()=>{this.$root.dialogCallback = false}, 3000);
                     }
                 }
             },
-            resendCallback() {
-                this.clearSubmitCallback();
-                this.clearForm()
-            }
         },
         computed: {
             ...mapState('callbackStore', {
                 form: state => state.form,
-                submitSuccess: state => state.submitCallback,
+                submitSuccess: state => state.submit,
             }),
             nameErrors() {
                 const errors = [];
@@ -224,9 +188,6 @@
                 }
             }
         },
-        mounted() {
-            console.log(this.inModal)
-        }
     }
 </script>
 
@@ -237,6 +198,7 @@
     }
 
     .main-callback-form-success {
+        padding: 50px 20px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -261,9 +223,8 @@
         color: #3eb39e;;
     }
 
-    .main-callback-form-success-btn span {
+    .main-callback-form-success-close {
         font-size: 0.8rem;
-        cursor: pointer;
+        text-align: right;
     }
-
 </style>
