@@ -25,7 +25,9 @@
             overflow-y: auto !important;
         }
     </style>
-
+    @if(\App\Helpers\Common\Std::getP('GOOGLE_RECAPTCHA'))
+        <script src="https://www.google.com/recaptcha/api.js?render=_reCAPTCHA_site_key"></script>
+    @endif
 </head>
 <body>
 <div class="flex-center position-ref full-height @if (Route::current()->uri !== '/')padding_page_top @endif" id="app">

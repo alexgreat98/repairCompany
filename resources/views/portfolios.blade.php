@@ -43,6 +43,6 @@
             проектов – именно поэтому мы смело гарантируем наилучший результат. Свяжитесь с нами уже сейчас, чтобы
             воспользоваться услугами и убедиться в этом лично. Сделаем всё, чтобы вы остались довольны!
         </div>
-        <callback-client></callback-client>
+        <callback-client captcha-key="6LfIUb4UAAAAAJrHE5cUMA_TZAsYgOXVqxt-nWbh"></callback-client>
     </div>
 @endsection

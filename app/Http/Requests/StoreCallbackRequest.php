@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use App\Rules\Captcha;
 class StoreCallbackRequest extends FormRequest
 {
     /**
@@ -25,7 +25,8 @@ class StoreCallbackRequest extends FormRequest
     {
         return [
             'name' => 'required|min:2|max:40',
-            'phone' => 'required|numeric'
+            'phone' => 'required|numeric',
+            'g-recaptcha-response' => new Captcha()
         ];
     }
 

@@ -17,7 +17,7 @@ class Param extends Model
 
     //
     protected $table = 'params';
-    protected $fillable = ['key', 'value'];
+    protected $fillable = ['key', 'value', 'description', 'type'];
     static public function getP($key){
             $p = Param::where('key', $key)->first();
             return $p->value;

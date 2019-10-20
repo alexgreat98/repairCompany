@@ -45,7 +45,16 @@
                                         ></v-text-field>
                                     </v-col>
                                 </v-row>
-
+                                <div class="form-group row" v-if="captchaKey">
+                                    <div class="col-md-6 offset-md-4">
+                                        <div class="g-recaptcha" :data-sitekey="captchaKey"></div>
+                                        <!--@if ($errors->has('g-recaptcha-response'))
+                                        <span class="invalid-feedback" style="display: block;">
+                                            <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+                                        </span>
+                                        @endif-->
+                                    </div>
+                                </div>
                                 <v-btn class="btn-primary" type="submit" :disabled="submitStatus === 'PENDING'">Оставить
                                     заявку
                                 </v-btn>
@@ -126,6 +135,7 @@
     export default {
 
         name: "CallbackClient",
+        props: ['captchaKey'],
         data() {
             return {
                 windowsWidth: window.innerWidth,
