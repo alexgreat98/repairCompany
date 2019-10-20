@@ -22,4 +22,5 @@ class Param extends Model
             $p = Param::where('key', $key)->first();
             return $p->value;
     }
+
 }
