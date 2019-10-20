@@ -25,7 +25,6 @@ class ServiceController extends Controller
         return response()->json(compact('items'));
     }
 
-
     /**
      * @param StoreServiceRequest $request
      * @return JsonResponse
