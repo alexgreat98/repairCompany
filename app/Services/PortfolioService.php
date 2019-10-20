@@ -8,6 +8,15 @@ use App\Portfolio;
 
 class PortfolioService
 {
+    public function GetPortfolioIndexPage()
+    {
+        $portfolios = Portfolio::with('images')->where('show_on_main', true)->get();
+        foreach ($portfolios as $portfolio)
+        {
+            $portfolio['image'] = $portfolio->images->first();
+        }
+        return $portfolios;
+    }
     public function GetAllPortfolioPage()
     {
         $portfolios = Portfolio::with('images')->get();

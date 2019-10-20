@@ -18,8 +18,13 @@
             :search="search"
             :loading="progresses"
         >
-            <template v-slot:item.text="{ item }">
-                <p v-html="item.text"></p>
+            <template v-slot:item.show_on_main="{ item }">
+                <v-icon
+                    v-show="item.show_on_main"
+                    color="light-blue darken-1"
+                >
+                    mdi-check-circle
+                </v-icon>
             </template>
             <template v-slot:item.action="{ item }">
                 <v-icon
@@ -103,7 +108,7 @@
                                     required
                                 ></v-text-field>
                             </v-flex>
-                            <v-flex xs12 class="justify-start">
+                            <v-flex xs12 class="justify-start" v-if="editedItem.id">
                                 <v-flex sm5 class="justify-start">
                                     <div class="subtitle-2">Изображение услуги</div>
                                     <v-img
@@ -260,7 +265,7 @@
                         value: 'id',
                     },
                     {text: 'Название', value: 'name'},
-                    {text: 'Текст', value: 'text'},
+                    {text: 'На главной', value: 'show_on_main'},
                     {text: 'Изменен', value: 'updated_at'},
                     {text: 'Действия', value: 'action', sortable: false},
                 ],

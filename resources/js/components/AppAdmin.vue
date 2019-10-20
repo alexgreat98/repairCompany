@@ -95,18 +95,9 @@
             <v-btn small text route-to="/" href="/" target="_blank">Сайт
                 <v-icon>mdi-open-in-new</v-icon>
             </v-btn>
-            <v-text-field
-                flat
-                solo-inverted
-                hide-details
-                prepend-inner-icon="search"
-                label="Search"
-                class="hidden-sm-and-down"
-            ></v-text-field>
-            <v-btn small text @click="logout">Выход
-                <v-icon color="black">mdi-open-in-new</v-icon>
-            </v-btn>
             <div class="flex-grow-1"></div>
+            <v-btn small color="red" text @click="logout">Выход</v-btn>
+
 
         </v-app-bar>
         <v-content>
@@ -134,19 +125,6 @@
                 {icon: 'mdi-clipboard-list-outline', text: 'Услуги', link: 'services'},
                 {icon: 'mdi-image-filter', text: 'Портфолио', link: 'portfolios'},
                 {icon: 'mdi-currency-usd', text: 'Прайсы', link: 'prices'},
-                {
-                    icon: 'keyboard_arrow_up',
-                    'icon-alt': 'keyboard_arrow_down',
-                    text: 'Разделы',
-                    model: false,
-                    children: [
-                        {text: 'Import'},
-                        {text: 'Export'},
-                        {text: 'Print'},
-                        {text: 'Undo changes'},
-                        {text: 'Other contacts'},
-                    ],
-                },
                 {icon: 'settings', text: 'Параметры', link: 'parameters'},
                 {icon: 'mdi-account-card-details-outline', text: 'Пользователи', link: 'users'},
                 // { icon: 'help', text: 'Help' },
