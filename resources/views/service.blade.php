@@ -7,8 +7,11 @@
 
         <div class="row services-description-wrap">
             <div class="col-lg-6 col-md-5 col-12">
-                <div class="services-img">
-                    <img src="{{Storage::url('/services/'.$service->image)}}" alt="" class="img-fluid">
+                <div
+                    class="services-img"
+                    style="background: transparent url({{Storage::url('/services/'.$service->image)}}) center center/cover no-repeat scroll;"
+                >
+{{--                    <img src="{{Storage::url('/services/'.$service->image)}}" alt="" class="img-fluid">--}}
                 </div>
             </div>
             <div class="col-lg-6 col-md-7 col-12">
@@ -18,19 +21,20 @@
                         <div class="divider_inner divider_line1">
                         </div>
                     </div>
-                    <p class="services-text">{!! $service->text !!}</p>
+                    <div class="services-text">{!! $service->text !!}</div>
                 </div>
             </div>
         </div>
         <div class="sec-title centered">
-            <h2 class="title">Цены на {{ $service->name }}</h2>
+            <h2 class="sec-title-header">Цены на {{ $service->name }}</h2>
             <div class="sec-title-text">
-                <h4 class="title-text">Примерный подбор цен на {{ $service->name }}. Расчитайте примерную сумму за работы</h4>
+                <h4 class="title-text">Примерный подбор цен на {{ $service->name }}. Расчитайте примерную сумму за
+                    работы</h4>
             </div>
         </div>
 
         <prices-client :prices="{{$service->prices}}"></prices-client>
-
+        <callback-store-modal-client></callback-store-modal-client>
         @if(sizeof($service->images))
             <div class="services-portfolio-attach">
                 <div class="sec-title centered">

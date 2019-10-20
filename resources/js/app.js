@@ -7,6 +7,7 @@ import {validationMixin} from 'vuelidate'
 import PricesClient from './components/PricesClient'
 import CallbackClient from './components/CallbackClient'
 import CallbackModalClient from './components/CallbackModalClient'
+import CallbackStoreModalClient from "./components/CallbackStoreModalClient";
 import callbackStore from './components/store/clientCallbackStore'
 import Vuex from 'vuex'
 import 'fslightbox/fslightbox.min.js'
@@ -79,7 +80,8 @@ const App = new Vue({
     components: {
         PricesClient,
         CallbackClient,
-        CallbackModalClient
+        CallbackModalClient,
+        CallbackStoreModalClient
     },
     data: {
         dialogCallback: false

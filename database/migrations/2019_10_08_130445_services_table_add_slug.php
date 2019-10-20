@@ -14,7 +14,7 @@ class ServicesTableAddSlug extends Migration
     public function up()
     {
         Schema::table('services', function (Blueprint $table) {
-            $table->string('slug');
+            $table->string('slug')->after('name');
         });
     }
 

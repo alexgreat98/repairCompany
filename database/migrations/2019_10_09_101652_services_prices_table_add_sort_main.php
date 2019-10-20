@@ -14,11 +14,11 @@ class ServicesPricesTableAddSortMain extends Migration
     public function up()
     {
         Schema::table('services', function (Blueprint $table) {
-            $table->integer('sort')->default(250);
+            $table->integer('sort')->default(250)->after('keywords');
             $table->boolean('show_on_main')->default(false);
         });
         Schema::table('portfolio', function (Blueprint $table) {
-            $table->integer('sort')->default(250);
+            $table->integer('sort')->default(250)->after('keywords');
             $table->boolean('show_on_main')->default(false);
 
         });

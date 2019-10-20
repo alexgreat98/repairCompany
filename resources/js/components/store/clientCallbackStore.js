@@ -6,6 +6,7 @@ const state = {
         phone: '',
     },
     submit: (localStorage.submitForm) ? localStorage.submitForm : 0,
+    submitCallback: (localStorage.submitCallback) ? localStorage.submitCallback : 0,
     dialogCallback: false
 };
 
@@ -19,7 +20,6 @@ const actions = {
         await axios.post('/api/callback/store', state.form)
             .then(({data}) => {
                 commit('saveForm');
-                commit('saveSubmit');
                 return data
             })
             .catch(({error}) => {
@@ -37,7 +37,6 @@ const mutations = {
             name: '',
             phone: null,
         };
-        state.submit = 0;
         localStorage.form = JSON.stringify(state.form);
         localStorage.submitForm = state.submit;
     },
@@ -45,10 +44,19 @@ const mutations = {
         localStorage.form = JSON.stringify(state.form);
 
     },
+
     saveSubmit(state) {
         state.submit = 1;
         localStorage.submitForm = state.submit;
-    }
+    },
+    saveSubmitCallback(state) {
+        state.submitCallback = 1;
+        localStorage.submitCallback = state.submitCallback;
+    },
+    clearSubmitCallback(state){
+        state.submitCallback = 0;
+        localStorage.submitCallback = state.submitCallback;
+    },
 };
 
 export default {

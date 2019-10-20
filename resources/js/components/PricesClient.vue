@@ -17,8 +17,9 @@
                     v-for="price in filteredList"
                     class="services-price-table-item"
                     v-bind:class="{ active: price.check }"
+                    @click="price.check = !price.check"
                 >
-                    <v-checkbox v-model="price.check" color="orange darken-3">
+                    <v-checkbox @click.self v-model="price.check" color="orange darken-3">
                     </v-checkbox>
 
                     <div class="services-price-table-name">
@@ -30,6 +31,7 @@
                             :label="price.type"
                             v-model="price.value"
                             v-mask="mask"
+                            @click.stop
                             hide-details
                             height="30"
                             class="m-0"
@@ -66,6 +68,7 @@
 
 <script>
     import {mask} from 'vue-the-mask'
+    import {mapMutations} from 'vuex'
     export default {
         directives: {mask},
         name: "PricesClient",
@@ -115,7 +118,11 @@
             }
         },
         methods: {
+            ...mapMutations('callbackStore', {
+                clearForm: 'clearForm'
+            }),
             openDialog(){
+                // this.clearForm();
                 this.$root.dialogCallback = true
             }
         }
