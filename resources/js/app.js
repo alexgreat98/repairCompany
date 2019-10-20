@@ -159,6 +159,7 @@ function scrollMenu() {
 }
 
 if (nav_bar_scroll.classList.contains('index_page')) {
+    scrollMenuIndex();
     window.addEventListener('scroll', () => {
         scrollMenuIndex()
     });

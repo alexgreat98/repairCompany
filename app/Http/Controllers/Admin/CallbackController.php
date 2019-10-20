@@ -24,6 +24,8 @@ class CallbackController extends Controller
      */
     public function edit(Callback $callback)
     {
+        $callback->look = true;
+        $callback->save();
         return response()->json(['item' => $callback]);
     }
 
@@ -35,7 +37,10 @@ class CallbackController extends Controller
      */
     public function update(Request $request, Callback $callback)
     {
+
         $status = $callback->update($request->all());
+        $callback->answer = $request->input('answer');
+        $callback->save();
         return response()->json(['status' => $status]);
     }
 

@@ -39,7 +39,7 @@
 
             <div class="navbar-top-wrap">
 
-                <a href="/" class="navbar-brand" title="LOGO">LOGO</a>
+                <a @if (Route::current()->uri !== '/')href="/"@endif class="navbar-brand" title="LOGO">LOGO</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent"
                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

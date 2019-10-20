@@ -16,8 +16,28 @@
             :items="callbackList"
             :search="search"
             :loading="progresses"
+            :items-per-page="50"
+            :footer-props="{
+                itemsPerPageOptions: [20,50,100]
+            }"
             dense
         >
+            <template v-slot:item.answer="{ item }">
+                <v-icon
+                    small
+                    :color="item.answer? 'light-blue darken-1': 'grey lighten-2'"
+                >
+                    mdi-check-underline-circle-outline
+                </v-icon>
+            </template>
+            <template v-slot:item.look="{ item }">
+                <v-icon
+                    small
+                    :color="item.look? 'light-blue darken-1': 'grey lighten-2'"
+                >
+                    mdi-eye-check-outline
+                </v-icon>
+            </template>
             <template v-slot:item.action="{ item }">
                 <v-icon
                     small
@@ -35,18 +55,32 @@
             </template>
         </v-data-table>
         <v-dialog v-model="dialogEdit" persistent max-width="600">
-            <v-card>
-                <v-card-title class="headline">Просмотр заказа</v-card-title>
+            <v-card v-if="openedItem">
+                <v-card-title class="headline">
+                    <v-flex xs6>
+                        Просмотр заказа
+                    </v-flex>
+                    <v-flex xs6>
+                        <v-switch
+                            v-model="openedItem.answer"
+                            :label="`Дозвонились: ${(openedItem.answer)?'да': 'нет'}`"
+                            class="m-0 justify-content-end"
+                            hide-details
+                        ></v-switch>
+                    </v-flex>
+                </v-card-title>
                 <v-card-text>
-                    <v-container grid-list-md v-if="openedItem">
+                    <v-container grid-list-md>
                         <v-layout wrap>
-                            <v-flex xs12 sm8>
-                                <v-text-field v-model="openedItem.name" label="Название" required></v-text-field>
+                            <v-flex xs12 sm4>
+                                <v-text-field v-model="openedItem.name" label="Имя" required></v-text-field>
                             </v-flex>
-                            <v-flex xs12 sm8>
-                                <v-text-field v-model="openedItem.phone" label="Цена" required></v-text-field>
+                            <v-flex xs12 sm4>
+                                <v-text-field v-model="openedItem.phone" label="Телефон" required></v-text-field>
                             </v-flex>
-
+                            <v-flex xs12 v-if="openedItem.comment">
+                                <v-textarea v-model="openedItem.comment" label="Заказ" required></v-textarea>
+                            </v-flex>
                         </v-layout>
                     </v-container>
                 </v-card-text>
@@ -76,7 +110,7 @@
         watch: {
             dialogEdit(val) {
                 if (!val) {
-
+                    this.getItems()
                 }
             }
         },
@@ -86,18 +120,13 @@
                 search: '',
                 dialogEdit: false,
                 headers: [
-                    {
-                        text: 'id',
-                        align: 'left',
-                        sortable: false,
-                        value: 'id',
-                    },
+
+                    {text: 'Ответ', value: 'answer', align: 'center', width: 100},
+                    {text: 'Просм.', value: 'look', align: 'center', width: 95},
                     {text: 'Имя', value: 'name'},
                     {text: 'Телефон', value: 'phone'},
-                    {text: 'Отвеченно', value: 'answer'},
-                    {text: 'Просмотренно', value: 'look'},
                     {text: 'Время', value: 'created_at'},
-                    {text: 'Actions', value: 'action', sortable: false},
+                    {text: 'Actions', value: 'action', sortable: false, width: 70},
                 ],
             }
         },

@@ -153,15 +153,14 @@ a, a:hover {
             float: left;
             color: #fe6500;
             border-color: transparent !important;
-            padding: 8px;
+            padding: 2px;
             margin-right: 10px;
         }
-        .btn-callback {
-            order: 4;
-            float: right;
-            min-height: 100%;
-            padding: 12px;
-            display: inline-block;
+        .top-callback-btn-wrap{
+            padding: 0!important;
+        }
+        .navbar-brand{
+            font-size: 1.5rem!important;
         }
     }
 }
@@ -770,7 +769,7 @@ p {
 }
 
 .services-price-table-item {
-    cursor: pointer;
+    //cursor: pointer;
     display: grid;
     grid-template-columns: 40px 1fr 70px 145px;
     padding-left: 10px;
@@ -1062,7 +1061,7 @@ p {
 
 .main-footer {
     position: relative;
-    background: url(//domatti.com.ua/wp-content/themes/buildark/assets/images/background/2.png) bottom center no-repeat;
+    background: url(/storage/site/footer_background.png) bottom center no-repeat;
 }
 
 .main-footer {
@@ -1254,6 +1253,9 @@ p {
     position: absolute;
 }
 .callback-in-modal{
+    .main-callback-form{
+        padding: 0 20px;
+    }
     .main-callback-form-wrap{
         padding: 0;
         text-align: center;
