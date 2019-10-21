@@ -5,7 +5,7 @@
 @section('banner')
     <div class="index__page-banner-parallax">
         <div class="index__page-banner-center">
-            <div class="index__page-banner-title">Ремонт оффисов под ключ</div>
+            <div class="index__page-banner-title">Ремонт офисов под ключ</div>
             <div class="index__page-banner-form">
 
             </div>

@@ -9,7 +9,7 @@
             <div class="col-lg-6 col-md-5 col-12">
                 <div
                     class="services-img"
-                    style="background: transparent url({{Storage::url('/services/'.$service->image)}}) center center/cover no-repeat scroll;"
+                    style="background: transparent url({{Storage::url('services/'.$service->image)}}) center center/cover no-repeat scroll;"
                 >
 {{--                    <img src="{{Storage::url('/services/'.$service->image)}}" alt="" class="img-fluid">--}}
                 </div>
