@@ -11,9 +11,10 @@
                     <div class="portfolio__item-item">
 
 
-                            <a class=" single-work project-img"
+                            <a class=" single-work project-img glightbox"
                                style="background-image: url({{Storage::url('portfolio/prev-'.$image->url)}});"
-                               href="{{Storage::url('portfolio/'.$image->url)}}" data-fslightbox="example-gallery"
+                               href="{{Storage::url('portfolio/'.$image->url)}}"
+                               data-gallery="gallery1"
                                title="Кухня">
 {{--                                <span class="icon"><i class="icon-search2"></i></span>--}}
                             </a>

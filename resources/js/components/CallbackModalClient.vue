@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-dialog
-            v-model="dialog"
+            v-model="$root.dialogCallback"
             width="500"
         >
             <template v-slot:activator="{ on }">
@@ -29,7 +29,6 @@
         components: {CallbackClient},
         data(){
             return {
-                dialog: false
             }
         }
     }

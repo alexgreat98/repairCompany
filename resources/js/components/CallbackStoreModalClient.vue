@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-dialog
-            v-model="$root.dialogCallback"
+            v-model="$root.dialogCallbackStore"
             width="500"
         >
             <v-card class="dialog-callback">
@@ -143,9 +143,11 @@
                 if (this.$v.$invalid) {
                     this.submitStatus = 'Заполните все данные'
                 } else {
-                    if (this.storeCallback()){
+                    if (this.storeCallback()) {
                         this.saveSubmit();
-                        setTimeout(()=>{this.$root.dialogCallback = false}, 3000);
+                        setTimeout(() => {
+                            this.$root.dialogCallback = false
+                        }, 3000);
                     }
                 }
             },

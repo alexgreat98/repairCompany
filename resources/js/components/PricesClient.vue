@@ -47,11 +47,12 @@
 
 
         <v-snackbar
-            v-model="selected.length"
+            v-model="selected.length && !$root.dialogCallbackStore && !$root.dialogCallback"
             bottom
             color="orange accent-4"
             class="services-price-calculated"
             :timeout="0"
+            z-index="200"
         >
             <span>
                 На сумму: <b>{{sum}}</b>р
@@ -126,7 +127,7 @@
             }),
             openDialog() {
                 this.clearSubmit();
-                this.$root.dialogCallback = true
+                this.$root.$root.dialogCallbackStore = true
             }
         }
     }

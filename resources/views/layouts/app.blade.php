@@ -183,7 +183,5 @@
 </div>
 </body>
 
-<link href="{{Storage::url('css/fslightbox.min.css')}}" rel="stylesheet">
 <script src="{{ mix('/js/app.js') }}" async></script>
-<script src="{{Storage::url('js/fslightbox.min.js')}}"></script>
 </html>

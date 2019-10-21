@@ -10,7 +10,7 @@ import CallbackModalClient from './components/CallbackModalClient'
 import CallbackStoreModalClient from "./components/CallbackStoreModalClient";
 import callbackStore from './components/store/clientCallbackStore'
 import Vuex from 'vuex'
-// import 'fslightbox/fslightbox.min.js'
+import GLightbox from "glightbox";
 
 import Vuetify, {
     VCard,
@@ -84,6 +84,7 @@ const App = new Vue({
         CallbackStoreModalClient
     },
     data: {
+        dialogCallbackStore: false,
         dialogCallback: false
     }
 }).$mount('#app');
@@ -180,3 +181,16 @@ if (menuBtn) {
         document.querySelector('#navbarSupportedContent').classList.toggle('show')
     })
 }
+
+const lightbox = GLightbox({
+    touchNavigation: true,
+    loopAtEnd: true,
+    autoplayVideos: true,
+    onOpen: () => {
+        console.log('Lightbox opened')
+    },
+    beforeSlideLoad: (slide, data) => {
+        // Need to execute a script in the slide?
+        // You can do that here...
+    }
+});
