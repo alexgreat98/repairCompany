@@ -49,6 +49,10 @@ const mutations = {
         state.submit = 1;
         localStorage.submitForm = state.submit;
     },
+    clearSubmit(state) {
+        state.submit = 0;
+        localStorage.submitForm = state.submit;
+    },
     saveSubmitCallback(state) {
         state.submitCallback = 1;
         localStorage.submitCallback = state.submitCallback;

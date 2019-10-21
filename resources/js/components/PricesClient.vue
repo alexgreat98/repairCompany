@@ -1,72 +1,77 @@
 <template>
-        <v-content>
-            <v-flex>
-                <v-text-field
-                    v-model.trim="search"
-                    @keyup="updateData()"
-                    type="text"
-                    placeholder="Начните вводить название услуги"
-                    label="Поиск услуг"
-                    class="pt-4"
-                    clearable
-                ></v-text-field>
-            </v-flex>
-            <v-flex class="services-price-table">
+    <v-content>
+        <v-flex>
+            <v-text-field
+                v-model.trim="search"
+                @keyup="updateData()"
+                type="text"
+                placeholder="Начните вводить название услуги"
+                label="Поиск услуг"
+                class="pt-4"
+                clearable
+            ></v-text-field>
+        </v-flex>
+        <v-flex class="services-price-table">
 
-                <div
-                    v-for="price in filteredList"
-                    class="services-price-table-item"
-                    v-bind:class="{ active: price.check }"
-                >
-                    <v-checkbox v-model="price.check" color="orange darken-3">
-                    </v-checkbox>
+            <div
+                v-for="price in filteredList"
+                class="services-price-table-item"
+                v-bind:class="{ active: price.check }"
+            >
+                <v-checkbox v-model="price.check" color="orange darken-3">
+                </v-checkbox>
 
-                    <div class="services-price-table-name">
-                        {{price.name}}
-                    </div>
-                    <div>
-                        <v-text-field
-                            v-show="price.check"
-                            :label="price.type"
-                            v-model="price.value"
-                            v-mask="mask"
-                            hide-details
-                            height="30"
-                            class="m-0"
-                            outlined
-                        ></v-text-field>
-                    </div>
-
-                    <div class="services-price-table-price">
-                        <span class="price">{{price.price}}</span>p за {{price.type}}
-                    </div>
+                <div class="services-price-table-name">
+                    {{price.name}}
+                </div>
+                <div>
+                    <v-text-field
+                        v-show="price.check"
+                        :label="price.type"
+                        v-model="price.value"
+                        v-mask="mask"
+                        hide-details
+                        height="30"
+                        class="m-0"
+                        outlined
+                    ></v-text-field>
                 </div>
 
-            </v-flex>
+                <div class="services-price-table-price">
+                    <span class="price">{{price.price}}</span>p <span class="d-none d-sm-inline-block">за</span>
+                    <span class="services-price-table-price-type">{{price.type}}</span>
+                </div>
+            </div>
+
+        </v-flex>
 
 
-            <v-snackbar
-                v-model="selected.length"
-                bottom
-                color="orange accent-4"
-                class="services-price-calculated"
-                :timeout="0"
-            >
+        <v-snackbar
+            v-model="selected.length"
+            bottom
+            color="orange accent-4"
+            class="services-price-calculated"
+            :timeout="0"
+        >
+            <span>
                 На сумму: <b>{{sum}}</b>р
-                <v-btn
-                    dark
-                    text
-                    @click="openDialog"
-                >
-                    Оставить заявку
-                </v-btn>
-            </v-snackbar>
-        </v-content>
+            </span>
+
+            <v-btn
+                dark
+                text
+                @click="openDialog"
+            >
+                Оставить заявку
+            </v-btn>
+        </v-snackbar>
+    </v-content>
 </template>
 
 <script>
     import {mask} from 'vue-the-mask'
     import {mapMutations} from 'vuex'
+
     export default {
         directives: {mask},
         name: "PricesClient",
@@ -117,10 +122,10 @@
         },
         methods: {
             ...mapMutations('callbackStore', {
-                clearForm: 'clearForm'
+                clearSubmit: 'clearSubmit'
             }),
-            openDialog(){
-                // this.clearForm();
+            openDialog() {
+                this.clearSubmit();
                 this.$root.dialogCallback = true
             }
         }

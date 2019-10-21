@@ -10,7 +10,7 @@ import CallbackModalClient from './components/CallbackModalClient'
 import CallbackStoreModalClient from "./components/CallbackStoreModalClient";
 import callbackStore from './components/store/clientCallbackStore'
 import Vuex from 'vuex'
-import 'fslightbox/fslightbox.min.js'
+// import 'fslightbox/fslightbox.min.js'
 
 import Vuetify, {
     VCard,

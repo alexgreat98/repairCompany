@@ -783,6 +783,22 @@ p {
     -moz-user-select: none;
     -khtml-user-select: none;
     user-select: none;
+    font-size: 0.8rem;
+    max-width: 100%;
+    @media (max-width: 470px) {
+        &{
+            grid-template-columns: 30px 1fr 1px 100px;
+            &.active{
+                grid-template-columns: 30px 1fr 67px 80px;
+            }
+            .services-price-table-price-type{
+                display: inline-block;
+            }
+            &.active .services-price-table-price-type{
+                display: none;
+            }
+        }
+    }
     .services-price-table-item-checkbox {
         width: 100%;
     }
@@ -1260,6 +1276,7 @@ p {
 .callback-in-modal{
     .main-callback-form{
         padding: 0 20px;
+        grid-template-columns: 1fr
     }
     .main-callback-form-wrap{
         padding: 0;

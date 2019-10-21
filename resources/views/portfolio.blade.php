@@ -15,7 +15,7 @@
                                style="background-image: url({{Storage::url('portfolio/prev-'.$image->url)}});"
                                href="{{Storage::url('portfolio/'.$image->url)}}" data-fslightbox="example-gallery"
                                title="Кухня">
-                                <span class="icon"><i class="icon-search2"></i></span>
+{{--                                <span class="icon"><i class="icon-search2"></i></span>--}}
                             </a>
 
                     </div>

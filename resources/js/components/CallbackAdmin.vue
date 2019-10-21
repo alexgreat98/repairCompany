@@ -1,5 +1,5 @@
 <template>
-    <v-card width="100%">
+    <v-card>
         <v-card-title>
             Заказы с форм
             <div class="flex-grow-1"></div>
@@ -20,7 +20,8 @@
             :footer-props="{
                 itemsPerPageOptions: [20,50,100]
             }"
-            dense
+            sort-by="created_at"
+            sort-desc
         >
             <template v-slot:item.answer="{ item }">
                 <v-icon
