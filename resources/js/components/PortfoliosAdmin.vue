@@ -81,10 +81,9 @@
                             <v-toolbar-title>Редактирование портфолио</v-toolbar-title>
                             <div class="flex-grow-1"></div>
                             <v-toolbar-items>
+                                <v-btn small dark text color="red" @click="deleteItem">Удалить</v-btn>
                                 <v-btn small dark text @click="close()">Отмена</v-btn>
-                                <v-btn small dark text @click="save()">
-                                    Сохранить
-                                </v-btn>
+                                <v-btn small dark text @click="save()">{{isNew?'Создать':'Сохранить'}}</v-btn>
                             </v-toolbar-items>
                         </v-toolbar>
 
@@ -278,6 +277,7 @@
                     name: ''
                 }],
                 defItem: {
+                    id : 0,
                     name: 'Новый Альбом',
                     text: '',
                     title: '',
@@ -293,14 +293,11 @@
         methods: {
             showPortfolio(item) {
                 this.current = item;
+                this.current.text = this.current.text||'';
                 this.imgPrepareToUpload = [];
                 this.isNew = false;
                 this.dialog = true;
 
-                /*               this.axios.get('api/portfolio/' + item.id)
-                                   .then(data=>{
-                                       console.log(data.data)
-                                   })*/
             },
             deleteItem() {
                 if (confirm('Вы уверрены')) {
@@ -321,6 +318,8 @@
             },
             openCreateForm() {
                 Object.assign(this.current, this.defItem);
+                this.current.images = [];
+                this.imgPrepareToUpload = [];
                 this.isNew = true;
                 this.dialog = true;
             },
@@ -382,8 +381,11 @@
                 if (this.isNew) {
                     this.axios.post('api/portfolio', this.current)
                         .then(data => {
-                            this.dialog = false;
-                            this.initialize();
+                            console.log(this.current, data.data);
+                            this.current.id = data.data.id;
+                            //Object.assign(this.current, data.data);
+                            //this.initialize();
+                            this.isNew = false;
                         })
                 } else {
                     this.axios.put('api/portfolio/' + this.current.id, this.current)
