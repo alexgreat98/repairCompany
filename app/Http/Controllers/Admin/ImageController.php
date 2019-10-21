@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
-
+use Validator;
 class ImageController extends Controller
 {
     /**
@@ -42,10 +42,14 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'portfolio' => 'required',
             'file.*' => 'required|image|mimes:jpeg,bmp,png'
         ]);
+
+        if($validator->fails()){
+            return response()->json(['error'=>'Bad argument']);
+        }
         $portfolio = $request->portfolio;
         $photo = [];
         foreach ($request->file('file') as $image){

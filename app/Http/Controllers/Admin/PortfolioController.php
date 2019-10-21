@@ -50,11 +50,9 @@ class PortfolioController extends Controller
             'description'=>'',
             'title'=>''
         ]);
-        $param = new Portfolio;
-        $param->fill($request->all());
-        $param->save();
+        $portfolio = Portfolio::create($request->all());
 
-        return response()->json($param);
+        return response()->json($portfolio);
     }
 
     /**
