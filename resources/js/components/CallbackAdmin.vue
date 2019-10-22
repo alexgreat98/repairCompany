@@ -55,13 +55,13 @@
                 </v-icon>
             </template>
         </v-data-table>
-        <v-dialog v-model="dialogEdit" persistent max-width="600">
+        <v-dialog v-model="dialogEdit" persistent max-width="800">
             <v-card v-if="openedItem">
                 <v-card-title class="headline">
                     <v-flex xs6>
                         Просмотр заказа
                     </v-flex>
-                    <v-flex xs6>
+                    <v-flex xs6 class="d-flex justify-end">
                         <v-switch
                             v-model="openedItem.answer"
                             :label="`Дозвонились: ${(openedItem.answer)?'да': 'нет'}`"
@@ -79,8 +79,11 @@
                             <v-flex xs12 sm4>
                                 <v-text-field v-model="openedItem.phone" label="Телефон" required></v-text-field>
                             </v-flex>
-                            <v-flex xs12 v-if="openedItem.comment">
-                                <v-textarea v-model="openedItem.comment" label="Заказ" required></v-textarea>
+                            <v-flex xs12 sm4 class="d-flex justify-end">
+                                <span v-html="openedItem.created_at"></span>
+                            </v-flex>
+                            <v-flex xs12>
+                                <v-textarea v-model="openedItem.comment" label="Комментарий к заказу" required></v-textarea>
                             </v-flex>
                         </v-layout>
                     </v-container>

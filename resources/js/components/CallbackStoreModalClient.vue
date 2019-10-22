@@ -106,7 +106,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="main-callback-form-success-btn"><span>Форма закроется автоматически</span></div>
+                    <div class="main-callback-form-success-btn"><span class="font-weight-light float-right">Форма закроется автоматически</span></div>
                 </div>
             </v-card>
         </v-dialog>
@@ -122,6 +122,9 @@
     export default {
         name: "CallbackStoreModalClient",
         directives: {mask},
+        props:{
+            order: Array
+        },
         data() {
             return {
                 windowsWidth: window.innerWidth,
@@ -143,10 +146,10 @@
                 if (this.$v.$invalid) {
                     this.submitStatus = 'Заполните все данные'
                 } else {
-                    if (this.storeCallback()) {
+                    if (this.storeCallback(this.order)) {
                         this.saveSubmit();
                         setTimeout(() => {
-                            this.$root.dialogCallback = false
+                            this.$root.dialogCallbackStore = false
                         }, 3000);
                     }
                 }

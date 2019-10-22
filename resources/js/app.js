@@ -7,7 +7,7 @@ import {validationMixin} from 'vuelidate'
 import PricesClient from './components/PricesClient'
 import CallbackClient from './components/CallbackClient'
 import CallbackModalClient from './components/CallbackModalClient'
-import CallbackStoreModalClient from "./components/CallbackStoreModalClient";
+// import CallbackStoreModalClient from "./components/CallbackStoreModalClient";
 import callbackStore from './components/store/clientCallbackStore'
 import Vuex from 'vuex'
 import GLightbox from "glightbox";
@@ -81,7 +81,6 @@ const App = new Vue({
         PricesClient,
         CallbackClient,
         CallbackModalClient,
-        CallbackStoreModalClient
     },
     data: {
         dialogCallbackStore: false,

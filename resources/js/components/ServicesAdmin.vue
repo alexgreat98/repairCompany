@@ -46,7 +46,7 @@
                   transition="dialog-bottom-transition">
 
             <v-card tile>
-                <v-card-title class="p-0">
+                <v-card-title class="pa-0">
                     <v-toolbar dark flat color="primary">
 
                         <v-btn icon dark @click="dialogEdit = false">

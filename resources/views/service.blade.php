@@ -34,7 +34,7 @@
         </div>
 
         <prices-client :prices="{{$service->prices}}"></prices-client>
-        <callback-store-modal-client></callback-store-modal-client>
+
         @if(sizeof($service->images))
             <div class="services-portfolio-attach">
                 <div class="sec-title centered">

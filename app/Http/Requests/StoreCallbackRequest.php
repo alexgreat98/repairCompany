@@ -26,6 +26,7 @@ class StoreCallbackRequest extends FormRequest
         return [
             'name' => 'required|min:2|max:40',
             'phone' => 'required|numeric',
+            'order' => '',
             'g-recaptcha-response' => new Captcha()
         ];
     }

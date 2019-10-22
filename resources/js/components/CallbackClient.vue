@@ -177,7 +177,10 @@
                     this.submitStatus = 'Заполните все данные'
                 } else {
                     if(this.storeCallback()){
-                        this.saveSubmitCallback()
+                        this.saveSubmitCallback();
+                        setTimeout(() => {
+                            this.$root.dialogCallback = false
+                        }, 3000);
                     }
                 }
             },

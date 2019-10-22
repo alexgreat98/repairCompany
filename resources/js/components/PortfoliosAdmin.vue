@@ -72,7 +72,7 @@
                     <!--<v-btn color="primary" dark v-on="on">Open Dialog</v-btn>-->
                 </template>
                 <v-card>
-                    <v-card-title class="p-0">
+                    <v-card-title class="pa-0">
                         <v-toolbar dark flat color="primary">
 
                             <v-btn icon dark @click="dialog = false">

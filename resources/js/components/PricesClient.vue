@@ -66,16 +66,21 @@
                 Оставить заявку
             </v-btn>
         </v-snackbar>
+        <callback-store-modal-client v-bind:order="selected"></callback-store-modal-client>
     </v-content>
 </template>
 
 <script>
     import {mask} from 'vue-the-mask'
     import {mapMutations} from 'vuex'
+    import CallbackStoreModalClient from "./CallbackStoreModalClient";
 
     export default {
         directives: {mask},
         name: "PricesClient",
+        components: {
+            CallbackStoreModalClient
+        },
         props: {
             prices: Array
         },

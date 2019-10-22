@@ -279,6 +279,7 @@ a, a:hover {
 }
 
 main {
+    width: 100%;
     & > * {
         //background-color: $c-white;
         //@include box-shadow;

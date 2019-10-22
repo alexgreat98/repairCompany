@@ -22,7 +22,25 @@ class CallbackController extends Controller
      */
     public function storeCallbackForm(StoreCallbackRequest $request)
     {
-        $status = $this->callback->create($request->all());
+        $callback = New $this->callback;
+        $callback->name = $request->input('name');
+        $callback->phone = $request->input('phone');
+        $callback->comment = '';
+        if (!empty($request->input('order'))) {
+            foreach ($request->input('order') as $order) {
+                $callback->comment .= $order['name'];
+                $value = (int)$order['value'];
+                if (is_null($order['value'])) {
+                    $value = 1;
+                }
+                $callback->comment .= ' кол.: ';
+                $callback->comment .= $value;
+                $callback->comment .= ' на сумму: ';
+                $callback->comment .= $value * (int)$order['price'];
+                $callback->comment .= chr(0x0D).chr(0x0A);
+            }
+        }
+        $status = $callback->save();
         return response()->json(compact('status'));
     }
 }

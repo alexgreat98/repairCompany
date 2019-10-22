@@ -9,10 +9,12 @@ class Callback extends Model
     protected $fillable = [
         'name',
         'phone',
-        'comment'
+        'comment',
+        'order'
     ];
     protected $guarded = [
         'answer',
         'look',
+
     ];
 }

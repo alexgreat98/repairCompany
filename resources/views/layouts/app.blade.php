@@ -15,7 +15,7 @@
     <style>
         html, body {
             background-color: whitesmoke;
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Roboto';
             font-weight: 400;
             line-height: 1.5;
             /*height: 100vh;*/
