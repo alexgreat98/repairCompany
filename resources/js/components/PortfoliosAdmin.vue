@@ -190,7 +190,7 @@
                                     v-model="progressValue"
                                     v-if="progressValue !== 0"
                                 ></v-progress-linear>
-                                <v-col cols="12" sm="12">
+                                <v-col cols="12" sm="8">
                                     <v-file-input
                                         show-size
                                         counter
@@ -365,6 +365,7 @@
                     this.snackColor = 'success'
                     this.snackText = 'Данные сохранены'
                     this.files = [];
+                    this.imgPrepareToUpload = [];
                     this.progressValue = 0;
                 } else {
                     console.log("there are no files.");
