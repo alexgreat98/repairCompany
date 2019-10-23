@@ -27,7 +27,15 @@
         }
     </style>
     @if(\App\Helpers\Common\Std::getP('GOOGLE_RECAPTCHA'))
-        <script src="https://www.google.com/recaptcha/api.js?render=_reCAPTCHA_site_key"></script>
+        <script src="https://www.google.com/recaptcha/api.js?render={{\App\Helpers\Common\Std::getP('GOOGLE_RECAPTCHA_KEY')}}"></script>
+        <script>
+            grecaptcha.ready(function() {
+            grecaptcha.execute("{{\App\Helpers\Common\Std::getP('GOOGLE_RECAPTCHA_KEY')}}", {action: 'homepage'}).then(function(token) {
+                window._token = token;
+                });
+            });
+        </script>
+
     @endif
 </head>
 <body>

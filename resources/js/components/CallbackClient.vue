@@ -45,7 +45,7 @@
                                         ></v-text-field>
                                     </v-col>
                                 </v-row>
-                                <div class="form-group row" v-if="captchaKey">
+                                <div class="form-group row" v-if="!!captchaKey">
                                     <div class="col-md-6 offset-md-4">
                                         <div class="g-recaptcha" :data-sitekey="captchaKey"></div>
                                         <!--@if ($errors->has('g-recaptcha-response'))
@@ -148,7 +148,7 @@
             },
             captchaKey :{
                 type: String,
-            default: ''
+                default: ''
             },
 
         },
@@ -228,7 +228,7 @@
             }
         },
         mounted() {
-            console.log(this.inModal)
+            console.log(this.inModal, this.captchaKey)
         }
     }
 </script>
