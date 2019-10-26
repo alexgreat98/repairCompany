@@ -19,6 +19,7 @@ const actions = {
     async storeCallback({commit, state}, order) {
         let formData = Object.assign(state.form);
         formData['order'] = order;
+        console.log(window._token);
         await axios.post('/api/callback/store', formData)
             .then(({data}) => {
                 commit('saveForm');

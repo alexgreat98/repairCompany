@@ -11,7 +11,7 @@ class ParamsTableSeeder extends Seeder
      */
     public function run()
     {
-        $pricesTypes = ['кв.м.', 'шт.', 'конт.', 'мешок', 'тн.', 'ч./час', 'п.м.'];
+        $pricesTypes = ['кв.м.', 'шт.', 'конт.', 'мешок', 'тн.', 'ч./час', 'м.п.'];
         Param::create([
             'key' => 'SITE_NAME',
             'value' => 'Строительство и ремонт',
