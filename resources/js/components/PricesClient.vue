@@ -84,11 +84,6 @@
         props: {
             prices: Array
         },
-/*        created(){
-            setInterval(_=>{
-                console.log(this.selected.length && !this.$root.dialogCallbackStore && !this.$root.dialogCallback);
-            }, 1000)
-        },*/
         data() {
             return {
                 mask: '####',
