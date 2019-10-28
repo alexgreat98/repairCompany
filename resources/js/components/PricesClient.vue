@@ -3,7 +3,6 @@
         <v-flex>
             <v-text-field
                 v-model.trim="search"
-                @keyup="updateData()"
                 type="text"
                 placeholder="Начните вводить название услуги"
                 label="Поиск услуг"
@@ -107,9 +106,14 @@
                             return price;
                         }
                     });
-                    this.sum = this.selected.reduce(
+                    let sumPre = this.selected.reduce(
                         (sum, {price, value}) => sum + price * ((value) ? value : 1), 0
-                    ).toFixed(0)
+                    );
+
+                    if (sumPre) {
+                        sumPre = (sumPre + (sumPre / 6)).toFixed(2)
+                    }
+                    this.sum = sumPre;
                 },
                 deep: true
             },
@@ -132,7 +136,7 @@
             }),
             openDialog() {
                 this.clearSubmit();
-                this.$root.$root.dialogCallbackStore = true
+                this.$root.dialogCallbackStore = true
             }
         }
     }

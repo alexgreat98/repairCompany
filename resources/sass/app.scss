@@ -217,7 +217,7 @@ a, a:hover {
             z-index: 1;
             -webkit-filter: blur(10px);
             filter: blur(15px);
-            opacity: 0;
+            display: none;
         }
         .top-callback-btn-wrap{
             @media(max-width:768px){
@@ -240,7 +240,7 @@ a, a:hover {
 
     &.index_scroll {
         .navbar-top:before {
-            opacity: 1;
+            display: block;
         }
 
         .navbar-top {
@@ -749,6 +749,7 @@ p {
 
 .services-description {
     padding: 0 3rem;
+    min-height: 300px;
 }
 
 .services-title {
