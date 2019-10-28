@@ -47,7 +47,7 @@
 
 
         <v-snackbar
-            v-model="selected.length && !$root.dialogCallbackStore && !$root.dialogCallback"
+            v-model="!!selected.length && !$root.dialogCallbackStore && !$root.dialogCallback"
             bottom
             color="orange accent-4"
             class="services-price-calculated"
@@ -84,7 +84,11 @@
         props: {
             prices: Array
         },
-
+/*        created(){
+            setInterval(_=>{
+                console.log(this.selected.length && !this.$root.dialogCallbackStore && !this.$root.dialogCallback);
+            }, 1000)
+        },*/
         data() {
             return {
                 mask: '####',
