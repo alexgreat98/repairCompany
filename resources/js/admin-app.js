@@ -34,11 +34,23 @@ axios.defaults.headers.common = {
 
 };
 
-/*axios.defaults.headers.common = {
-    'X-Requested-With': 'XMLHttpRequest',
-    'X-CSRF-TOKEN': window.csrf_token
-};*/
+function onAxiosResponseRejected(error){
+    vm.$data.errorsSnackbar = true;
+    vm.$data.errorsSnackbarText = (error.response.status === 403)?
+        'У вас нет прав для этого дествия':
+        'Ошибка сервера'
 
+}
+// Add a response interceptor
+axios.interceptors.response.use(function (response) {
+    // Any status code that lie within the range of 2xx cause this function to trigger
+    // Do something with response data
+    return response;
+}, function (error) {
+    // Any status codes that falls outside the range of 2xx cause this function to trigger
+    // Do something with response error
+    return onAxiosResponseRejected(error);
+});
 Vue.prototype.axios = axios;
 Vue.prototype.vue = Vue;
 Vue.prototype.editor = ClassicEditor;
@@ -82,5 +94,9 @@ let vm = new Vue({
     store: new Vuex.Store(store),
     vuetify: new Vuetify(opts),
     components: {ClassicEditor},
+    data: {
+        errorsSnackbar: false,
+        errorsSnackbarText: null
+    },
     render: h => h(App)
 }).$mount('#app');

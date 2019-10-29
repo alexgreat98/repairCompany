@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Строй компания</title>
 
+@yield('head')
 
-    <!-- Styles -->
+<!-- Styles -->
     <link href="{{mix('css/app.css')}}" rel="stylesheet">
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,200,400,500,700,900" rel="stylesheet">
@@ -22,16 +22,18 @@
             margin: 0;
             overflow-y: auto !important;
         }
-        html{
+
+        html {
             background-color: #2a2a33;
         }
     </style>
     @if(\App\Helpers\Common\Std::getP('GOOGLE_RECAPTCHA'))
-        <script src="https://www.google.com/recaptcha/api.js?render={{\App\Helpers\Common\Std::getP('GOOGLE_RECAPTCHA_KEY')}}"></script>
+        <script
+            src="https://www.google.com/recaptcha/api.js?render={{\App\Helpers\Common\Std::getP('GOOGLE_RECAPTCHA_KEY')}}"></script>
         <script>
-            grecaptcha.ready(function() {
-            grecaptcha.execute("{{\App\Helpers\Common\Std::getP('GOOGLE_RECAPTCHA_KEY')}}", {action: 'homepage'}).then(function(token) {
-                window._token = token;
+            grecaptcha.ready(function () {
+                grecaptcha.execute("{{\App\Helpers\Common\Std::getP('GOOGLE_RECAPTCHA_KEY')}}", {action: 'homepage'}).then(function (token) {
+                    window._token = token;
                 });
             });
         </script>
@@ -49,7 +51,7 @@
 
             <div class="navbar-top-wrap">
 
-                <a @if (Route::current()->uri !== '/')href="/"@endif class="navbar-brand" title="LOGO">LOGO</a>
+                <a @if (Route::current()->uri !== '/')href="/" @endif class="navbar-brand" title="Строй-Комплект" alt="Строй-Комплект">LOGO</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent"
                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -101,7 +103,7 @@
                     <div class="footer-column col-md-3 col-sm-6 col-xs-12">
                         <div id="text-2" class="column footer-widget widget_text">
                             <div class="textwidget">
-                                <p><span style="color: #ff6600;font-size: 2rem">LOGO</span></p>
+                                <p><span style="color: #ff6600;font-size: 2rem">"Строй-Комплект"</span></p>
                                 <p>Компания «Лого» работает на рынке ремонтов и дизайна интерьера уже много лет. За это
                                     время мы действительно научились создавать интерьеры, в которых приятно жить.</p>
                             </div>

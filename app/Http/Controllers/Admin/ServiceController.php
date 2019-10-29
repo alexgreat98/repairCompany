@@ -33,7 +33,7 @@ class ServiceController extends Controller
     {
         $service = Service::create($request->all());
         return response()->json([
-            'item' =>$service
+            'item' => $service
         ]);
     }
 
@@ -69,6 +69,7 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
+        $this->authorize($service);
         $service->delete();
         return response()->json([
             'items' => Service::all()
@@ -86,9 +87,11 @@ class ServiceController extends Controller
         ]);
     }
 
-    public function ServicesImageAttach(Service $service,Image $image){
+    public function ServicesImageAttach(Service $service, Image $image)
+    {
         $service->images()->attach($image);
     }
+
     /**
      * @param Image $image
      */
@@ -110,6 +113,7 @@ class ServiceController extends Controller
         return $service->image;
 
     }
+
     public function ServiceImageDelete(Service $service)
     {
         FileSystem::delete_service_image($service->image);

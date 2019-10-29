@@ -109,6 +109,26 @@
                 <router-view></router-view>
             </v-container>
         </v-content>
+
+        <!--errors snackbar-->
+        <v-snackbar
+            v-model="$root.errorsSnackbar"
+            color="error"
+            right
+            :timeout="3000"
+            top
+        >
+            {{ $root.errorsSnackbarText }}
+            <v-btn
+                dark
+                @click="$root.errorsSnackbar = false"
+                icon
+            >
+                <v-icon>mdi-close</v-icon>
+            </v-btn>
+        </v-snackbar>
+
+
     </v-app>
 </template>
 
@@ -132,13 +152,12 @@
                 // { icon: 'keyboard', text: 'Go to the old version' },
             ],
         }),
-        methods : {
-            logout(){
-                this.axios.post('logout').
-                then(data=>{
+        methods: {
+            logout() {
+                this.axios.post('logout').then(data => {
                     console.log(data);
                 })
-                window.location='/';
+                window.location = '/';
             }
         }
     }

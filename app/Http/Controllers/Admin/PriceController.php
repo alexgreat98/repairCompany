@@ -5,22 +5,26 @@ namespace App\Http\Controllers\Admin;
 use App\Param;
 use App\Price;
 use App\Service;
+use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class PriceController extends Controller
 {
     protected $type;
-    public function __construct()
+    protected $price;
+
+    public function __construct(Price $price)
     {
-        $qweq = Param::where('key', 'PRICE_TYPE')->first();
         $this->type = explode(';', Param::where('key', 'PRICE_TYPE')->first()->value);
+        $this->price = $price;
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function index()
     {
@@ -31,7 +35,7 @@ class PriceController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function create()
     {
@@ -44,37 +48,26 @@ class PriceController extends Controller
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function store(Request $request)
     {
-        Price::create($request->all());
+        $this->price::create($request->all());
 
         return response()->json([
             'status' => 'success'
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param Price int  $id
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function edit(Price $price)
     {
-//        $price['services_id'] = $price->service()->first();
         return response()->json([
             'price' => $price,
             'type' => $this->type,
@@ -85,7 +78,7 @@ class PriceController extends Controller
     /**
      * @param Request $request
      * @param Price $price
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function update(Request $request, Price $price)
     {
@@ -97,11 +90,12 @@ class PriceController extends Controller
 
     /**
      * @param Price $price
-     * @return \Illuminate\Http\JsonResponse
-     * @throws \Exception
+     * @return JsonResponse
+     * @throws Exception
      */
     public function destroy(Price $price)
     {
+        $this->authorize($price);
         $price->delete();
         return response()->json([
             'status' => 'success'
@@ -110,9 +104,10 @@ class PriceController extends Controller
 
     /**
      * @param Service $service
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
-    public function ServicesPrice(Service $service){
+    public function ServicesPrice(Service $service)
+    {
         return response()->json([
             'prices' => $service->prices()->get()
         ]);
