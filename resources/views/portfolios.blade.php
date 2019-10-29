@@ -4,7 +4,10 @@
 @section('content')
     <div class="portfolio__list">
         <div class="sec-title centered">
-            <h1 class="title">Портфолио</h1>
+            <h1 class="sec-title-header line">Портфолио</h1>
+            <div class="sec-title-text">
+                <h2 class="title-text">Подборка наших работ</h2>
+            </div>
         </div>
         <div class="portfolio__list-list">
             <div class="row">

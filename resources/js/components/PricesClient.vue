@@ -100,6 +100,7 @@
         watch: {
             localPrices: {
                 handler: function (val) {
+
                     this.selected = val.filter((price) => {
                         if ((price.check)) {
                             return price;

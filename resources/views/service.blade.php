@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="sec-title centered">
-            <h2 class="sec-title-header">Цены на {{ $service->name }}</h2>
+            <h2 class="sec-title-header line">Цены на {{ $service->name }}</h2>
             <div class="sec-title-text">
                 <h4 class="title-text">Примерный подбор цен на {{ $service->name }}. Расчитайте примерную сумму за
                     работы</h4>

@@ -65,10 +65,10 @@
                             <a href="/services" class="nav-link" title="Услуги">Услуги</a>
                         </li>
                         <li class="nav-item">
-                            <a href="/portfolio" class="nav-link" title="портфолио">портфолио</a>
+                            <a href="/portfolio" class="nav-link" title="Портфолио">Портфолио</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link" title="контакты">контакты</a>
+                            <a href="/contacts" class="nav-link" title="Контакты">Контакты</a>
                         </li>
                     </ul>
                 </div>

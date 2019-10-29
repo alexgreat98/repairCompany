@@ -3,7 +3,7 @@
 @section('content')
     <div class="portfolio__item">
         <div class="sec-title centered">
-            <h1 class="title">{{$portfolio->name}}</h1>
+            <h1 class="sec-title-header">{{ $portfolio->name }}</h1>
         </div>
         <div class="row">
             @foreach($portfolio->images as $image)
