@@ -14,6 +14,7 @@
 @import '~@mdi/font/css/materialdesignicons.css';
 @import '~vuetify/dist/vuetify.min.css';
 @import '~glightbox/dist/css/glightbox.min.css';
+
 .swiper-container {
     width: 100%;
     height: 100%;
@@ -54,7 +55,9 @@ a, a:hover {
 :root {
     --swiper-theme-color: #ff6600
 }
-
+:focus{
+    outline: none;
+}
 .swiper-button-next:after, .swiper-button-prev:after {
     color: $c-mainColor;
 }
@@ -156,11 +159,11 @@ a, a:hover {
             padding: 2px;
             margin-right: 10px;
         }
-        .top-callback-btn-wrap{
-            padding: 0!important;
+        .top-callback-btn-wrap {
+            padding: 0 !important;
         }
-        .navbar-brand{
-            font-size: 1.5rem!important;
+        .navbar-brand {
+            font-size: 1.5rem !important;
         }
     }
 }
@@ -219,16 +222,18 @@ a, a:hover {
             filter: blur(15px);
             display: none;
         }
-        .top-callback-btn-wrap{
-            @media(max-width:768px){
-                &{
+
+        .top-callback-btn-wrap {
+            @media(max-width: 768px) {
+                & {
                     float: right;
                     padding: 6px;
                 }
             }
         }
-        .top-callback-btn{
-            background-color: $c-mainColor!important;
+
+        .top-callback-btn {
+            background-color: $c-mainColor !important;
         }
     }
 
@@ -280,6 +285,7 @@ a, a:hover {
 
 main {
     width: 100%;
+
     & > * {
         //background-color: $c-white;
         //@include box-shadow;
@@ -726,6 +732,7 @@ p {
     justify-content: center;
     align-items: center;
     height: 100%;
+
     img {
         max-height: 100%;
     }
@@ -789,27 +796,34 @@ p {
     font-size: 0.8rem;
     max-width: 100%;
     @media (max-width: 470px) {
-        &{
+        & {
             grid-template-columns: 30px 1fr 1px 100px;
-            &.active{
+
+            &.active {
                 grid-template-columns: 30px 1fr 67px 80px;
             }
-            .services-price-table-price-type{
+
+            .services-price-table-price-type {
                 display: inline-block;
             }
-            &.active .services-price-table-price-type{
+
+            &.active .services-price-table-price-type {
                 display: none;
             }
         }
     }
+
     .services-price-table-item-checkbox {
         width: 100%;
     }
 
-    &:hover {
-        border-color: $c-grey;
-        box-shadow: none;
+    @media (min-width: 768px) {
+        &:hover {
+            border-color: $c-grey;
+            box-shadow: none;
+        }
     }
+
 
     &.active {
         border-color: $c-mainColor;
@@ -874,6 +888,7 @@ p {
             width: 70px;
             height: 70px;
         }
+
         img {
             width: 50px;
             height: 50px;
@@ -1276,51 +1291,64 @@ p {
     padding: 0 10px;
     position: absolute;
 }
-.callback-in-modal{
-    .main-callback-form{
+
+.callback-in-modal {
+    .main-callback-form {
         padding: 0 20px;
         grid-template-columns: 1fr
     }
-    .main-callback-form-wrap{
+
+    .main-callback-form-wrap {
         padding: 0;
         text-align: center;
-        .main-callback-form-title{
+
+        .main-callback-form-title {
             margin-bottom: 1rem;
         }
     }
 }
-.page__contacts-info{
+
+.page__contacts-info {
 
 }
-.page__contacts-info-item{
+
+.page__contacts-info-item {
     display: grid;
     grid-template-columns: 40px 1fr;
 }
-.page__contacts-info-item-text{
+
+.page__contacts-info-item-text {
 
 }
-.page__contacts-info-item-icon{
+
+.page__contacts-info-item-icon {
     padding: 5px 9px;
-    svg{
+
+    svg {
         width: 100%;
         height: auto;
     }
 }
-.page__contacts-info-item-title{
+
+.page__contacts-info-item-title {
     font-size: 1.2rem;
     text-transform: uppercase;
 }
-.page__contacts-info-item-description{
+
+.page__contacts-info-item-description {
     font-size: 0.8rem;
     color: $c-rDark;
-    a{
+
+    a {
         color: $c-rDark !important;
         font-size: 0.9rem;
-        &:hover{
-            color: $c-mainColor!important;
+
+        &:hover {
+            color: $c-mainColor !important;
         }
     }
 }
+
 body {
     opacity: 1 !important;
 }
