@@ -33,7 +33,7 @@
         <script>
             grecaptcha.ready(function () {
                 grecaptcha.execute("{{\App\Helpers\Common\Std::getP('GOOGLE_RECAPTCHA_KEY')}}", {action: 'homepage'}).then(function (token) {
-                    window._token = token;
+                    localStorage.token = token;
                 });
             });
         </script>
