@@ -58,7 +58,9 @@
                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <callback-modal-client class="top-callback-btn-wrap" style="order: 4;"></callback-modal-client>
+                <a href="tel:74953699782" class="navbar-top-phone"><span class="phone">+7 (495) 369-97-82</span></a>
                 <div class="collapse navbar-collapse top__navigation order-1" id="navbarSupportedContent">
                     <ul class="navbar-nav">
                         <li class="nav-item">
