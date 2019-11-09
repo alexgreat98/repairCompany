@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
-{{--@section('title', 'Page Title')--}}
-
+@section('head')
+    <title>ООО «Строй-Комплект» ремонт оффисов, квартир и других помещений под ключ</title>
+    <meta name="description"
+          content="Компания ООО «Строй-Комплект» предоставляет услуги по ремонту и обслуживанию офисов, квартир и других помещений под ключ">
+    <meta name="keywords" content="Строительная компания, Москва, Ремонт, Под ключ, Строительство">
+@endsection
 @section('banner')
     <div class="index__page-banner-parallax">
         <div class="index__page-banner-center">

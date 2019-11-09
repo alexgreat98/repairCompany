@@ -27,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin/callback';
+    protected $redirectTo = '/admin';
 
     /**
      * Create a new controller instance.
@@ -41,7 +41,7 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        $user->api_token = Str::random();
+        $user->api_token = Str::random(80);
         $user->save();
     }
 

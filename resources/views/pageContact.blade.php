@@ -93,8 +93,7 @@
                                     Телефон
                                 </div>
                                 <div class="page__contacts-info-item-description">
-                                    <a href="tel:89652276020">89652276020 Иван Коробков</a> <br>
-                                    <a href="tel:89803329989">89803329989 Иван Топал</a>
+                                    <a href="tel:74953699782">+7 (495) 369-97-82 Иван Топал</a> <br>
                                 </div>
                             </div>
                         </div>

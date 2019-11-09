@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Callback;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -47,9 +48,11 @@ class CallbackController extends Controller
     /**
      * @param $id
      * @return JsonResponse
+     * @throws AuthorizationException
      */
     public function destroy($id)
     {
+        $this->authorize($id);
         $status = Callback::destroy($id);
         return response()->json(['status' => $status]);
     }

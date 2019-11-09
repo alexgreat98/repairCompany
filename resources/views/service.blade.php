@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
-{{--@section('title', 'Page Title')--}}
+@section('head')
+    <title>ООО «Строй-Комплект» | {{ $service->name }} под ключ</title>
+    <meta name="description"
+          content="Компания ООО «Строй-Комплект» выполняет {{ $service->name }} под ключ в кротчайшие сроки. Расчитайте примерную стоимость работ для {{ $service->name }}.">
+    <meta name="keywords" content="Строительная компания, Москва, Ремонт, Под ключ, Строительство">
+@endsection
 @section('breadcrumbs', Breadcrumbs::render('service', $service))
 @section('content')
     <div class="services">

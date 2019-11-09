@@ -55,9 +55,11 @@ a, a:hover {
 :root {
     --swiper-theme-color: #ff6600
 }
-:focus{
+
+:focus {
     outline: none;
 }
+
 .swiper-button-next:after, .swiper-button-prev:after {
     color: $c-mainColor;
 }
@@ -688,9 +690,10 @@ p {
 
     .services__list-item-price {
         display: flex;
-        align-items: flex-end;
+        align-items: center;
         font-size: 1.5rem;
         padding: 15px 0;
+        min-height: 120px;
 
         span.price {
             font-size: 100px;
@@ -700,9 +703,13 @@ p {
             font-family: 'Montserrat', sans-serif;
         }
 
+        span.before {
+            align-self: flex-end;
+        }
         span.type {
             font-weight: 400;
             padding-left: 10px;
+            align-self: flex-end;
         }
 
         .unit {
@@ -1144,7 +1151,21 @@ p {
     }
 }
 
-
+.footer__contacts{
+    .icon{
+        vertical-align: middle;
+        margin-right: 5px;
+        svg{
+            width: 25px;
+            height: 25px;
+        }
+    }
+    .list-style-one{
+        li{
+            margin-bottom: 20px;
+        }
+    }
+}
 .footer-widget {
     h2 {
         position: relative;

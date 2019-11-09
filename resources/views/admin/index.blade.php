@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>Администрирование</title>
 
     <!-- Fonts -->
     <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" as="style" rel="preload" onload="this.rel='stylesheet'">

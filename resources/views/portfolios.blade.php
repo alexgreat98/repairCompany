@@ -1,5 +1,10 @@
 @extends('layouts.app')
-
+@section('head')
+    <title>Порфолио ООО «Строй-Комплект» | Наши работы</title>
+    <meta name="description"
+          content="Компания ООО «Строй-Комплект» выполнила не мало проектов. Мы гордимся нашими довольными клиентами">
+    <meta name="keywords" content="Строительная компания, Москва, Ремонт, Под ключ, Строительство">
+@endsection
 @section('breadcrumbs', Breadcrumbs::render('portfolio'))
 @section('content')
     <div class="portfolio__list">
