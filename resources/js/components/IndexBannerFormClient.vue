@@ -16,12 +16,12 @@
             </div>
             <div class="index__page-banner-form-name">
                 <v-text-field
-                    v-model.trim.number="form.name"
+                    v-model.trim="form.name"
                     @input="$v.form.name.$touch()"
                     @blur="$v.form.name.$touch()"
                     label="Имя"
                     :error-messages="nameErrors"
-                    type="tel"
+                    type="text"
                     required
                     solo
                     hide-details
