@@ -7,6 +7,7 @@ import {validationMixin} from 'vuelidate'
 import PricesClient from './components/PricesClient'
 import CallbackClient from './components/CallbackClient'
 import CallbackModalClient from './components/CallbackModalClient'
+import IndexBannerFormClient from "./components/IndexBannerFormClient";
 // import CallbackStoreModalClient from "./components/CallbackStoreModalClient";
 import callbackStore from './components/store/clientCallbackStore'
 import Vuex from 'vuex'
@@ -26,7 +27,8 @@ import Vuetify, {
     VContainer,
     VRow,
     VCol,
-    VDialog
+    VDialog,
+    VSelect
 } from 'vuetify/lib'
 
 Vue.use(Vuelidate);
@@ -45,7 +47,8 @@ Vue.use(Vuetify, {
         VContainer,
         VRow,
         VCol,
-        VDialog
+        VDialog,
+        VSelect
     },
     directives: {
         Ripple,
@@ -81,6 +84,7 @@ const App = new Vue({
         PricesClient,
         CallbackClient,
         CallbackModalClient,
+        IndexBannerFormClient
     },
     data: {
         dialogCallbackStore: false,

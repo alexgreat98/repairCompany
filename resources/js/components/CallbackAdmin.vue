@@ -54,7 +54,9 @@
                     delete
                 </v-icon>
             </template>
+
         </v-data-table>
+        <v-btn @click="getItems" text>Обновить</v-btn>
         <v-dialog v-model="dialogEdit" persistent max-width="800">
             <v-card v-if="openedItem">
                 <v-card-title class="headline">

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Requests\StoreCallbackRequest;
+use App\Mail\OrderCreated;
 use App\Services\CallbackClientService;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 
 class CallbackController extends Controller
 {
@@ -22,8 +24,8 @@ class CallbackController extends Controller
      */
     public function storeCallbackForm(StoreCallbackRequest $request)
     {
-        $status = $this->callback->CreateCallback($request);
-
-        return response()->json(compact('status'));
+        $callback = $this->callback->CreateCallback($request);
+//        Mail::send(new OrderCreated($callback));
+        return response()->json(compact('callback'));
     }
 }

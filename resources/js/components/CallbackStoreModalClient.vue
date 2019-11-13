@@ -129,6 +129,10 @@
             return {
                 windowsWidth: window.innerWidth,
                 submitStatus: null,
+                form: {
+                    phone: '',
+                    name: ''
+                },
                 mask: '#########',
             }
         },
@@ -146,7 +150,7 @@
                 if (this.$v.$invalid) {
                     this.submitStatus = 'Заполните все данные'
                 } else {
-                    if (this.storeCallback(this.order)) {
+                    if (this.storeCallback({form: this.form, order: this.order})) {
                         this.saveSubmit();
                         setTimeout(() => {
                             this.$root.dialogCallbackStore = false
@@ -157,7 +161,7 @@
         },
         computed: {
             ...mapState('callbackStore', {
-                form: state => state.form,
+                // form: state => state.form,
                 submitSuccess: state => state.submit,
             }),
             nameErrors() {

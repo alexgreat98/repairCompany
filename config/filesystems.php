@@ -56,14 +56,14 @@ return [
         ],
         'portfolio' => [
             'driver' => 'local',
-            'root' => storage_path('app/public/portfolio'),
-            'url' => env('APP_URL').'/storage',
+            'root' => storage_path('app/public'),
+            'url' => env('APP_URL').'/storage/portfolio',
             'visibility' => 'public',
         ],
         'services' => [
             'driver' => 'local',
-            'root' => storage_path('app/public/services'),
-            'url' => env('APP_URL').'/storage',
+            'root' => storage_path('app/public'),
+            'url' => env('APP_URL').'/storage/services',
             'visibility' => 'public',
         ],
 

@@ -24,8 +24,9 @@ class CallbackClientService
      */
     public function CreateCallback(Request $request)
     {
-        $request['comment'] = '';
+
         if (!empty($request['order'])) {
+            $request['comment'] = '';
             foreach ($request['order'] as $order) {
                 $request['comment'] .= $order['name'];
                 $value = (int)$order['value'];
@@ -36,9 +37,12 @@ class CallbackClientService
                 $request['comment'] .= $value;
                 $request['comment'] .= ' на сумму: ';
                 $request['comment'] .= $value * (int)$order['price'];
+                $request['comment'] .= ' с НДС: ';
+                $request['comment'] .= round(($value * (int)$order['price']) + (($value * (int)$order['price']) / 6), 2);
                 $request['comment'] .= chr(0x0D) . chr(0x0A);
             }
         }
+
         return $this->callback->create($request->except('order'));
 
     }

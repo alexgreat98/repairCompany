@@ -8,6 +8,12 @@ use App\Service;
 
 class ServicesService
 {
+    public function GetAllServicesIndexPage()
+    {
+        $services = Service::all('name');
+        return $services;
+    }
+
     public function GetPortfolioIndexPage()
     {
         $services = Service::with('prices')->where('show_on_main', true)->get();

@@ -1,10 +1,6 @@
 import axios from 'axios';
 
 const state = {
-    form: (localStorage.form) ? JSON.parse(localStorage.form) : {
-        name: '',
-        phone: '',
-    },
     submit: (localStorage.submitForm) ? localStorage.submitForm : 0,
     submitCallback: (localStorage.submitCallback) ? localStorage.submitCallback : 0,
     dialogCallback: false
@@ -16,14 +12,18 @@ const getters = {};
 // actions
 const actions = {
 
-    async storeCallback({commit, state}, order) {
-        let formData = Object.assign(state.form);
+    async storeCallback({commit, state}, {form, order, comment}) {
+        console.log('org_phone', form.phone);
+
+        form.phone = parseInt(form.phone.replace(/[()]|-|\s+|\+/g, ''));
+        console.log('org_phone', form.phone);
+        let formData = Object.assign(form);
         formData['order'] = order;
         formData['token'] = localStorage.token;
-        console.log(window._token);
+        if (comment) formData['comment'] = comment;
+        console.log(formData);
         await axios.post('/api/callback/store', formData)
             .then(({data}) => {
-                commit('saveForm');
                 return data
             })
             .catch(({error}) => {
@@ -37,18 +37,8 @@ const actions = {
 // mutations
 const mutations = {
     clearForm(state) {
-        state.form = {
-            name: '',
-            phone: null,
-        };
-        localStorage.form = JSON.stringify(state.form);
         localStorage.submitForm = state.submit;
     },
-    saveForm(state) {
-        localStorage.form = JSON.stringify(state.form);
-
-    },
-
     saveSubmit(state) {
         state.submit = 1;
         localStorage.submitForm = state.submit;
@@ -61,7 +51,7 @@ const mutations = {
         state.submitCallback = 1;
         localStorage.submitCallback = state.submitCallback;
     },
-    clearSubmitCallback(state){
+    clearSubmitCallback(state) {
         state.submitCallback = 0;
         localStorage.submitCallback = state.submitCallback;
     },
