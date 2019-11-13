@@ -18,6 +18,7 @@
                                             v-model.trim="form.name"
                                             @input="$v.form.name.$touch()"
                                             @blur="$v.form.name.$touch()"
+                                            type="text"
                                             label="Как к вам обращаться"
                                             :error-messages="nameErrors"
                                             required
@@ -25,7 +26,7 @@
                                     </v-col>
                                     <v-col cols="12">
                                         <v-text-field
-                                            v-model.trim.number="form.phone"
+                                            v-model.trim="form.phone"
                                             @input="$v.form.phone.$touch()"
                                             @blur="$v.form.phone.$touch()"
                                             label="Контактный номер"
@@ -33,7 +34,7 @@
                                             v-mask="mask"
                                             type="tel"
                                             required
-                                            maxlength="9"
+                                            maxlength="18"
                                         ></v-text-field>
                                     </v-col>
                                 </v-row>
@@ -133,7 +134,7 @@
                     phone: '',
                     name: ''
                 },
-                mask: '#########',
+                mask: '!+!7!(###!) ###-###-##',
             }
         },
         methods: {
@@ -190,9 +191,8 @@
                 },
                 phone: {
                     required,
-                    numeric,
-                    minLength: minLength(9),
-                    maxLength: maxLength(9)
+                    minLength: minLength(18),
+                    maxLength: maxLength(18)
 
                 }
             }
