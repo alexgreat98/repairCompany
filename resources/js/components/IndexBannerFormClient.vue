@@ -16,7 +16,7 @@
             </div>
             <div class="index__page-banner-form-name">
                 <v-text-field
-                    v-model.trim="form.name"
+                    v-model.trim.number="form.name"
                     @input="$v.form.name.$touch()"
                     @blur="$v.form.name.$touch()"
                     label="Имя"
