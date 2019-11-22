@@ -51,8 +51,14 @@
 
             <div class="navbar-top-wrap">
 
-                <a @if (Route::current()->uri !== '/')href="/" @endif class="navbar-brand" title="Строй-Комплект"
-                   alt="Строй-Комплект">LOGO</a>
+                <a @if (Route::current()->uri !== '/')href="/" @endif class="navbar-brand logo-wrap " title="Строй-Комплект"
+                   alt="Строй-Комплект">
+                    <img src="/images/lgoo_stroi.png" alt="Строй комплект - логотип" class="img-fluid logo-img-top">
+                    <span class="logo-text-top">
+                    <span>ООО "Строй комплект"</span>
+                    <span>строительная компания</span>
+                    </span>
+                </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent"
                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -106,9 +112,9 @@
                     <div class="footer-column col-md-3 col-sm-6 col-xs-12">
                         <div id="text-2" class="column footer-widget widget_text">
                             <div class="textwidget">
-                                <p><span style="color: #ff6600;font-size: 2rem">"Строй-Комплект"</span></p>
-                                <p>Компания «Лого» работает на рынке ремонтов и дизайна интерьера уже много лет. За это
-                                    время мы действительно научились создавать интерьеры, в которых приятно жить.</p>
+                                <p><span style="color: #ff6600;font-size: 2rem">ООО "Строй-Комплект"</span></p>
+                                <p>Компания ООО «Строй-Комплект» работает на рынке ремонтов уже много лет. За это
+                                    время мы действительно научились создавать интерьеры, в которых приятно жить и работать.</p>
                             </div>
                         </div>
                     </div>

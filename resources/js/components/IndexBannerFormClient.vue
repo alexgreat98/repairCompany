@@ -1,7 +1,7 @@
 <template>
     <v-app>
         <v-form @submit.prevent="sendCallback" class="index__page-banner-form" v-show="submitSuccess != 1">
-            <div class="index__page-banner-form-services">
+            <!--<div class="index__page-banner-form-services">
                 <v-select
                     v-model="comment"
                     :items="services"
@@ -13,7 +13,7 @@
                     solo
                 ></v-select>
 
-            </div>
+            </div>-->
             <div class="index__page-banner-form-name">
                 <v-text-field
                     v-model.trim="form.name"
